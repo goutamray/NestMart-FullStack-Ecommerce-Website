@@ -1,17 +1,11 @@
 
-
-
-
 /********** banner css  ***************/
-
 .banner-section .banner-part .banner-img {
   position: relative;
 }
-
 .banner-section .banner-part .banner-img img{
   border-radius: 10px;
 }
-
 .banner-section .banner-part .banner-img .banner-text .banner-title {
   position: absolute;
   left: 10%;
@@ -19,10 +13,7 @@
   width: 70%;
   font-size: 24px;
   font-weight: 700;
-
 }
-
-
 .banner-section .banner-part .banner-img .banner-text .button-shop {
   position: absolute;
   left: 10%;
@@ -41,13 +32,10 @@
 .banner-section .banner-part .banner-img .banner-text .button-shop svg{
   margin-left: 10px;
 }
-
 .banner-section .banner-part .banner-img .banner-text:hover .banner-title{
   transition: all 0.3s ease-in-out;
   transform: translateY(-5%);
-
 }
-
 .banner-section .banner-part .banner-img .banner-text .button-shop:hover{
   background-color: #FDC040;
 }
@@ -61,20 +49,16 @@
   padding-right:10px ;
   transition: all 0.3s ease-in-out;
 }
-
 .popular-products .custom-ul li a:hover{
   color: var(--nest-primary) !important;
 }
 
 /****** single product item css *************/
-
 .popular-products .product-row{
   display: flex;
-  
 } 
 .popular-products .product-row .item{
   width: 20%;
-
 } 
 .popular-products .banner-image{
   position: relative;
@@ -104,6 +88,11 @@
 .popular-products .product-slider-main .slick-slide{
   padding: 0px 15px !important;
 }
+
+
+
+
+
 
 
 

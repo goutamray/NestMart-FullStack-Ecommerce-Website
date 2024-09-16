@@ -1,3 +1,318 @@
 
 
 
+/************** new latter  ****************/
+.news-letter{
+  background-image: url("../../assets//img/banner/banner-10.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 20px 20px !important;
+  width: 98%;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 400px;
+  position: relative;
+  
+  
+  }
+  .news-letter .photo-box img{
+    position: absolute;
+    right: 30px;
+    bottom: 0px;
+    width: 40%;
+  }
+  
+  .news-letter .item{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+  .news-letter .item .info{
+     position: absolute;
+     top: 10%;
+     left: 5%;
+     padding-top: 50px;
+     padding-bottom: 10px;
+  }
+  
+  .news-letter .item .info h2{
+    font-size: 40px;
+    font-weight: 600;
+    color: #253D4E;
+    margin-bottom: 30px;
+  }
+  .news-letter .item .info p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #7E7E7E;
+    line-height: 24px;
+  }
+  .news-letter .item .info p a{
+    color: var(--nest-primary);
+  }
+  /* form css */
+  .subscribe-form {
+    height: 40px;
+    width: 500px;
+    position: absolute;
+    bottom: -24%;
+    left: 0%;
+  } 
+  .subscribe-form svg.send {
+    position: absolute;
+    top: 42%;
+    left: 4%;
+    font-size: 23px;
+  }
+  
+  .subscribe-form input {
+    height: 57px;
+    width: 65%;
+    border: 1px solid #ececec;
+    border-radius: 50px 0 0 50px;
+    box-shadow: none;
+    padding-left: 50px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    font-size: 16px;
+  }
+  
+  .subscribe-form button{
+    font-size: 16px;
+    font-weight: 500;
+    padding: 15px 40px;
+    color: #ffffff;
+    border: none;
+    background-color: #3BB77E;
+    border: 1px solid #29A56C;
+    border-radius: 50px;
+    position: relative;
+    left: -5%;
+  } 
+
+
+
+
+
+/*************** top footer csss *****************/
+.top-footer{
+  padding: 25px 0px;
+  
+}
+
+.top-footer .collumPartAll{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+}
+.top-footer .collumPartAll .item-box-icon {
+  width: 20%;
+  height: 134px;
+  display: flex;
+  align-items: center;
+  background: #F4F6FA;
+  padding: 20px !important;
+  border-radius: 10px;
+}
+
+.top-footer .collumPartAll .single-text {
+  margin-left: 13px;
+  height: 85px;
+}
+
+.top-footer .collumPartAll .single-text h4{
+font-size: 17px;
+font-weight: 500;
+color: #242424;
+}
+.top-footer .collumPartAll .single-text p{
+font-size: 16px;
+font-weight: 400;
+color: #ADADAD;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/********** bottom footer css *************/
+.footer-section .footer-all-part .footer-part1{
+  width: 21%;
+}
+
+
+.footer-section .footer-all-part  .footer-part1 .footer-left-box{
+
+}
+
+.footer-section .footer-all-part  .footer-part1 .footer-left-box img{
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+
+.footer-section .footer-all-part .footer-part1 .footer-left-box h4 {
+  font-size: 17px;
+  font-weight: 400;
+  color: #253D4E;
+  margin-bottom: 20px;
+}
+
+.footer-section .footer-all-part  .footer-part1 .footer-left-box p{
+  font-size: 15px;
+  color:  #253D4E;
+  font-weight: 400;
+
+}
+.footer-section .footer-all-part  .footer-part1 .footer-left-box p span{
+  color: var(--nest-primary);
+  font-size: 16px;
+  padding-right: 2px;
+ 
+}
+
+.footer-section .footer-all-part  .footer-part1 .footer-left-box p .link-text-all {
+   color: var(--nest-primary) !important;
+} 
+
+/* part 2 css */
+
+.footer-section .footer-all-part  .footer-part2 h2 {
+   color:  #253D4E !important;
+   font-size: 25px;
+   font-weight: 600;
+   margin-top: 20px;
+   margin-bottom: 20px;
+} 
+
+.footer-section .footer-all-part  .footer-part2 ul li a{
+  display: block;
+  margin: 0 0 13px;
+  transition-duration: 0.3s;
+  font-weight: 500;
+  line-height: 24px;
+  color: #253D4E;
+}
+.footer-section .footer-all-part  .footer-part2 ul li a:hover{
+  color: var(--nest-primary);
+}
+
+/* right box */
+.footer-section .footer-all-part  .footer-part1 .footer-right-box{
+  
+}
+.footer-section .footer-all-part  .footer-part1 .footer-right-box h2{
+  color:  #253D4E !important;
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.footer-section .footer-all-part  .footer-part1 .footer-right-box p{
+  color:  #253D4E !important;
+  font-weight: 400;
+  
+
+}
+.footer-section .footer-all-part  .footer-part1 .footer-right-box .image a img{
+  width: 140px;
+}
+
+.footer-section .footer-all-part  .footer-part1 .footer-right-box .image2  p{
+  margin-top: 10px;
+  padding: 10px 0px;
+}
+.footer-section .footer-all-part  .footer-part1 .footer-right-box .image2 a img{
+  width: 300px;
+}
+
+
+
+/*************** bottom footer **************/
+.bottom-footer{
+  border-top: 1px solid var(--nest-primary);
+  padding: 30px 0px;
+}
+.bottom-footer .footer-left p a{
+   font-size: 16px;
+   font-weight: 600;
+   color: var(--nest-primary);
+}
+
+.bottom-footer .middle-bar{
+   display: flex;
+   gap: 30px;
+}
+.bottom-footer .middle-bar .icon-call{
+ display: flex;
+ gap: 10px;
+
+}
+
+.bottom-footer .middle-bar .icon-call .icon{
+   font-size: 35px;
+   color: #7E7E7E;
+} 
+.bottom-footer .middle-bar .icon-call .call h2{
+   font-size: 26px;
+   color: var(--nest-primary);
+   margin-bottom: 0px;
+} 
+.bottom-footer .middle-bar .icon-call .call p{
+   font-size: 12px;
+   font-weight: 500;
+   color: #7E7E7E;
+
+} 
+
+/* right  */
+.bottom-right .follow-media{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  
+}
+.bottom-right .follow-media .follow p{
+   font-size: 16px;
+   font-weight: 600;
+   color:  #253D4E;
+   margin-bottom: 5px;
+}
+.bottom-right .follow-media .media span{
+   
+}
+.bottom-right .follow-media .media span .all-icon{
+    font-size: 20px;
+    color: var(--nest-primary);
+    margin-right: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.bottom-right .follow-media .media span .all-icon:hover{
+  transform: translateY(-4px);
+}
+
+.bottom-right p{
+  text-align: end;
+  font-size: 16px;
+  font-weight: 400;
+  color: #7E7E7E;
+}
+
+
+
+
+
+
+

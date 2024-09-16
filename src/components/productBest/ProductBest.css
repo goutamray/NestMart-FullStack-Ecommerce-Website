@@ -1,0 +1,144 @@
+
+
+.productThumb{
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  border: 1px solid #ececec;
+  border-radius: 15px ;
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+.productThumb .badge{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 60px;
+  height: 30px;
+  background-color: red;
+  z-index: 999999;
+  display: inline-block;
+  border-radius: 15px 0 20px 0;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  padding: 9px 20px 10px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+.productThumb .badge.hot{
+  background-color: #f74b81;
+}
+.productThumb .badge.new{
+  background-color: var(--nest-primary);
+}
+.productThumb .badge.sale{
+  background-color: #67bcee;
+}
+.productThumb .badge.best{
+  background-color: #f59758;
+}
+.productThumb:hover{
+  background: #fff;
+  border: 1px solid #BCE3C9;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out; 
+}
+.productThumb .product-image{
+   position: relative;
+}
+.productThumb .product-image .overlay {
+  position: absolute;
+  left: 65px;
+  top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  z-index: 0;
+  transition: all 0.3s ease-in-out;
+}
+.productThumb:hover .product-image .overlay{ 
+  visibility: visible;
+  z-index: 999;
+}
+.productThumb .product-image .overlay ul {
+  background-color: #fff;
+  width: 103px;
+  height: 36px;
+  border-radius: 4px;
+  color: var(--nest-primary) !important;
+}
+.productThumb .product-image .overlay ul li{
+  border-right: 1px solid var(--nest-primary);
+  margin-right: 0px;
+}
+.productThumb .product-image .overlay ul li .pad-tooltip:hover{
+  margin: 0px;
+  border: none;
+  left: 0px !important;
+  top: 0px !important;
+}
+.productThumb .product-image .overlay ul li a{
+    display: inline-block;
+    padding: 6px 8px;
+    font-size: 17px;
+    color: var(--nest-primary) !important;
+    font-weight: 500;
+}
+.productThumb .product-image .overlay ul li a:hover{
+  color: #fdc040 !important;
+}
+.productThumb:hover .product-image  img{
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.1);
+}
+.productThumb .info .category{
+  margin-top: 10px;
+  color: #adadad  ;
+  font-size: 12px;
+}
+.productThumb .info .title h3{
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin-bottom: 5px;
+}
+.productThumb .info .review{
+  margin-bottom: 5px;
+}
+.productThumb .info .product-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.productThumb .info .product-card-bottom .product-price{
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--nest-primary);
+}
+.productThumb .info .product-card-bottom .product-price .old-price{
+  font-size: 14px;
+  color: #adadad;
+  margin: 0 0 0 7px;
+  text-decoration: line-through;
+}
+.cart-btn a{
+  color: #fff !important;
+  background-color: var(--nest-primary);
+  width: 100% !important;
+  display: block;
+  padding: 12px 20px;
+  border: none;
+  margin-top: 5px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  transition: all ease-in-out 0.3s;
+}
+.cart-btn a:hover{
+  background-color: #FDC040;
+}
+

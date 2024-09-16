@@ -37,7 +37,9 @@ const Navbar = () => {
               <div className="navbar-menu">
                  <ul className="list list-inline menu-item">
                     <li className="list-inline-item list-item-single ">
-                       <Link to="/" onClick={handleClickOpen}> Home <FaChevronDown className="down-arrow-item"/> </Link>
+                       <Link to="/" onClick={handleClickOpen}> 
+                          Home <FaChevronDown className="down-arrow-item"/> 
+                       </Link>
 
                        
 
