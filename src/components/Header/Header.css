@@ -1,0 +1,166 @@
+
+/***** Header css ******/
+
+.header-custom-data{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.col-sm-5.middle-bar {
+  width: 46%;
+}
+.logo {
+  max-width: 85%;
+}
+.header-middle {
+  width: 100%;
+  height: auto;
+  margin: auto;
+  padding: 20px 0px;
+}
+.middle-bar {
+  display: flex;
+  align-items: center;
+}
+.header-middle .header-search{
+  width: 100%;
+  height: 55px;
+  border: var(--nest-border);
+  border-radius: 4px; 
+  padding: 0px 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.header-middle .header-search .select-drop{
+  width: 25%;
+  padding: 10px 5px;
+  position: relative;
+}
+.header-middle .header-search .select-drop::after {
+  content: "";
+  height: 29px;
+  width: 1px;
+  position: absolute;
+  right: 14px;
+  top: 6px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.header-middle .header-search .select-drop p{
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+.header-middle .header-search .search {
+  width: 75%;
+  position: relative;
+  top: -78%;
+  left: 26%;
+}
+.header-middle .header-search .search .search-icon {
+  position: absolute;
+  right: 5px;
+  top: 11px;
+  font-size: 28px;
+  font-weight: 500;
+  color: rgba(0,0,0, 0.5);
+}
+.header-middle .header-search .search input{
+ width: 100%;
+ height: 50px;
+ border: 0px;
+ font-size: 14px;
+}
+
+/********** Cart-wishlist-account css **************/
+
+.header-middle .cart-wish-account {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header-middle .cart-wish-account .header-cart-wishlist .header-action-icon-2 {
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+  position: relative;
+
+
+}
+.header-middle .cart-wish-account .header-cart-wishlist .dropdown-menu-abc {
+  position: absolute;
+  right: 22px;
+  top: 76px;
+  padding: 10px 0px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  z-index: 999999999999;
+  background-color: #fff !important;
+}
+
+ .cart-wish-account .header-cart-wishlist .dropdown-menu-abc .drop-down-hover {
+  padding: 2px 13px;
+  width: 160px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cart-wish-account .header-cart-wishlist .dropdown-menu-abc .drop-down-hover:hover{
+  color: var(--nest-primary);
+  background-color: #dcdcdc;
+}
+
+ .cart-wish-account .header-cart-wishlist .dropdown-menu-abc .drop-down-hover button {
+    border: none !important;
+    background: transparent !important;
+    padding: 8px 5px;
+    font-size: 14px;
+
+}
+
+ .cart-wish-account .header-cart-wishlist .header-action-icon-2 .compare-box{
+  position: relative;
+}
+
+.cart-wish-account .header-cart-wishlist .header-action-icon-2 .compare-box .pro-count {
+  background-color: var(--nest-primary);
+  display: block;
+  height: 20px !important;
+  width: 20px !important;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 11px !important;
+  line-height: 20px;
+  position: absolute;
+  left: 14px;
+  top: -8px;
+  text-align: center;
+}
+
+.cart-wish-account .header-cart-wishlist .header-action-icon-2 a.compare-text{
+  margin-top: 11px;
+  margin-left: 2px;
+  color: #636262;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
