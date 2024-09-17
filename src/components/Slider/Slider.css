@@ -1,10 +1,8 @@
 
-
 .home-slider{
   padding: 25px 0px;
   position: relative;
 }
-
 .home-slider-main{
   border-radius: 20px;
   overflow: hidden;
@@ -20,17 +18,15 @@
    width: 10px;
    font-size: 16px;
 }
-
 .slick-active button:before{
   color: var(--nest-primary) !important;
 }
-
 .slick-arrow{
   position: absolute;
   top: 47%;
   height: 40px !important;
   width: 40px !important;
-  background-color: #F2F3F4;
+  background-color: var(--nest-primary) !important;
   box-shadow: var(--shadow-md);
   border-radius: 50%;
   z-index: 999;
@@ -45,18 +41,18 @@
 .slick-arrow.slick-next{
   margin-right: 4% !important;
 }
-.slick-prev::before{
+/* /* .slick-prev::before{
   content: "\f104" !important; 
   font-family: FontAwesome !important;
   color: #000;
   font-size: 25PX;
-}
-.slick-next::before{
+} */
+/* .slick-next::before{
   content: "\f105" !important; 
   font-family: FontAwesome !important;
-  color: #000;
+  color: #d21717;
   font-size: 25PX;
-}
+}  */
 .slick-prev:hover::before{
   color: #F2F3F4;
 }
@@ -135,6 +131,18 @@
   .home-slider-main .item .info p{
     font-size: 15px;
   }
+  .home-slider .slick-slide img {
+    display: block;
+    height: 300px;
+}
+
+.home-slider .slick-arrow.slick-prev{
+  display: none !important;
+}
+.home-slider .slick-arrow.slick-next{
+  display: none !important;
+}
+
 }
 
  @media (min-width : 575px) and (max-width: 767px){ 
@@ -146,48 +154,6 @@
     font-size: 22px;
   }
 }
-
-
- @media (min-width : 767px) and (max-width: 992px){ 
-  .home-slider-main .item .info h2{
-    font-size: 35px;
-  }
-  .home-slider-main .item .info p{
-    font-size: 26px;
-  }
-
-}   
-
-
- @media (min-width : 320px) and (max-width: 768px){ 
-  .slick-arrow.slick-prev{
-    display: none !important;
-  }
-  .slick-arrow.slick-next{
-    display: none !important;
-  }
-}   
-
- @media (min-width : 320px) and (max-width: 992px){ 
-  .home-slider {
-    margin-top: 57px !important;
-    padding: 0px !important;
-  }
-  .home-slider-main .item .info h2{
-    margin-bottom: 10px;
-  }
-  .subscribe-form{
-    display: none;
-  }
-
-
-
-} 
-
-
-
-
-
 
 
 

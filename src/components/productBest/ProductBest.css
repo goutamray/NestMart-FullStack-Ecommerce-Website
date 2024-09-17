@@ -1,5 +1,4 @@
 
-
 .productThumb{
   width: 100%;
   height: auto;
@@ -99,11 +98,12 @@
   color: #adadad  ;
   font-size: 12px;
 }
-.productThumb .info .title h3{
+.productThumb .info .title a{
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 5px;
   margin-bottom: 5px;
+  color: #253D4E;
 }
 .productThumb .info .review{
   margin-bottom: 5px;
@@ -141,4 +141,17 @@
 .cart-btn a:hover{
   background-color: #FDC040;
 }
+
+
+/***** Responsive css *****/
+@media (min-width : 320px) and (max-width: 576px){
+  .productThumb .info {
+    margin-top: 210px;
+}
+.popular-products .product-slider-main .slick-slide {
+  padding: 0px 15px !important;
+}
+
+}
+
 

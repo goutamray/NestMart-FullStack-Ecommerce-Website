@@ -139,4 +139,8 @@
   color: #636262;
 }
 
-
+@media (min-width : 320px) and (max-width: 1920px){
+  .header-middle{
+    display: none;
+  }
+}

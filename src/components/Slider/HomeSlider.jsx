@@ -2,15 +2,12 @@
 import Slider from "react-slick"; 
 import { IoIosSend } from "react-icons/io";
 
-// slider css  import 
+// Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import slider1 from "../../../src/assets/img/slider/slider-1.png"
 import slider2 from "../../../src/assets/img/slider/slider-2.png"
-
-
-
 
 
 import "./Slider.css" 
@@ -26,6 +23,8 @@ const HomeSlider = () => {
     slidesToScroll: 1,
     fade : true,
     arrows : true, 
+    autoplay: true,
+    autoplaySpeed: 5000,
   }
 
   return (
@@ -38,7 +37,7 @@ const HomeSlider = () => {
                     <div className="info">
                          <h2> Don’t miss amazing <br/>  grocery deals </h2>
                          <p> Sign up for the daily newsletter </p>
-                         <form className="subscribe-form">
+                         <form action="#" className="subscribe-form">
                            <IoIosSend className="send" />
                            <input type="email" placeholder="Your emaill address" />
                            <button type="submit"> Subscribe </button>

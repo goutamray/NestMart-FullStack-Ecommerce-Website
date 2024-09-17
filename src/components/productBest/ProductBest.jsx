@@ -1,5 +1,4 @@
 
-import { IoCartOutline } from "react-icons/io5";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { CiHeart, CiShuffle } from "react-icons/ci";
 import { FaCartArrowDown } from "react-icons/fa";
@@ -44,7 +43,9 @@ const ProductBest = (props) => {
          
          <div className="info">
            <h4 className="category"> Snack</h4>
-           <div className="title"> <h3> Seeds of Change Organic Quinoa, Brown, & Red Rice</h3></div>
+           <div className="title">
+              <a href="#"> Seeds of Change Organic Quinoa, Brown, & Red Rice</a>
+           </div>
            <div className="review">
                <Rating name="read-only" value={5} readOnly size="small"/>
            </div>

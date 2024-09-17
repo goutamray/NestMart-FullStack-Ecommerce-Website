@@ -105,6 +105,11 @@
 
 
 
+@media (min-width : 320px) and (max-width: 1920px){
+  .my-custom-header{
+    display: none;
+  }
+}
 
 
 

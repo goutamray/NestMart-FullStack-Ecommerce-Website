@@ -48,6 +48,11 @@
 .productThumb .product-image{
    position: relative;
 }
+.productThumb .product-image img{
+  height: 280px;
+  overflow: hidden !important;
+  z-index: -1;
+}
 .productThumb .product-image .overlay {
   position: absolute;
   left: 65px;
@@ -94,16 +99,20 @@
   transition: all 0.3s ease-in-out;
   transform: scale(1.1);
 }
+.productThumb .info{
+  margin-top: 15px;
+}
 .productThumb .info .category{
   margin-top: 10px;
   color: #adadad  ;
   font-size: 12px;
 }
-.productThumb .info .title h3{
+.productThumb .info .title a{
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 5px;
   margin-bottom: 5px;
+  color: #253D4E;
 }
 .productThumb .info .review{
   margin-bottom: 5px;
@@ -149,3 +158,13 @@
   background-color: var(--nest-primary);
   color: #fff !important;
 }
+
+
+@media (min-width : 320px) and (max-width: 576px){
+  .productThumb .info{
+    margin-top: 25px;
+  }
+}
+
+
+

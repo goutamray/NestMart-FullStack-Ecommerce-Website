@@ -9,30 +9,64 @@ import banner2 from "../../assets/img/banner/banner-2.png"
 import banner3 from "../../assets/img/banner/banner-3.png"
 import banner4 from "../../assets/img/banner/banner-4.png"
 
-
-
-
 import Product from "../../components/product/Product";
+import ProductBest from "../../components/productBest/ProductBest";
+import TopProduct from "../../components/TopProducts/TopProduct";
 
 import Slider from "react-slick"; 
 
-import TopProduct from "../../components/TopProducts/TopProduct";
+import { TabContext } from '@mui/lab';
+import { Tab, Tabs } from '@mui/material';
 
 import "./Home.css"
-import ProductBest from "../../components/productBest/ProductBest";
+import { useState } from "react";
+
 const Home = () => {
 
-  let settings = {
+  const [value, setValue] = useState('1');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  }; 
+
+  var settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 3000,
     slidesToShow: 4,
     slidesToScroll: 1,
     fade : false,
-    arrows : true, 
-    autoPlay : 3000,
-
-  }
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows : true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+        }
+      }
+    ]
+  };
 
   return (
     <> 
@@ -85,27 +119,13 @@ const Home = () => {
           <div className="tab-header d-flex align-items-center justify-content-between">
             <h3> Popular Products </h3>
             <ul className="list list-inline custom-ul"> 
-              <li  className="list-inline-item"> 
-                <a href=""> All </a>
-              </li>
-              <li className="list-inline-item"> 
-                <a href=""> Milks & Dairies </a>
-              </li>
-              <li  className="list-inline-item"> 
-                <a href=""> Coffes & Teas </a>
-              </li>
-              <li  className="list-inline-item"> 
-                <a href=""> Pet Foods </a>
-              </li>
-              <li  className="list-inline-item"> 
-                <a href=""> Meats </a>
-              </li>
-              <li className="list-inline-item"> 
-                <a href=""> Vegetables </a>
-              </li>
-              <li className="list-inline-item"> 
-                <a href=""> Fruits </a>
-              </li>
+              <TabContext value={value}>
+                <Tabs value={value} onChange={handleChange}>
+                  <Tab label="Tab One" value="1" />
+                  <Tab label="Tab Two" value="2" />
+                  <Tab label="Tab Three" value="3" />
+                </Tabs>
+              </TabContext>
             </ul>
           </div>
 
@@ -150,17 +170,6 @@ const Home = () => {
         <div className="container-fluid">
           <div className="tab-header d-flex align-items-center justify-content-between">
             <h3> Daily Best Sells </h3>
-            <ul className="list list-inline custom-ul">        
-              <li  className="list-inline-item"> 
-                <a href=""> Featured </a>
-              </li>
-              <li className="list-inline-item"> 
-                <a href=""> Popular </a>
-              </li>
-              <li className="list-inline-item"> 
-                <a href=""> New added </a>
-              </li>
-            </ul>
           </div>
           
           <div className="row my-4">

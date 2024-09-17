@@ -5,6 +5,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import Shop from "../pages/Shop/Shop";
 import SingleProduct from "../pages/SinglePage/SingleProduct";
 import Contact from "../pages/contact/Contact";
+import ThankYou from "../pages/thankYou/ThankYou";
 
 
 
@@ -36,6 +37,10 @@ const publicRouter = [
       {
         path : "*",
         element : <NotFound />  
+      },
+      {
+        path : "/thank-you",
+        element : <ThankYou/>  
       },
     ] 
   }

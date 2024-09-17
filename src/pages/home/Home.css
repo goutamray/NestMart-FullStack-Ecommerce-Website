@@ -39,9 +39,6 @@
 .banner-section .banner-part .banner-img .banner-text .button-shop:hover{
   background-color: #FDC040;
 }
-
-
-/********** popular products  ***********/
 .popular-products .custom-ul li a{
   font-size: 16px;
   color: #333;
@@ -96,110 +93,12 @@
 .banner-section .banner-part .banner-img .banner-text .banner-title {
   font-size: 18px !important;
 }
-
-}
-
-/******** Min 320px & Max 768px  **********/
-@media (min-width : 320px) and (max-width: 768px){ 
-  .banner-section .banner-part.extra{
-     margin-top: 15px !important;
-  }
-
-}
-
-/******** Min 576px & Max 768px  **********/
-@media (min-width : 576px) and (max-width: 768px){ 
-  .banner-section .banner-part .banner-img .banner-text .button-shop {
-    top: 57%;
-}
-}
-
-
-/******** Min 576px & Max 992px  **********/
-@media (min-width : 576px) and (max-width: 992px){ 
-  .banner-section .banner-part .banner-img img {
-    border-radius: 10px;
-    height: 201px;
-    width: 100% !important;
-    object-fit: cover;
-  }
-  .banner-section .banner-part .banner-img .banner-text .banner-title{
-    font-size: 16px !important;
-  }
-}
-
-
-/******** Min 768px & Max 992px  **********/
-@media (min-width : 768px) and (max-width: 992px){ 
-  .banner-section .banner-part.extra{
-    margin-top: 15px !important;
- }
-}
-
-
-/******** Min 992px & Max 1200px  **********/
-@media (min-width : 992px) and (max-width: 1200px){ 
-  .banner-section .banner-part .banner-img .banner-text .banner-title{
-    font-size: 22px !important;
-  }
-  .banner-section .banner-part .banner-img .banner-text .button-shop {
-    top: 56%;
-  }
-}
-
-
-
-/************** Popular Product Wrapper Responsive css   *************/
-@media (min-width : 320px) and (max-width: 992px){ 
-.res-full{
-   width: 100% !important;
-}
-.pppppp-div {
-   overflow: auto;
-   width: 100%;
-}
-.popular-productsTileWrap .custom-ul {
-  white-space: nowrap !important;
-  overflow-x: scroll !important; 
-  width: 100% !important;
-  display: block !important;
-}
-.popular-productsTileWrap {
-  flex-direction: column;
-}
-.popular-productsTileWrap .custom-ul{
-   white-space: wrap !important;
-   overflow-x: scroll !important;
-   width: 100% !important;
-   display: block !important;
-}
-.productThumb .product-image {
-  height: 123px !important;
-}
-.productThumb .info .title h3 {
-  font-size: 14px;
-}
-.productThumb .info .product-card-bottom .product-price {
-  font-size: 16px;
-}
-.productThumb .info .author {
-  font-size: 12px;
-}
-.popular-products .product-row .item {
-  width: 181px;
-  display: inline-block;
-}
-}
-
-
-/*********** Daily Best Products  ***************/
-@media (min-width : 320px) and (max-width: 576px){ 
 .popular-products.daily-sells.my-5 {
   margin-bottom: 0px !important;
   padding-bottom: 0px !important;
 }
 .product-slider-main .item {
-  padding: 13px 6px;
+  padding: 5px 0px !important;
 }
 .productThumb {
   padding: 13px;
@@ -208,50 +107,34 @@
   height: 100px !important;
   margin-top: 16px;
 }
+.top-footer .collumPartAll {
+  display: flex;
+  flex-direction: column;
+}
+.top-footer .collumPartAll .item-box-icon {
+  width: 100% !important;
+}
+.top-footer .collumPartAll .single-text {
+  height: 60px !important;
+}
+.popular-products .product-row .item {
+  width: 100%;
+  display: block;
+}
+.popular-products .banner-image {
+  position: relative;
+  display: none;
+}
+.tab-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start !important;
 }
 
-
-@media (min-width : 320px) and (max-width: 768px){ 
-.popular-products .banner-image h2 {
-  font-size: 28px;
-}
-.banner-image.my-banner img {
-  height: 250px !important;
-}
-.productThumb .info .product-card-bottom .product-price {
-  font-size: 14px;
+.banner-section .banner-part .banner-img .banner-text .banner-title {
+  width: 74%;
 }
 
 }
-
-
-
-@media (min-width : 768px) and (max-width: 992px){
-.popular-products .banner-image h2 {
-    font-size: 24px;
-    left: 9%;
-    top: 5%;
-    width: 92%;
-}
-.banner-image.my-banner img {
-  height: 300px !important;
-}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

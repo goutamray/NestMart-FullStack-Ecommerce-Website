@@ -1,0 +1,52 @@
+
+.thank-you{
+  padding: 70px 0px;
+}
+h2.thank-message{
+  font-size: 25px;
+  font-weight: 600;
+  color: #00b853;
+  text-align: center;
+  border: 2px solid #00b853;
+  border-style: dashed;
+  padding: 25px 0px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.order-full-data{
+  padding: 40px 0px;
+}
+h2.order-details{
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+
+
+/******* Responsive css ******/
+@media (min-width : 320px) and (max-width: 576px){
+  h2.thank-message{
+    font-size: 22px;
+  }
+  table.thank-table{
+    display: flex;
+    justify-content: space-between;
+  }
+  .custom-order{
+    display: flex;
+    flex-direction: column;
+   justify-content: flex-end;
+  }
+  .custom-order.output{
+    display: flex;
+    flex-direction: column;
+   justify-content: flex-end;
+   align-items: flex-end;
+  }
+}
+
+
+
+
+

@@ -130,7 +130,7 @@ const Footer = () => {
                     <a href="#"> About Us </a>
                   </li>
                   <li>
-                    <a href="#"> Delivery Information </a>
+                    <a href="#"> Delivery Info </a>
                   </li>
                   <li>
                     <a href="#"> Privacy Policy </a>
@@ -221,6 +221,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
 
 
       {/* bottom footer */}

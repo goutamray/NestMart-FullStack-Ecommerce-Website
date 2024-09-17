@@ -64,6 +64,33 @@
 }
 
 
+/**************** Responsive css ********************/
+@media (min-width : 320px) and (max-width: 576px){ 
+.category-slider .heading{
+  font-size: 20px;
+  margin-bottom: 12px !important;
+}
+.category-slider .slick-arrow.slick-prev{
+  display: none !important;
+}
+.category-slider .slick-arrow.slick-next{
+  display: none !important;
+}
+.subscribe-form {
+  height: 40px;
+  width: 388px;
+}
+.subscribe-form button {
+  padding: 16px 18px;
+  left: -25%;
+}
+.home-slider-main .item .info p {
+  margin-bottom: 19px;
+  width: 80%;
+}
+
+ }
+ 
 
 
 

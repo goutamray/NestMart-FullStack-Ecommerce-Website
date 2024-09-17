@@ -1,5 +1,6 @@
 import Layout from "../components/Layout/Layout";
 import Cart from "../pages/cart/Cart";
+import Checkout from "../pages/checkout/Checkout";
 import Shop from "../pages/Shop/Shop";
 import SignIn from "../pages/signIn/SignIn";
 import SignUp from "../pages/signUp/SignUp";
@@ -25,6 +26,10 @@ const privateRouter = [
            {
             path : "/cart",
             element : <Cart />
+           } ,
+           {
+            path : "/checkout",
+            element : <Checkout />
            } ,
  
       ] 

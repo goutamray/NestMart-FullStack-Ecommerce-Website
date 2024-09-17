@@ -1,10 +1,10 @@
 
-import { FaStar, FaStarHalfAlt } from "react-icons/fa"; 
 import { IoCartOutline } from "react-icons/io5";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { CiHeart, CiShuffle } from "react-icons/ci";
 
 import { Link } from "react-router-dom";
+import Rating from '@mui/material/Rating';
 
 import "./Product.css"
 
@@ -45,9 +45,11 @@ const Product = (props) => {
          
          <div className="info">
            <h4 className="category"> Snack</h4>
-           <div className="title"> <h3> Seeds of Change Organic Quinoa, Brown, & Red Rice</h3></div>
+           <div className="title"> 
+            <a href="#"> Seeds of Change Organic Quinoa, Brown, & Red Rice</a>
+          </div>
            <div className="review">
-            <span><FaStar /><FaStar /><FaStar /><FaStar /><FaStarHalfAlt /></span>
+           <Rating name="read-only" value={5} readOnly size="small"/>
            </div>
            <div className="author">
               <p> By <a href="#"> NestFood </a></p>
