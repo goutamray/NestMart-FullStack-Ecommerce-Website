@@ -3,6 +3,7 @@
   border-top: 1px solid #e4e4e4 ;
   border-bottom: 1px solid #e4e4e4 ;
 }
+
 .my-custom-header{
     position: sticky;
     top:0px;
@@ -14,12 +15,13 @@
 .navbar-header .part1 .browse-button{
    display: flex;
    align-items: center;
+   width: 270px;
 }
 .navbar-header .part1 .browse-button button {
   background-color: var(--nest-primary);
   padding: 10px 15px;
   border: none;
-  width: 75%;
+  width: 100%;
   color: #fff;
   border-radius: 5px;
 }

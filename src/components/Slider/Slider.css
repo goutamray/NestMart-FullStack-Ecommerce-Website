@@ -36,7 +36,6 @@
   z-index: 999;
   transition: all 0.3s ease-in-out;
 }
-
 .slick-arrow:hover{
   background-color: var(--nest-primary);
 }
@@ -46,25 +45,21 @@
 .slick-arrow.slick-next{
   margin-right: 4% !important;
 }
-
 .slick-prev::before{
   content: "\f104" !important; 
   font-family: FontAwesome !important;
   color: #000;
   font-size: 25PX;
 }
-
 .slick-next::before{
   content: "\f105" !important; 
   font-family: FontAwesome !important;
   color: #000;
   font-size: 25PX;
 }
-
 .slick-prev:hover::before{
   color: #F2F3F4;
 }
-
 .slick-next:hover::before{
   color: #F2F3F4;
 }
@@ -77,9 +72,7 @@
    position: absolute;
    top: 10%;
    left: 10%;
-
 }
-
 .home-slider-main .item .info h2{
   font-size: 60px;
   font-weight: 600;
@@ -108,7 +101,6 @@
   left: 4%;
   font-size: 23px;
 }
-
 .subscribe-form input {
   height: 57px;
   width: 65%;
@@ -120,7 +112,6 @@
   padding-bottom: 18px;
   font-size: 16px;
 }
-
 .subscribe-form button{
   font-size: 16px;
   font-weight: 500;
@@ -135,6 +126,63 @@
 } 
 
 
+
+/*************** Responsive css **************/
+@media (min-width : 320px) and (max-width: 575px){ 
+  .home-slider-main .item .info h2{
+    font-size: 22px;
+  }
+  .home-slider-main .item .info p{
+    font-size: 15px;
+  }
+}
+
+ @media (min-width : 575px) and (max-width: 767px){ 
+  .home-slider-main .item .info h2{
+    font-size: 30px;
+    margin-bottom: 5px;
+  }
+  .home-slider-main .item .info p{
+    font-size: 22px;
+  }
+}
+
+
+ @media (min-width : 767px) and (max-width: 992px){ 
+  .home-slider-main .item .info h2{
+    font-size: 35px;
+  }
+  .home-slider-main .item .info p{
+    font-size: 26px;
+  }
+
+}   
+
+
+ @media (min-width : 320px) and (max-width: 768px){ 
+  .slick-arrow.slick-prev{
+    display: none !important;
+  }
+  .slick-arrow.slick-next{
+    display: none !important;
+  }
+}   
+
+ @media (min-width : 320px) and (max-width: 992px){ 
+  .home-slider {
+    margin-top: 57px !important;
+    padding: 0px !important;
+  }
+  .home-slider-main .item .info h2{
+    margin-bottom: 10px;
+  }
+  .subscribe-form{
+    display: none;
+  }
+
+
+
+} 
 
 
 
