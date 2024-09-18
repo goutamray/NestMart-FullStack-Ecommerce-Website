@@ -3,14 +3,13 @@
   border-top: 1px solid #e4e4e4 ;
   border-bottom: 1px solid #e4e4e4 ;
 }
-
 .my-custom-header{
-    position: sticky;
-    top:0px;
-    left: 0px;
-    width: 100%;
-    background-color: #fff;
-    z-index: 99999999;
+  position: sticky;
+  top:0px;
+  left: 0px;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99999999;
 }
 .navbar-header .part1 .browse-button{
    display: flex;
@@ -104,11 +103,11 @@
 }
 
 
-
-@media (min-width : 320px) and (max-width: 1920px){
-  .my-custom-header{
-    display: none;
-  }
+/***** Responsive csss ******/
+@media (min-width : 320px) and (max-width: 576px){
+ .my-custom-header{
+  display: none;
+ }
 }
 
 

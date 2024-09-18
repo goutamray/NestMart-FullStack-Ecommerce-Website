@@ -1,5 +1,13 @@
 
 /****** Shop page css  *********/
+.shop-bread{
+  text-align: center;
+}
+.css-8yvas4-MuiTypography-root-MuiBreadcrumbs-root {
+  font-size: 20px !important;
+  display: flex;
+  justify-content: center;
+}
 .listingProduct {
   background-image: url(../../assets/img/banner/header-bg.png);
   background-position: center center;
@@ -7,24 +15,19 @@
   background-size: cover;
   margin: 10px 20px;
   border-radius: 20px;
-
 }
-
 .listingProduct .breadCrumb{
    padding: 50px 0px;
 }
-
 .listingProduct .breadCrumb h2{
-    font-size: 48px;
-    color: #253D4E;
-    font-weight: 700;
+  font-size: 48px;
+  color: #253D4E;
+  font-weight: 700;
 }
-
 .listingProduct .breadCrumb ul li a{
   color: #7E7E7E;
   font-size: 14px;
   font-weight: 600;
-
 }
 
 /*sidebar  */
@@ -32,11 +35,9 @@
    max-width: 20%;
    padding: 0px;
 }
-
 .right-sidebar{
   max-width: 80%;
 }
-
 .col-lg-9{
   flex: 0 0 auto;
   width: 80%;
@@ -48,11 +49,9 @@
    padding: 20px 0px;
   font-size: 16px;
 }
-
 .right-sidebar .top-strip .ml-auto .tab-item { 
    position: relative;
 }
-
 .right-sidebar .top-strip .ml-auto .tab-item .show-btn {
   padding: 7px 13px;
   background: none;
@@ -62,16 +61,12 @@
   font-size: 14px;
   color: #838383;
 }
-
 .tab-item ul.dropdown-menu-abc {
   position: absolute;
   right: 0px;
   top: 100%;
   z-index: 9999999;
-
 }
-
-
 .tab-item ul.dropdown-menu-abc li button{
   background-color: #fff !important;
   font-size: 13px;
@@ -88,8 +83,68 @@
    color: #fff;
 }
 
+.filters-btn{
+  display: none;
+}
 
 
+
+/******** Responsive css *********/
+@media (min-width : 320px) and (max-width: 576px){
+.listingProduct .breadCrumb {
+  padding: 23px 0px;
+}
+.listingProduct .breadCrumb h2 {
+  font-size: 27px;
+  font-weight: 600;
+}
+.popular-products .product-row {
+  margin-left: 0px !important;
+}
+.col-lg-9.col-md-3.left-sidebar {
+  width: 0%;
+  display: none;
+}
+.top-strip{
+  display: flex;
+  flex-direction: column;
+}
+.show-count-product{
+  width: 100%;
+}
+.col-lg-9.col-md-9.right-sidebar.popular-products {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.right-sidebar .top-strip .ml-auto .tab-item .show-btn {
+  padding: 7px 8px;
+  margin-bottom: 10px;
+}
+
+.filters-btn{
+  display: block;
+  width: 90px;
+}
+.filters-btn {
+ background-color: red;
+ color: #fff;
+ width: 95% !important;
+ border: none;
+ border-radius: 5px;
+ position: fixed;
+ left: 0%;
+ bottom: 0%;
+ padding: 10px 10px;
+ font-weight: 600;
+ font-size: 16px !important;
+ z-index: 99999999 !important;
+ margin: 0px 10px ;
+}
+.filters-btn:hover{
+  background-color: var(--nest-primary);
+}
+
+}
 
 
 

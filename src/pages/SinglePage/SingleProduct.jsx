@@ -14,6 +14,8 @@ import galary4 from "../../assets/img/thumbnail/thumbnail-10.jpg"
 import galary5 from "../../assets/img/thumbnail/thumbnail-11.jpg"
 import galary6 from "../../assets/img/thumbnail/thumbnail-12.jpg"
 
+import Rating from '@mui/material/Rating';
+
 import Slider from "react-slick";
 // slider css  import 
 import { useRef, useState } from 'react';
@@ -22,6 +24,7 @@ import "slick-carousel/slick/slick.css";
 
 import "./SingleProduct.css";
 import Product from "../../components/product/Product";
+import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
 
 const SingleProduct = () => {
 
@@ -70,14 +73,44 @@ const SingleProduct = () => {
     fade : false,
     arrows : true, 
   }
+
   let related = {
     dots: false,
-    infinite: false,
-    speed: 500,
+    infinite: true,
+    speed: 3000,
     slidesToShow: 5,
     slidesToScroll: 1,
     fade : false,
-    arrows : true, 
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows : true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+        }
+      }
+    ]
   }
 
 
@@ -96,22 +129,10 @@ const SingleProduct = () => {
       <div className="single-product">
 
        {/* breadcrumb */}
-        <div className="breadCrumbWrapper2 ">
-           <div className="container-fluid">
-              <div className="bradcrumb2 ">
-               <nav aria-label="breadcrumb">
-                 <ul className="breadcrumb">
-                      <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                      <li className="breadcrumb-item active" aria-current="page"> <Link to="/"> Vegetables & Tubers </Link></li>
-                      <li className="breadcrumb-item " > Seeds Of Change Organic</li>
-                 </ul>
-                </nav>
-             </div>
-          </div>
-        </div>
+       <BreadCrumb  category={"Vegetables and Tubers"} productName={"vigatable foot"}/>
 
 
-        <div className="container my-5">
+        <div className="container mb-5">
            <div className="row">
 
              <div className="col-md-12 singlePart-1 ">
@@ -185,7 +206,9 @@ const SingleProduct = () => {
                        <div className="all-single-info">
                            <h2> Seeds of Change Organic Quinoa, Brown </h2>
                            <div className="review">
-                              <span><FaStar /><FaStar /><FaStar /><FaStar /><FaStarHalfAlt /></span> (32 reviews)
+                              <span>  
+                                <Rating name="read-only" value={5} readOnly size="small"/>
+                              </span> (32 reviews)
                             </div>
                             <div className="price-sec">
                               <span className="sale-price"> $38 </span>

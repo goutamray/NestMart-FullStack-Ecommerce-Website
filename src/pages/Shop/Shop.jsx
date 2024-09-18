@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 
 // components 
 import SideBar from "../../components/sideBer/SideBar";
-import Product from "../../components/product/Product";
+import Typography from '@mui/material/Typography';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+
+import ProductBest from "../../components/productBest/ProductBest";
 
 // react icons 
 import { IoGrid } from "react-icons/io5";
@@ -17,6 +20,15 @@ const Shop = () => {
 
   const [dropDownOpen, setDropDownOpen ] = useState(false); 
   const [dropDownOpen2, setDropDownOpen2 ] = useState(false); 
+
+  const [isOpenSideBar, setIsOpenSideBar ] = useState(false); 
+
+
+  // open filter 
+  const openSideBarData = () => {
+    setIsOpenSideBar(() => !isOpenSideBar)
+  }
+
 
      // handle close
      const handleCloseDrop = () => {
@@ -31,22 +43,33 @@ const Shop = () => {
 
   return (
     <>
+        <button 
+           className="btn btn-primary w-100 filters-btn mb-2 "
+           onClick={openSideBarData}> 
+           Open Filters 
+        </button>
+
+        {
+          isOpenSideBar === true &&  <SideBar isOpenSideBar={isOpenSideBar} openSideBarData={openSideBarData}/> 
+        }
+        
+       
+
     {/* breadcrumb section */}
       <div className="listingProduct my-4">
          <div className="container-fluid">
              <div className="row">
-                <div className="breadCrumb">
-                   <h2> Snack </h2>
+                <div className="breadCrumb text-center">
+                   <h2> SHOP </h2>
                    <ul className="list list-inline">
-                    <li className="list-inline-item">
-                      <Link to=""> Home </Link>
-                    </li>
-                    <li className="list-inline-item">
-                      <Link to=""> Shop </Link>
-                    </li>
-                    <li className="list-inline-item">
-                      <Link to=""> Snack </Link>
-                    </li>
+                   <Breadcrumbs aria-label="breadcrumb" className="shop-bread">
+                      <Link underline="hover" to="/" className="my-color"  >
+                        Home
+                      </Link>
+                      <Link underline="hover"  to="/" className="my-color">
+                        Shop
+                      </Link>    
+                  </Breadcrumbs>
                    </ul>
                 </div>
              </div>
@@ -58,14 +81,14 @@ const Shop = () => {
         <div className="productListingData">
           <div className="container-fluid">
             <div className="row">
-               <div className="col-lg-9 col-md-3  left-sidebar">
-                   <SideBar /> 
+               <div className="col-lg-3 col-md-3  left-sidebar">
+                   <SideBar isOpenSideBar={isOpenSideBar} openSideBarData={openSideBarData}/> 
                </div>
 
                <div className="col-lg-9 col-md-9 right-sidebar popular-products ">
                <div className="top-strip d-flex align-items-center justify-content-between">
                   <p> We found <span style={{color: "#3BB77E"}}> 29 </span> items for you! </p>
-                  <div className="ml-auto  d-flex align-items-center ">
+                  <div className="ml-auto  d-flex align-items-center show-count-product ">
                       <div className="tab-item">
                         <button className="show-btn" onClick={handleCloseDrop }> <IoGrid /> show : 50 <FaAngleDown /> </button>
                         {
@@ -96,50 +119,37 @@ const Shop = () => {
 
                    <div className="row product-row ms-3">
                       <div className="item">
-                          <Product tag="new"/> 
+                          <ProductBest tag="new"/> 
                       </div>
                       <div className="item">
-                          <Product tag="best"/> 
+                          <ProductBest tag="best"/> 
                       </div>
                       <div className="item">
-                          <Product tag="sale"/> 
+                          <ProductBest tag="sale"/> 
                       </div>
                       <div className="item">
-                          <Product tag="hot"/> 
+                          <ProductBest tag="hot"/> 
                       </div>
                       <div className="item">
-                          <Product tag="new"/> 
+                          <ProductBest tag="new"/> 
                       </div>
                       <div className="item">
-                          <Product tag="hot"/> 
+                          <ProductBest tag="hot"/> 
                       </div>
                       <div className="item">
-                          <Product tag="new"/> 
+                          <ProductBest tag="new"/> 
                       </div>
                       <div className="item">
-                          <Product tag="best"/> 
+                          <ProductBest tag="best"/> 
                       </div>
                       <div className="item">
-                          <Product tag="sale"/> 
+                          <ProductBest tag="sale"/> 
                       </div>
                       <div className="item">
-                          <Product tag="new"/> 
+                          <ProductBest tag="new"/> 
                       </div>
-                      <div className="item">
-                          <Product tag="hot"/> 
-                      </div>
-                      <div className="item">
-                          <Product tag="sale"/> 
-                      </div>
-                      <div className="item">
-                          <Product tag="hot"/> 
-                      </div>
-                      <div className="item">
-                          <Product tag="new"/> 
-                      </div>
-                      <div className="item">
-                          <Product tag="sale"/> 
-                      </div>
+                     
+                      
                    </div>
                </div>
             </div>

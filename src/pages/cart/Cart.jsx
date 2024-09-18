@@ -5,29 +5,13 @@ import { PiSignOutBold } from "react-icons/pi";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-
-
 import Counter from "../../components/counter/Counter";
 
 import "./Cart.css"; 
 const Cart = () => {
   return (
     <>
-        {/* breadcrumb */}
-         <div className="breadCrumbWrapper2 ">
-          <div className="container-fluid">
-             <div className="bradcrumb2 ">
-              <nav aria-label="breadcrumb">
-                 <ul className="breadcrumb">
-                    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                     <li className="breadcrumb-item" ><Link to="/shop"> Shop </Link> </li>
-                      <li className="breadcrumb-item"><Link to=""> Cart </Link> </li>          
-                  </ul>
-                 </nav>
-              </div>
-           </div>
-         </div>
-       
+ 
     {/* Cart section  */}
     <div className="cart-section py-2">
       <div className="container-fluid">
@@ -56,20 +40,18 @@ const Cart = () => {
                             <tr > 
                               <th> Product </th>
                               <th> Unit Price </th>
-                              <th> Quantity </th>
+                              <th className="mobile-hide"> Quantity </th>
                               <th> Subtotal </th>
                               <th> Remove </th>
                             </tr>           
                       </thead>
                       <tbody>   
-
-                    
                           <tr >
                             <td> 
                               <div className="table-box d-flex align-items-center">
                                   <div className="image">
                                       <Link to={`/`}> 
-                                          <img src="" alt="" />
+                                          <img src="https://powerpackelements.com/wp-content/uploads/2017/11/Team-memeber-01.png" alt="cart-photo" />
                                       </Link>  
                                   </div>
                                   <div className="product-content">
@@ -79,12 +61,12 @@ const Cart = () => {
                               </div>
                             </td>
                             <td className="product-price"> $ 20  </td>
-                            <td> 
+                            <td className="mobile-hide"> 
                               <div className="cart-counter">
                                   <Counter  />
                               </div>
                             </td>
-                            <td className="subTotal"> $120.00 </td>
+                            <td className="subTotal"> $120 </td>
                             <td className="delete-product"> 
                                 <span >  <RiDeleteBin6Fill  /> 
                                 </span>

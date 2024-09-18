@@ -52,10 +52,7 @@
 }
 
 /****** Responsive css *******/
-@media (min-width : 320px) and (max-width: 768px){
-  .breadcrumb {
-    display: none !important;
-  }
+@media (min-width : 320px) and (max-width: 576px){
   .image-part1 {
     display: none;
   }
@@ -67,23 +64,4 @@
 
 
 
-@media (min-width : 768px) and (max-width: 992px){
-  .breadcrumb{
-    margin-top: 20px;
-  }
-  .single-part {
-    width: 0%;
-  }
-  .image-part1 {
-    display: block;
-    width: 45%;
-  }
-  .image-part {
-    display: block;
-    width: 45%;
-  }
-  .image-login img {
-    height: 442px;
-   }
 
-}

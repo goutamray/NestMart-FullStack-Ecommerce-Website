@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import "./ProductBest.css"; 
 const ProductBest = (props) => {
    
-
   return (
     <>
          <div className="productThumb my-2">

@@ -7,17 +7,21 @@ import cat5 from "../../assets/img/icons/category-5.svg"
 import banner11 from "../../assets/img/banner/banner-11.png"
 
 import { MdFilterListAlt } from "react-icons/md";
+import { IoClose } from "react-icons/io5";
 
 import Filter from "./Filter/Filter"
 
-
 import "./SideBar.css";
-const SideBar = () => {
+const SideBar = (props) => {
+
   return (
     <>
-    <div className="sidebar-left">
+      <div className={`sidebar-left ${props?.isOpenSideBar === true ? "openSidebar" : ""}`}>
         <div className="card-box">
+         <div className="cat-part">
            <h2> Category </h2>
+           <button onClick={props?.openSideBarData}> <IoClose />  </button>
+         </div>
 
            <div className="catList">
              <div className="catItem">
@@ -102,51 +106,11 @@ const SideBar = () => {
            <a href="" className="btn-default-filter"> <MdFilterListAlt className="filter" /> Filter </a>
         
         </div>
- 
-      {/* New products*/}
-        {/* <div className="card-box">
-           <h2> New products </h2>
-           <div className="catList">
-             <div className="catItem">
-                 <div className="text">
-                    <a href=""> <img src={cat1} alt="" /> Milks & Dairies  </a> 
-                    <p className="count"> 27 </p>
-                 </div>
-             </div>
-             <div className="catItem">
-                 <div className="text">
-                    <a href=""> <img src={cat2} alt="" /> Clothing  </a> 
-                    <p className="count"> 2 </p>
-                 </div>
-             </div>
-             <div className="catItem">
-                 <div className="text">
-                    <a href=""> <img src={cat3} alt="" /> Pet Foods  </a> 
-                    <p className="count"> 7 </p>
-                 </div>
-             </div>
-             <div className="catItem">
-                 <div className="text">
-                    <a href=""> <img src={cat4} alt="" /> Baking material  </a> 
-                    <p className="count"> 20 </p>
-                 </div>
-             </div>
-             <div className="catItem">
-                 <div className="text">
-                    <a href=""> <img src={cat5} alt="" /> Fresh Fruit  </a> 
-                    <p className="count"> 9 </p>
-                 </div>
-             </div>
-           </div>
-
-        </div> */}
 
       {/* New products*/}
         <div className="card-box-img">
              <img src={banner11} alt="" />
         </div>
-
-
       </div>
     </>
   )

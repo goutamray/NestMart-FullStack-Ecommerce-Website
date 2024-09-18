@@ -3,6 +3,13 @@
 }
 
 
+/***** Responsive csss ******/
+@media (min-width : 320px) and (max-width: 576px){
+  .container-fluid{
+    padding: 0px 20px !important;
+  }
+}
+
 
 
 

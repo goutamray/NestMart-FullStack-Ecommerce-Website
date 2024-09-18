@@ -13,6 +13,9 @@
    color: var(--nest-primary);
 }
 /* product zoom singlePart-1 */
+.single-product {
+  margin-top: 50px;
+}
 .singlePart-1 .product-zoom{
   border: 1px solid rgb(203, 203, 203);
   padding: 15px;
@@ -31,14 +34,19 @@
   padding: 5px !important;
   overflow: hidden !important;
   height: 90px;
+  width: 80px;
+
 }
 .product-galary-slider .slick-slide  img{
-  border-radius: 10px;
   overflow: hidden !important;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px !important;
+
 }
 .product-galary-slider .slick-current{
   border: 2px solid var(--nest-primary);
-  border-radius: 15px;
+  border-radius: 10px;
 } 
 .product-galary-slider .slick-arrow.slick-prev {
   margin-left: 0% !important;
@@ -273,6 +281,7 @@ color: #B6B6B6;
   width: 90px;
   border-radius: 50%;
   object-fit: cover;
+
 }
 .review-card .image-item p{
     font-size: 14px;
@@ -408,4 +417,96 @@ color: #B6B6B6;
   padding: 5px 10px;
 
 }
+
+
+
+
+/******************* Responsive  css  ****************/
+@media (min-width : 320px) and (max-width: 576px){
+.product-galary-slider .slick-slide .item {
+  padding: 5px !important;
+  overflow: hidden !important;
+  height: 92px;
+}
+.all-single-info h2{
+  font-size: 20px;
+  margin-top: 20px;
+}
+.product-info {
+  padding-left: 15px !important;
+}
+.product-info .price-sec .sale-price {
+  font-size: 28px;
+  font-weight: 600;
+}
+.product-info .price-sec .reg-price .regular {
+  font-size: 18px;
+}
+.product-info .short-desc p {
+  font-size: 14px;
+}
+.productSize ul li a {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+.productDetailsTab .custom-tabs ul li button {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.add-to-cart-btn a {
+  padding: 10px 10px;
+  font-size: 14px;
+}
+.productDetailsTab{
+  padding: 20px !important;
+}
+.progress-bar-item .single-progress {
+   display: block; 
+}
+.progress-bar-item .single-progress span {
+  width: 100%;
+  display: block;
+}
+.productDetailsTab {
+  margin-top: 22px;
+}
+.productSize{
+  display: flex;
+  flex-direction: column;
+}
+.productSize span{
+  display: block;
+  width: 100% !important; 
+  margin-bottom: 5px;
+  font-size: 14px  !important;
+}
+.productSize ul{
+  display: block;
+  width: 100% !important;
+  margin-left: 0px;
+}
+.slick-track .slick-slide .item{
+  width: 100% !important;
+}
+
+ .product-galary-slider .slick-arrow.slick-prev{
+   margin-left: 4%;
+}
+.product-galary-slider .slick-arrow.slick-next{
+  margin-right: 4%;
+} 
+.add-to-cart-btn a .cart-icon {
+  display: none;
+}
+.breadcrumb {
+  display: block !important;
+}
+
+
+
+}
+   
+
+
+
 

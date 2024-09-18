@@ -10,7 +10,7 @@ import { MdVideoLabel } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { CiSettings } from "react-icons/ci";
 import { LuLogOut } from "react-icons/lu";
-
+import { IoMenu } from "react-icons/io5";
 
 import logo from "../../assets/img/logo.svg"
 import compare from "../../assets/img/icons/compare.svg"
@@ -56,14 +56,18 @@ const Header = () => {
           <div className="container-fluid">
             <div className="row header-custom-data">
 
-              <div className="col-sm-2">
+             <div className="phone-menu">
+                    <IoMenu />  
+              </div>
+
+              <div className="col-sm-2 main-logo-part">
                  <div className="logo">
                    <Link to="/"> <img src={logo} alt="" /> </Link>
                  </div>
               </div>
 
             {/* header search start  */}
-              <div className="col-sm-5 middle-bar ">
+              <div className="col-sm-5 middle-bar part2">
                  <div className="header-search d-flex align-items-center"> 
                       <SelectDrop data ={categories}/>
                      <div className="search">
@@ -71,17 +75,16 @@ const Header = () => {
                      </div>
                  </div>
               </div>
-            {/* header search end   */}
 
           
              <div className="col-sm-5 cart-wish-account">
-                <div className="header-cart-wishlist "> 
+                <div className="header-cart-wishlist compare-part"> 
                    <div className="header-action-icon-2">
                        <a href='' className="compare-box">
                            <img className=""  src={compare} />
                            <span className="pro-count blue">3</span>
                         </a>
-                      <a href='' className="compare-text"><span className="lable ml-0">Compare</span></a>
+                      <a href='' className="compare-text hide-phone"><span className="lable ml-0">Compare</span></a>
                    </div>        
                  </div>
 
@@ -91,17 +94,17 @@ const Header = () => {
                            <img className=""  src={heart} />
                            <span className="pro-count blue">6 </span>
                         </a>
-                      <a href='' className="compare-text"><span className="lable ml-0">Wishlist </span></a>
+                      <a href='' className="compare-text hide-phone"><span className="lable ml-0">Wishlist </span></a>
                    </div>        
                  </div>
 
                 <div className="header-cart-wishlist "> 
                    <div className="header-action-icon-2">
-                       <a href='' className="compare-box">
+                       <Link to='/cart' className="compare-box">
                            <img className=""  src={cart} />
                            <span className="pro-count blue">2 </span>
-                        </a>
-                      <Link to='/cart' className="compare-text">
+                        </Link>
+                      <Link to='/cart' className="compare-text hide-phone">
                         <span className="lable ml-0">Cart</span>
                       </Link>
                    </div>        
@@ -116,7 +119,7 @@ const Header = () => {
                         </a>   
                   
                
-                      <a href='#' className="compare-text"><span className="lable ml-0" onClick={handleCloseDrop}> Account </span></a>    
+                      <a href='#' className="compare-text hide-phone"><span className="lable ml-0" onClick={handleCloseDrop}> Account </span></a>    
                       
                    </div>
                    {

@@ -1,15 +1,14 @@
 
 /******* sideber css ***********/
-
-
-
+.sidebar-left{
+  display: block;
+}
 .sidebar-left .card-box {
   padding: 20px;
   border: 1px solid rgb(239 239 239);
   position: relative;
   margin-bottom: 20px;
 }
-
 .sidebar-left .card-box h2{
   font-size: 24px;
   color: #253D4E;
@@ -24,7 +23,6 @@
   position: absolute;
   background-color: var(--nest-primary);
 }
-
 .sidebar-left .card-box h2::before {
   content: "";
   height: 2px;
@@ -35,12 +33,10 @@
   background-color: #ececec;
 }
 
-
 /* item alll  */
 .sidebar-left .card-box .catList {
    margin-top: 40px;
    margin-bottom: 50p;
-  
 }
 
 .sidebar-left .card-box .catList .catItem {
@@ -57,7 +53,6 @@
   border: 1px solid #BCE3C9;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease-in-out; 
-
 }
 .sidebar-left .card-box .catList .catItem .text{
   display: flex;
@@ -65,20 +60,18 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-
 }
 .sidebar-left .card-box .catList .catItem .text a{
    font-size: 14px;
    color: #253D4E;
    transition: all 0.3s ease-in-out; 
 }
-
 .sidebar-left .card-box .catList .catItem:hover .text a{
-color: var(--nest-primary);
+  color: var(--nest-primary);
 }
 .sidebar-left .card-box .catList .catItem .text img {
-    width: 16%;
-    margin-right: 10px;
+  width: 16%;
+  margin-right: 10px;
 }
 .sidebar-left .card-box .catList .catItem .text p {
   display: inline-block;
@@ -88,7 +81,6 @@ color: var(--nest-primary);
   color: #000000;
   font-size: 12px;
 }
-
 .secondCart{
   margin-top: 80px;
 }
@@ -112,15 +104,12 @@ color: var(--nest-primary);
 .customer-checkbox ul li label{
   cursor: pointer;
   font-size: 16px;
-
 }
-
 .customer-checkbox .color-count{
   padding-left: 6px;
 }
 
 /* filter btn css */
-
 .card-box .btn-default-filter{
   background-color: var(--nest-primary);
   padding: 8px 20px;
@@ -131,20 +120,13 @@ color: var(--nest-primary);
   border-radius: 4px;
   transition: all 0.3s ease-in-out;  
 }
-
-
 .card-box .btn-default-filter:hover{
   background-color: #f5ba3e;
- 
 }
-
 .card-box .btn-default-filter .filter{
   font-size: 18px;
   font-weight: 500;
 }
-
-
-
 .sidebar-left .card-box-img {
   border: 1px solid rgb(239 239 239);
   position: relative;
@@ -153,8 +135,52 @@ color: var(--nest-primary);
   overflow: hidden;
 
 }
+.cat-part button{
+  display: none;
+}
 
 
+
+/**** Responsive css *****/
+@media (min-width : 320px) and (max-width: 576px){
+.sidebar-left .card-box-img {
+  display: none;
+}
+.sidebar-left{
+  display: none;
+  width: 0px;
+  left: 0px;
+  transition: all ease-in-out 0.3s;
+  background-color: blue;
+}
+.sidebar-left.openSidebar{
+  display: block;
+  width: 390px !important;
+  max-width: 100%;
+  left: 0%;
+  top: 0%;
+  z-index: 99999999999 !important;
+  background-color: #ffffff;
+  position: absolute;
+  padding: 20px !important;
+  height: auto !important;
+  max-height: max-content !important;
+}
+.cat-part {
+   display: flex;
+   justify-content: space-between;
+}
+.cat-part button{
+  display: block;
+  border: none;
+  background: transparent;
+}
+.cat-part button svg{
+  font-size: 25px;
+}
+
+}
+  
 
 
 

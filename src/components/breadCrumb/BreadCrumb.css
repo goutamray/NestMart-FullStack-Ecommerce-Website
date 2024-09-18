@@ -1,0 +1,33 @@
+
+
+
+nav.MuiTypography-root.MuiTypography-body1.MuiBreadcrumbs-root.custom-breadCrumb.css-8yvas4-MuiTypography-root-MuiBreadcrumbs-root {
+  display: none;
+}
+
+
+/**** Responsive css *****/
+@media (min-width : 320px) and (max-width: 576px){
+  .my-color{
+    color:  #3bb77e;
+  }
+  .custom-breadCrumb{
+    padding: 25px 20px !important;
+    margin-bottom: 5px;
+  }
+  
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

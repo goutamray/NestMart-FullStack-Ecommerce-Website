@@ -133,55 +133,19 @@
 
 
 /*********** Responsive css   ***************/
-@media (min-width : 320px) and (max-width: 768px){
- .counter {
-   width: 68px;
+@media (min-width : 320px) and (max-width: 576px){
+.table-box.d-flex.align-items-center {
+  display: flex;
+  flex-direction: column;
 }
-.counter h1 {
- font-size: 16px;
- margin-left: 10px;
+.product-content {
+  padding-left: 0px;
 }
-.cart-counter {
- margin-top: 56px;
+td.product-price {
+  font-size: 16px;
 }
-
+.mobile-hide{
+  display: none;
 }
-
-
-@media (min-width : 320px) and (max-width: 768px){ 
- .table-box .image img {
-   width: 70px;
- }
- .product-content a h5 {
-   font-size: 14px;
-   margin-top: 10px;
- }
- .product-price {
-   font-size: 18px;
-}
-.subTotal {
- font-size: 18px;
 }
 
-}
-
-
-@media (min-width : 320px) and (max-width: 992px){ 
- .breadCrumbWrapper2{
-   display: none;
- }
-.cart-part-left{
- width: 100%;
- display: block;
-}
-.cart-part-right{
- width: 100%;
- display: block;
-}
- .cart-section .cart-body .table-box {
-   display: flex !important;
-   flex-direction: column;
-}
-
-
-}

@@ -3,20 +3,16 @@
 .logo {
   max-width: 85%;
 }
-
 .header-middle {
   width: 100%;
   height: auto;
   margin: auto;
   padding: 20px 0px;
-
 }
 .middle-bar {
   display: flex;
   align-items: center;
- 
 }
-
 .header-middle .header-search{
   width: 100%;
   height: 55px;
@@ -26,7 +22,6 @@
   cursor: pointer;
   position: relative;
 }
-
 .header-middle .header-search .select-drop{
   width: 28%;
   padding: 10px 5px;
@@ -41,16 +36,14 @@
   top: 6px;
   background-color: rgba(0, 0, 0, 0.2);
 }
-
 .header-middle .header-search .select-drop p{
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 0px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0px;
 }
 .header-middle .header-search .search{
- width: 75%;
- position: relative;
- 
+  width: 75%;
+  position: relative;
 }
 .header-middle .header-search .search .search-icon {
   position: absolute;
@@ -60,7 +53,6 @@
   font-weight: 500;
   color: rgba(0,0,0, 0.5);
 }
-
 .header-middle .header-search .search input{
  width: 100%;
  height: 50px;
@@ -69,20 +61,16 @@
 }
 
 /********** Cart-wishlist-account css **************/
-
 .header-middle .cart-wish-account {
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
-
 .header-middle .cart-wish-account .header-cart-wishlist .header-action-icon-2 {
   display: flex;
   align-items: center;
   padding: 0px 10px;
   position: relative;
-
-
 }
 .header-middle .cart-wish-account .header-cart-wishlist .dropdown-menu-abc {
   position: absolute;
@@ -94,30 +82,24 @@
   z-index: 999999999999;
   background-color: #fff !important;
 }
-
- .cart-wish-account .header-cart-wishlist .dropdown-menu-abc .drop-down-hover {
+.cart-wish-account .header-cart-wishlist .dropdown-menu-abc .drop-down-hover {
   padding: 2px 13px;
   width: 160px;
   transition: all 0.3s ease-in-out;
 }
-
 .cart-wish-account .header-cart-wishlist .dropdown-menu-abc .drop-down-hover:hover{
   color: var(--nest-primary);
   background-color: #dcdcdc;
 }
-
- .cart-wish-account .header-cart-wishlist .dropdown-menu-abc .drop-down-hover button {
-    border: none !important;
-    background: transparent !important;
-    padding: 8px 5px;
-    font-size: 14px;
-
+.cart-wish-account .header-cart-wishlist .dropdown-menu-abc .drop-down-hover button {
+  border: none !important;
+  background: transparent !important;
+  padding: 8px 5px;
+  font-size: 14px;
 }
-
- .cart-wish-account .header-cart-wishlist .header-action-icon-2 .compare-box{
+.cart-wish-account .header-cart-wishlist .header-action-icon-2 .compare-box{
   position: relative;
 }
-
 .cart-wish-account .header-cart-wishlist .header-action-icon-2 .compare-box .pro-count {
   background-color: var(--nest-primary);
   display: block;
@@ -132,15 +114,69 @@
   top: -8px;
   text-align: center;
 }
-
 .cart-wish-account .header-cart-wishlist .header-action-icon-2 a.compare-text{
   margin-top: 11px;
   margin-left: 2px;
   color: #636262;
 }
+.phone-menu{
+  width: 0%;
+  display: none;
+}
 
-@media (min-width : 320px) and (max-width: 1920px){
-  .header-middle{
-    display: none;
-  }
+
+
+/***** Responsive csss ******/
+@media (min-width : 320px) and (max-width: 576px){
+.header-middle{
+    position: sticky;
+    top:0px;
+    left: 0px;
+    width: 100%;
+    background-color: #fff;
+    z-index: 99999999;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+}
+.row.header-custom-data {
+  display: flex;
+  justify-content: space-between;
+}
+.col-sm-5.middle-bar.part2 {
+  display: none;
+}
+.col-sm-3.part1 {
+  display: none;
+}
+.col-sm-2.part3{
+  display: none;
+}
+.phone-menu{
+  width: 20%;
+  display: block;
+  position: relative;
+  margin-top: 3px;
+}
+.phone-menu svg{
+  font-size: 35px;
+  font-weight: 500;
+}
+.logo {
+  max-width: 100%;
+}
+.header-cart-wishlist.compare-part {
+  display: none;
+}
+a.compare-text.hide-phone {
+  display: none;
+}
+.col-sm-2.main-logo-part {
+  width: 35%;
+}
+.header-middle .cart-wish-account {
+  width: 45%;
+  display: flex;
+  gap: 9px;
+}
+
+
 }

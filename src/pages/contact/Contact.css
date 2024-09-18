@@ -82,9 +82,7 @@
 
 
 /***** Responsive css  *******/
-
-/***** Min 320px & Max 576px  ******/
-@media (min-width : 320px) and (max-width: 768px){
+@media (min-width : 320px) and (max-width: 576px){
 .contact-text p{
     width: 90% !important;
   }

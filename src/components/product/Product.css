@@ -1,5 +1,4 @@
 
-
 .productThumb{
   width: 100%;
   height: auto;
@@ -49,7 +48,7 @@
    position: relative;
 }
 .productThumb .product-image img{
-  height: 280px;
+  height: auto;
   overflow: hidden !important;
   z-index: -1;
 }
