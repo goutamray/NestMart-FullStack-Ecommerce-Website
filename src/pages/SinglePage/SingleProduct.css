@@ -488,8 +488,7 @@ color: #B6B6B6;
 .slick-track .slick-slide .item{
   width: 100% !important;
 }
-
- .product-galary-slider .slick-arrow.slick-prev{
+.product-galary-slider .slick-arrow.slick-prev{
    margin-left: 4%;
 }
 .product-galary-slider .slick-arrow.slick-next{

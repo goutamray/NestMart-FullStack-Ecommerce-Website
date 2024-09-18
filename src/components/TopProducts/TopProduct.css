@@ -1,11 +1,9 @@
 
-
 .topSellingbox h2{
   font-size: 24px ;
   color: #253D4E;
   font-weight: 600;
   position: relative;
-  
 }
 .topSellingbox h2::before {
   content: "";

@@ -79,10 +79,9 @@
   transition: all 0.3s ease-in-out;
 }
 .tab-item ul.dropdown-menu-abc li:hover button{
-   background-color: var(--nest-primary) !important;
-   color: #fff;
+  background-color: var(--nest-primary) !important;
+  color: #fff;
 }
-
 .filters-btn{
   display: none;
 }
@@ -120,7 +119,6 @@
   padding: 7px 8px;
   margin-bottom: 10px;
 }
-
 .filters-btn{
   display: block;
   width: 90px;

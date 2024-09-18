@@ -4,14 +4,11 @@
   margin-top: 10px !important;
   font-weight: 500;
 }
-
 .colors span{
   color: #333 !important;
   font-weight: 600;
   font-size: 18px;
-
 }
-
 .colors .high-price{
   margin-left: 40px;
 }
@@ -27,7 +24,6 @@ small span{
   color: #333 !important;
   font-weight: 500;
 }
-
 .slider{
   margin-top: 50px;
   height: 4px;
@@ -43,7 +39,6 @@ small span{
   top: -5px;
   border: 2px solid var(--nest-primary);
 }
-
 .slider .thumb:focus{
   outline: none !important;
 }

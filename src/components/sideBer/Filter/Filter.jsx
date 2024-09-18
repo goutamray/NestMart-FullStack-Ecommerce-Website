@@ -15,16 +15,11 @@ const Filter = () => {
     <>
       <div className="app my-3">
         <div className="box">
-
            <Slider className="slider" value={values} min={MIN} max={MAX} onChange={setValues}/> 
            <div className="colors"> 
                <span> From : </span > ${values[0]} 
                <span className="high-price"> To : </span > ${values[1]} 
            </div>
-           {/* <small> 
-              <span> Current Range : </span>  ${ values[1] - values[0] }
-           </small> */}
-        
         </div>
       </div>
     </>
