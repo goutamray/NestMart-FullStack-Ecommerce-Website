@@ -129,6 +129,12 @@
 .home-slider .slick-arrow.slick-next{
   display: none !important;
 }
+.subscribe-form button {
+  left: -16% !important;
+}
+
+
+}
 
 
 

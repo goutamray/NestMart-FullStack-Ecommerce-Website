@@ -176,9 +176,13 @@
 
 
 @media (min-width : 320px) and (max-width: 576px){
-  .productThumb .info{
-    margin-top: 25px;
-  }
+.productThumb .info{
+  margin-top: 45px;
+}
+.productThumb .product-image .overlay {
+  left: 75px !important;
+}
+
 }
 
 

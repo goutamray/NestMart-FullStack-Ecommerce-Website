@@ -8,11 +8,15 @@ import banner11 from "../../assets/img/banner/banner-11.png"
 
 import { MdFilterListAlt } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
+import { useState } from "react"
 
-import Filter from "./Filter/Filter"
+// range slider 
+import RangeSlider from "react-range-slider-input";
+import "react-range-slider-input/dist/style.css";
 
 import "./SideBar.css";
 const SideBar = (props) => {
+   const [value, setValue] = useState([20, 90000]);
 
   return (
     <>
@@ -59,11 +63,17 @@ const SideBar = (props) => {
 
       {/* Fill by price */}
         <div className="card-box">
-           <h2> Fill by price </h2>
-              <Filter /> 
+           <h2 > Fill by price </h2>
+              <div className="filterBox mb-2">
+                <RangeSlider min={20} max={90000}  step={5} value={value} onInput={setValue} />
+                  <div className="d-flex pt-2 pb-2 priceRange">
+                     <span> From: <strong className='text-dark'>Tk : {value[0]} </strong> </span>
+                     <span className='ml-auto second-price'> From: <strong className='text-dark'>Tk : {value[1]} </strong> </span>
+                  </div>
+               </div>
        
           <div className="customer-checkbox">
-             <h6> Color </h6>
+             <h2> Color </h2>
              <ul>
                <li>
                   <input type="checkbox" id="red"/>

@@ -146,7 +146,7 @@
 /***** Responsive css *****/
 @media (min-width : 320px) and (max-width: 576px){
 .productThumb .info {
-  margin-top: 210px;
+  margin-top: 250px;
 }
 .popular-products .product-slider-main .slick-slide {
   padding: 0px 15px !important;

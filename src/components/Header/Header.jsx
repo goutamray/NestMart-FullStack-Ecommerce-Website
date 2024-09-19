@@ -15,7 +15,6 @@ import { IoMenu } from "react-icons/io5";
 
 // images 
 import logo from "../../assets/img/logo.svg"
-import compare from "../../assets/img/icons/compare.svg"
 import heart  from "../../assets/img/icons/heart.svg"
 import cart  from "../../assets/img/icons/cart.svg"
 import user  from "../../assets/img/icons/user.svg"
@@ -85,15 +84,7 @@ const Header = () => {
           
              <div className="col-sm-4 cart-wish-account">
                 <div className="header-cart-wishlist compare-part"> 
-                   <div className="header-action-icon-2">
-                       <Link to='#' className="compare-box">
-                           <img src={compare} />
-                           <span className="pro-count blue">3</span>
-                        </Link>
-                      <Link to='#' className="compare-text hide-phone">
-                         <span className="lable ml-0">Compare</span>
-                      </Link>
-                   </div>        
+        
                  </div>
 
                 <div className="header-cart-wishlist "> 
@@ -122,20 +113,22 @@ const Header = () => {
 
            <ClickAwayListener onClickAway={() => setDropDownOpen(false) }>
                 <div className="header-cart-wishlist ">                      
-                  <div className="header-action-icon-2">
+                  <div className="header-action-icon-2" onClick={handleCloseDrop}>
                        <a href='#' className="compare-box">
                            <img src={user} />
                            <span ></span>
                         </a>   
                   
                
-                      <a href='#' className="compare-text hide-phone">
+                      <Link 
+                        to='#' 
+                        className="compare-text hide-phone" 
+                        onClick={handleCloseDrop} >
                         <span 
                            className="lable ml-0" 
-                           onClick={handleCloseDrop}
                           > Account 
                         </span>
-                      </a>    
+                      </Link>    
                       
                    </div>
                    {

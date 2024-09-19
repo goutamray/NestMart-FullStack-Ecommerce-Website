@@ -97,7 +97,7 @@ const MyAccount = () => {
                                        <div className="user-photo">
                                           <img src={input.previewPhoto || avaterPhoto} alt="User" />
                                        </div>
-                                       <div className="overlay">
+                                       <div className="overlay-data">
                                           <label htmlFor="photo-upload" className="file-upload-label">
                                             <FaCloudUploadAlt /> Upload
                                           </label>

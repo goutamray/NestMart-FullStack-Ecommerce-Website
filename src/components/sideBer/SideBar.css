@@ -138,7 +138,9 @@
 .cat-part button{
   display: none;
 }
-
+span.ml-auto.second-price {
+  margin-left: 16px;
+}
 
 
 /**** Responsive css *****/

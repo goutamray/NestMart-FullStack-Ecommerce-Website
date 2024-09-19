@@ -1,5 +1,6 @@
-import { FaStar, FaStarHalfAlt } from "react-icons/fa"; 
+
 import thumb1 from "../../assets/img/thumbnail/thumbnail-1.jpg"
+import Rating from '@mui/material/Rating';
 
 import "./TopProduct.css";
 
@@ -15,8 +16,8 @@ const TopProduct = (props) => {
            </div>
            <div className="item-text">
                <h6> <a href="#"> Nestle Original Coffee-Mate Coffee Creamer </a></h6>
-               <div className="product-rate">
-                <p><FaStar /><FaStar /><FaStar /><FaStar /><FaStarHalfAlt /> <span> (4.3)  </span> </p>
+               <div className="review">
+                   <Rating name="read-only" value={5} readOnly size="small"/>
                </div>
                <div className="product-card-bottom">
                   <span className="salePrice"> $32.85 </span> <span className="regularPrice"> $33.8 </span>
@@ -30,9 +31,9 @@ const TopProduct = (props) => {
            </div>
            <div className="item-text">
                <h6> <a href="#"> Nestle Original Coffee-Mate Coffee Creamer </a></h6>
-               <div className="product-rate">
-                <p><FaStar /><FaStar /><FaStar /><FaStar /><FaStarHalfAlt /> <span> (4.3)  </span> </p>
-               </div>
+               <div className="review">
+                  <Rating name="read-only" value={5} readOnly size="small"/>
+              </div>
                <div className="product-card-bottom">
                   <span className="salePrice"> $32.85 </span> <span className="regularPrice"> $33.8 </span>
                </div>
@@ -45,8 +46,8 @@ const TopProduct = (props) => {
            </div>
            <div className="item-text">
                <h6> <a href="#"> Nestle Original Coffee-Mate Coffee Creamer </a></h6>
-               <div className="product-rate">
-                <p><FaStar /><FaStar /><FaStar /><FaStar /><FaStarHalfAlt /> <span> (4.3)  </span> </p>
+               <div className="review">
+                   <Rating name="read-only" value={5} readOnly size="small"/>
                </div>
                <div className="product-card-bottom">
                   <span className="salePrice"> $32.85 </span> <span className="regularPrice"> $33.8 </span>

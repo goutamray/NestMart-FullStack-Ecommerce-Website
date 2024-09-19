@@ -144,7 +144,7 @@
   display: flex;
   justify-content: space-between;
 }
-.col-sm-5.middle-bar.part2 {
+.col-sm-6.middle-bar.part2 {
   display: none;
 }
 .col-sm-3.part1 {
