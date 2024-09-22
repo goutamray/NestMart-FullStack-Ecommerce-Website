@@ -52,18 +52,19 @@
 .home-slider-main .item{
   position: relative;
 }
-.home-slider-main .item .info{
+.home-slider-main .item .info-data{
    position: absolute;
    top: 10%;
    left: 10%;
 }
-.home-slider-main .item .info h2{
+.home-slider-main .item .info-data h2{
   font-size: 60px;
   font-weight: 600;
   color: #253D4E;
   margin-bottom: 30px;
+  width: 60%;
 }
-.home-slider-main .item .info p{
+.home-slider-main .item .info-data p{
   font-size: 30px;
   font-weight: 400;
   color: #7E7E7E;
@@ -113,10 +114,10 @@
 
 /*************** Responsive css **************/
 @media (min-width : 320px) and (max-width: 575px){ 
-.home-slider-main .item .info h2{
+.home-slider-main .item .info-data h2{
   font-size: 22px;
 }
-.home-slider-main .item .info p{
+.home-slider-main .item .info-data p{
   font-size: 15px;
 }
 .home-slider .slick-slide img {
@@ -139,11 +140,11 @@
 
 
  @media (min-width : 575px) and (max-width: 767px){ 
-.home-slider-main .item .info h2{
+.home-slider-main .item .info-data h2{
   font-size: 30px;
   margin-bottom: 5px;
 }
-.home-slider-main .item .info p{
+.home-slider-main .item .info-data p{
   font-size: 22px;
 }
 

@@ -2,7 +2,7 @@
 import SelectDrop from "../selectDropdown/SelectDrop";
 import Navbar from "../Header/navbar/Navbar"
 
-import {  useState } from "react";
+import {  useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 // react icons 
@@ -23,6 +23,8 @@ import ClickAwayListener from 'react-click-away-listener';
 
 
 import "./Header.css";  
+import { MyContext } from "../../App";
+import { MdOutlineSecurity } from "react-icons/md";
 
 const Header = () => {
    const [dropDownOpen, setDropDownOpen ] = useState(false); 
@@ -30,27 +32,72 @@ const Header = () => {
    // handle close
    const handleCloseDrop = () => {
     setDropDownOpen(() => !dropDownOpen)
+
    }
 
-   const [categories, setCategories ] = useState([ 
-          "All Categories",
-          "Milks and Ice cream",
-          "Noodles & Rice",
-          "Fresh Seafood",
-          "Vegetables",
-          "Baking material",
-          "Fast food",
-          "Pet Foods & Toy",
-          "Clothing & Beauty",
-          "Wines & Alcohol",
-          "Milks and Dairies",
-        
-   ]); 
-
-  
+   const context = useContext(MyContext); 
 
   return (
     <>
+     {/* top part  */}
+    
+       <div className="second-bar">
+        <div className="container-fluid">
+            <div className="row align-items-center header-text-bar">
+               <div className="col-sm-4 header-custom-col">
+                 <div className="menu-top">
+                   <ul>
+                    <li> 
+                      <Link to="/about"> About Us </Link>
+                    </li>
+                    <li> 
+                      <Link to="/my-account"> My account </Link>
+                    </li>
+                    <li> 
+                      <Link to="/wishlist"> Wishlist </Link>
+                    </li>
+                    <li> 
+                      <Link to="/order-truck"> Order Tracking </Link>
+                    </li>
+                   </ul>
+                 </div>
+               </div>
+               <div className="col-sm-4 hide-offer-text">
+                 <div className="offer-text">
+                    <span> <MdOutlineSecurity /> </span>
+                    <p> 100% Secure delivery without contacting the courier
+                    </p>
+                 </div>
+               </div>
+               <div className="col-sm-4">
+                  <div className="info">
+                      <p> Need help? Call Us </p>
+                      <a href="#"> + 0020 500 </a>
+                      <div className="right-select-part">
+                         <div className="language">
+                            <select name="" >
+                               <option value="english"> English </option>
+                               <option value="spanish"> Spanish </option>
+                               <option value="german"> German </option>
+                               <option value="dutch"> Dutch </option>
+                            </select>
+                         </div>
+                         <div className="currency">
+                            <select name="" >
+                               <option value="USD"> USD </option>
+                               <option value="INR"> INR </option>
+                               <option value="BDT"> BDT </option>
+                               <option value="GBP"> GBP </option>
+                            </select>
+                         </div>
+                      </div>
+                  </div>
+               </div>
+            </div>
+        </div>
+      </div>
+
+
         <header className="header-middle">
           <div className="container-fluid">
             <div className="row header-custom-data">
@@ -70,7 +117,7 @@ const Header = () => {
             {/* header search start  */}
               <div className="col-sm-6 middle-bar part2">
                  <div className="header-search d-flex align-items-center"> 
-                      <SelectDrop data ={categories}/>
+                      <SelectDrop data ={context?.categoryData}/>
                      <div className="search">
                        <input 
                           type="text" 

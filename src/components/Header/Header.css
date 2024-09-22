@@ -1,4 +1,64 @@
 
+/**** top bar css *****/
+.second-bar {
+  padding: 8px 0px;
+  border-bottom: 1px solid rgb(195, 195, 195);
+}
+.second-bar .menu-top ul{
+   display: flex;
+   gap: 14px;
+}
+.second-bar .menu-top li a{
+     font-size: 13px;
+     font-weight: 500;
+     font-family: var(--font-secondary);
+     text-transform: capitalize;
+     color: var(--heading-color);
+}
+.second-bar .menu-top li a:hover{
+  color: var(--primary-color);
+  transition: all 0.3s ease-in-out;
+}
+.second-bar .offer-text{
+   display: flex ;
+   gap: 6px;
+   align-items: center;
+   justify-content: end;
+}
+.second-bar .offer-text span svg{
+  font-size: 20px;
+}
+.second-bar .offer-text p{
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/**** Right part *****/
+.right-select-part {
+  display: flex;
+  gap: 10px;
+}
+.info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: end;
+}
+.info p{
+   font-size: 13px;
+   font-weight: 400;
+   color: var(--heading-color);
+}
+.info a{
+   font-size: 14px;
+   font-weight: 700;
+   color: var(--primary-color);
+}
+.info a:hover{
+  text-decoration: underline;
+}
+
+
 /***** Header css ******/
 .logo {
   max-width: 85%;
@@ -180,6 +240,8 @@ a.compare-text.hide-phone {
   display: flex;
   gap: 9px;
 }
-
+.second-bar{
+  display: none;
+}
 
 }

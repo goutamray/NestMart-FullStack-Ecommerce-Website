@@ -6,29 +6,15 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { useContext } from "react";
+import { MyContext } from "../../App";
+
 import "./CategorySlider.css";
-import { useState } from "react";
 
 const CategorySlider = () => {
-   
-  const [itemBg, setItemBg ] = useState([
-    "#f2fce4",
-    "#fffceb",
-    "#ecffec",
-    "#feefea",
-    "#fff3eb",
-    "#fff3ff",
-    "#f2fce4",
-    "#feefea",
-    "#fff3ff",
-    "#f2fce4",
-    "#feefea",
-    "#fff3eb",
-    "#fff3ff",
-    "#f2fce4",
-    "#feefea",
+    
+  const context = useContext(MyContext); 
 
-  ])
 
   let settings = {
     dots: false,
@@ -67,7 +53,7 @@ const CategorySlider = () => {
         }
       }
     ]
-  };
+  }; 
 
   return (
     <>
@@ -77,15 +63,16 @@ const CategorySlider = () => {
             <Slider {...settings} className="category-slider-main">
 
                 {
-                 itemBg.length > 0 && itemBg.map((item, index) => {
-                  return <div className="category-item" key={index} >
-                  <div className="info" style={{backgroundColor : item }}> 
-                   <img src="https://nest-frontend-v6.netlify.app/assets/imgs/shop/cat-13.png" alt="" />  
-                   <h6> <a href="#"> Cake & Milk </a>  </h6> 
-                   <span> 26 items </span>
-                   </div>
-                </div>
-                 })
+                  context?.categoryData?.length !== 0 &&
+                  context?.categoryData?.map((item, index) => {
+                    return <div className="category-item" key={index} >
+                    <div className="info" style={{ backgroundColor : item?.color }}> 
+                     <img src={item?.photo} alt="" />  
+                     <h6> <a href="#"> {item?.name} </a>  </h6> 
+                     <span> {item?.length} </span>
+                     </div>
+                  </div>
+                  })
                 }
                          
             </Slider>

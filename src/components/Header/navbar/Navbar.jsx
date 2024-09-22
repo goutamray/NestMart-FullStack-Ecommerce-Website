@@ -5,22 +5,25 @@ import { FaChevronDown } from "react-icons/fa";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 import "./Navbar.css"
-import {  useState } from "react";
+import { useState } from "react";
 
 
 const Navbar = () => {
   const [nestOpen, setNestOpen] = useState(false); 
   const [nestOpenbtn, setNestOpenbtn] = useState(false); 
 
+
+
   // handle click 
   const handleClickOpen = () => {
     setNestOpen(() => !nestOpen)
   }
 
-
   const handleClickOpenbtn = () => {
     setNestOpenbtn(() => !nestOpenbtn)
   }
+
+
 
 
   return (
@@ -36,35 +39,15 @@ const Navbar = () => {
             <div className="col-sm-7 part2">
               <div className="navbar-menu">
                  <ul className="list list-inline menu-item">
+
                     <li className="list-inline-item list-item-single ">
                        <Link to="/" onClick={handleClickOpen}> 
                           Home <FaChevronDown className="down-arrow-item"/> 
                        </Link>
-
                        
-
-                      {
-                        nestOpen &&  <ul className="nested-list shadow">
-                        <li> 
-                          <a href=""> Home-1 </a>
-                        </li>
-                        <li> 
-                          <a href=""> Home-2 </a>
-                        </li>
-                        <li> 
-                          <a href=""> Home-3 </a>
-                        </li>
-                        <li> 
-                          <a href=""> Home-4 </a>
-                        </li>
-                       </ul>
-                      }
                     </li>
                     <li className="list-inline-item list-item-single">
-                       <Link to="/about"> About </Link>
-                    </li>
-                    <li className="list-inline-item list-item-single">
-                       <Link to=""> Blog </Link>
+                       <Link to=""> About </Link>
                     </li>
                     <li className="list-inline-item list-item-single">
                        <Link to="/shop"  > Shop  </Link>        
@@ -73,33 +56,30 @@ const Navbar = () => {
                        <Link to=""> Vendors </Link>
                     </li>
                     <li className="list-inline-item list-item-single">
-                       <Link to=""> Megamenu  </Link>
-                       
+                       <Link to=""> Blog  </Link>     
                     </li>
                     <li className="list-inline-item list-item-single">
                        <Link to="" onClick={handleClickOpenbtn} > Pages  <FaChevronDown className="down-arrow-item"/> </Link>
                        {
                         nestOpenbtn &&  <ul className="nested-list shadow">
                         <li> 
-                          <a href=""> Home </a>
+                          <a href="/"> Home </a>
                         </li>
                         <li> 
-                          <a href=""> About </a>
+                          <a href="/about"> About </a>
                         </li>
                         <li> 
-                          <a href=""> Blog </a>
+                          <a href="/blog"> Blog </a>
                         </li>
-                        <li> 
-                          <a href=""> Contact </a>
-                        </li>
+                     
                         <li> 
                           <a href=""> Login </a>
                         </li>
                         <li> 
-                          <a href=""> Register </a>
+                          <a href="/register"> Register </a>
                         </li>
                         <li> 
-                          <a href=""> Privacy Policy </a>
+                          <a href="#"> Privacy Policy </a>
                         </li>
                        </ul>
                        }

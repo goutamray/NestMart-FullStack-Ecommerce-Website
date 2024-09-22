@@ -11,9 +11,13 @@ import slider2 from "../../../src/assets/img/slider/slider-2.png"
 
 
 import "./Slider.css" 
+import { fetchSliderFromApi } from "../../utils/api";
+import { useEffect, useState } from "react";
 
 
 const HomeSlider = () => {
+
+  const [sliderData , setSliderData] = useState([])
 
   let settings = {
     dots: true,
@@ -27,37 +31,36 @@ const HomeSlider = () => {
     autoplaySpeed: 5000,
   }
 
+ useEffect(() => {
+    fetchSliderFromApi("/").then((res) => {
+      setSliderData(res.sliderList); 
+  });
+ }, [])
+
+
   return (
     <>
     <section className="home-slider">
        <div className="container-fluid">
             <Slider {...settings} className="home-slider-main">
-                <div className="item">
-                    <img src={slider1} alt="" />
-                    <div className="info">
-                         <h2> Don’t miss amazing <br/>  grocery deals </h2>
-                         <p> Sign up for the daily newsletter </p>
-                         <form action="#" className="subscribe-form">
-                           <IoIosSend className="send" />
-                           <input type="email" placeholder="Your emaill address" />
-                           <button type="submit"> Subscribe </button>
-                         </form>
-                    </div>
+              {
+                sliderData.length !== 0 && sliderData.map((item, index) => {
+                  return <div className="item" key={index}>
+                  <img src={item?.photo} alt="" />
+                  <div className="info-data">
+                       <h2> {item?.title} </h2>
+                       <p> {item?.subTitle} </p>
+                       <form action="#" className="subscribe-form">
+                         <IoIosSend className="send" />
+                         <input type="email" placeholder="Your emaill address" />
+                         <button type="submit"> Subscribe </button>
+                       </form>
+                  </div>
 
-                </div>
-                <div className="item">
-                    <img src={slider2} alt="" />
-                      <div className="info"> 
-                         <h2> Fresh Vegetables  <br/>  Big discount </h2>
-                        <p> Save up to 50% off on your first order </p>      
-                        <form className="subscribe-form">
-                           <IoIosSend  className="send"/>
-                           <input type="email" placeholder="Your emaill address" />
-                           <button type="submit"> Subscribe </button>
-                         </form>     
-                     </div>
-                </div>
-               
+              </div>
+                })
+              }
+
             </Slider>
        </div>
     </section>
