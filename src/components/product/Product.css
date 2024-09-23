@@ -52,6 +52,12 @@
   overflow: hidden !important;
   z-index: -1;
 }
+.product-image .custom-photo-box{
+  height: 250px !important;
+  width: 100%;
+  overflow: hidden !important;
+}
+
 .productThumb .product-image .overlay {
   position: absolute;
   left: 40px !important;

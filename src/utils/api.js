@@ -33,7 +33,21 @@ export const fetchSliderFromApi = async(url) => {
 }; 
 
 
-
+/**
+ *  fetch product data from api
+ * @param {*} url 
+ * @returns 
+ */
+export const fetchProductFromApi = async(url) => {
+   try {
+      const res = await axios.get("http://localhost:5050/api/v1/product"+url);
+      return res.data;
+   } catch (error) {
+      console.error('Error submitting form data:', error.message);
+      throw error; 
+   }
+    
+};
 
 
 

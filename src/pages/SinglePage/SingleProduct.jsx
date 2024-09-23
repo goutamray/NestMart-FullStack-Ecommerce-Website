@@ -18,7 +18,7 @@ import Rating from '@mui/material/Rating';
 
 import Slider from "react-slick";
 // slider css  import 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
@@ -123,6 +123,10 @@ const SingleProduct = () => {
   const isActive = (index) => {
     setActiveSize(index)
   }; 
+
+  useEffect(() => {
+     window.scrollTo(0, 0)
+  }, []); 
 
   return (
     <>   

@@ -9,6 +9,7 @@ import { useContext, useState } from "react";
 import { MyContext } from "../../../App";
 
 
+
 const Navbar = () => {
   const [nestOpen, setNestOpen] = useState(false); 
 
@@ -20,9 +21,6 @@ const Navbar = () => {
   }
 
 
-
-
-
   return (
     <>
       <div className="nav navbar-header my-custom-header shadow">
@@ -30,6 +28,7 @@ const Navbar = () => {
           <div className="row my-custom-navbar my-3">
             <div className="col-sm-3 part1">
                <div className="browse-button ">
+                
                 <button onClick={handleClickOpen}> 
                   <IoGrid className="grid-box" />  
                     Browse All Categories <FaChevronDown className="down-arrow-btn"/>

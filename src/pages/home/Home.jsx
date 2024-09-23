@@ -19,54 +19,96 @@ import { TabContext } from '@mui/lab';
 import { Tab, Tabs } from '@mui/material';
 
 import "./Home.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { fetchDataFromApi, fetchProductFromApi } from "../../utils/api";
 
 const Home = () => {
+  const [productData, setProductData] = useState([]); 
+  const [categoryAllData, setCategoryAllData] = useState([]); 
 
-  const [value, setValue] = useState('1');
+    // filter 
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [products, setProducts] = useState([]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  }; 
+ 
 
-  var settings = {
-    dots: false,
-    infinite: true,
-    speed: 3000,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    fade : false,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows : true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 3000,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      fade : false,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      arrows : true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+          }
         }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-        }
-      }
-    ]
-  };
+      ]
+    };
+
+    // get all product & category 
+    useEffect(() => {
+      fetchProductFromApi("/").then((res) => {
+         setProductData(res?.productList);
+      }); 
+
+      fetchDataFromApi("/").then((res) => {
+         setCategoryAllData(res?.categoryList); 
+       }); 
+    }, []); 
+ 
+
+  useEffect(() => {
+    if (categoryAllData?.length > 0) {
+       const firstCategoryId = categoryAllData[0]._id;
+       setSelectedCategory(firstCategoryId);
+       fetchProducts(firstCategoryId);
+    }
+ }, [categoryAllData]);
+
+ const fetchProducts = async (category) => {
+    try {
+       const response = await axios.get(`http://localhost:5050/api/v1/product?category=${category}`);
+       setProducts(response.data.productList);
+    } catch (error) {
+       console.error('Error fetching products:', error);
+    }
+ };
+
+ // handle category change 
+ const handleCategoryChange = (event, newValue) => {
+    setSelectedCategory(newValue);
+    fetchProducts(newValue);
+
+ };
+
+ 
 
   return (
     <> 
@@ -119,47 +161,35 @@ const Home = () => {
           <div className="tab-header d-flex align-items-center justify-content-between">
             <h3> Popular Products </h3>
             <ul className="list list-inline custom-ul"> 
-              <TabContext value={value}>
-                <Tabs value={value} onChange={handleChange}>
-                  <Tab label="Tab One" value="1" />
-                  <Tab label="Tab Two" value="2" />
-                  <Tab label="Tab Three" value="3" />
+              <TabContext >
+                <Tabs  
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+
+                >
+                  {
+                      categoryAllData?.length !== 0 &&
+                      categoryAllData.map((item) => (
+                          <Tab key={item?._id} value={item?._id} label={item?.name} className="dynamic-cat-data" />
+                      ))
+                      }
+              
                 </Tabs>
               </TabContext>
             </ul>
           </div>
 
           <div className="row product-row my-4">
-             <div className="item">
-                 <Product tag="new"/> 
-             </div>
-             <div className="item">
-                 <Product tag="hot"/> 
-             </div>
-             <div className="item">
-                 <Product tag="best"/> 
-             </div>
-             <div className="item">
-                 <Product tag="new"/> 
-             </div>
-             <div className="item">
-                 <Product tag="best"/> 
-             </div>
-             <div className="item">
-                 <Product tag="hot"/> 
-             </div>
-             <div className="item">
-                 <Product tag="sale"/> 
-             </div>
-             <div className="item">
-                 <Product tag="hot"/> 
-             </div>
-             <div className="item">
-                 <Product tag="best"/> 
-             </div>
-             <div className="item">
-                 <Product tag="new"/> 
-             </div>
+                   {
+                        products?.length >  0 ?  
+                        products?.map((product, index) => {
+                          return   <div className="item" key={index}>
+                          <Product tag="new" item={product}/> 
+                      </div>
+                        }) : <p> No Products Found</p>
+                     } 
+           
+            
           </div>
 
         </div>
@@ -182,21 +212,16 @@ const Home = () => {
             </div>
             <div className="col-md-9">
             <Slider {...settings} className="product-slider-main">
-              <div className="item">
-                 <ProductBest tag="new"/>  
-              </div>
-              <div className="item">
-                 <ProductBest tag="new"/>  
-              </div>
-              <div className="item">
-                 <ProductBest tag="new"/>  
-              </div>
-              <div className="item">
-                 <ProductBest tag="new"/>  
-              </div>
-              <div className="item">
-                 <ProductBest tag="new"/>  
-              </div>
+
+              {
+                productData.length !== 0 && 
+                productData.map((product, index) => {
+                  return  <div className="item" key={index}>
+                  <ProductBest tag="new" item={product}/>  
+               </div>
+                })
+              }
+        
                          
              </Slider>
             </div>

@@ -11,18 +11,26 @@ import "./Product.css"
 
 const Product = (props) => {
 
+  console.log(props.item);
+  
+
   return (
           <>
 
       <div className="productThumb my-2">
-        {
-          props.tag !== null && props.tag !== undefined &&  
-           <span className={`badge ${props.tag}`}> {props.tag} </span>
-        }
+  
+          {
+            props.item?.tag?.length > 0 ?
+             <span className={`badge ${props.item?.tag}`}> 
+            {props.item?.tag }  
+           </span> : null
+          }
       
         <Link > 
           <div className="product-image">      
-             <img style={{width: "100%"}} src="https://nest-frontend-v6.netlify.app/assets/imgs/shop/product-2-2.jpg" alt="" />
+          <div className="custom-photo-box">
+                 <img style={{width: "100%"}} src={props?.item?.photo[0]} alt="product-photo" />
+            </div>
 
              <div className="overlay">
                 <ul className="list list-inline">
@@ -44,22 +52,27 @@ const Product = (props) => {
          </Link>
          
          <div className="info-custom">
-           <h4 className="category"> Snack</h4>
+           <h4 className="category"> {props?.item?.brand} </h4>
            <div className="title"> 
-            <a href="#"> Seeds of Change Organic Quinoa, Brown, & Red Rice</a>
+           <Link to={`/product/${props?.item?._id}`} >
+                  {props?.item?.name.length > 35 ? props?.item?.name?.substring(0, 30) + ". . ."  : props?.item?.name } 
+              </Link>
           </div>
            <div className="review">
-           <Rating name="read-only" value={5} readOnly size="small"/>
+           <Rating name="read-only" value={props?.item?.rating} readOnly size="small"/>
            </div>
            <div className="author">
               <p> By <a href="#"> NestFood </a></p>
            </div>
            <div className="product-card-bottom">
             <div className="product-price">
-                <span> $54.85 </span> <span className="old-price"> $55.8 </span>
+                <span> {props?.item?.oldPrice} </span> 
+                <span className="old-price"> {props?.item?.price} </span>
             </div>
             <div className="product-cart">
-               <a href="#"> <IoCartOutline className="cart" /> Add </a>
+            <Link to={`/product/${props?.item?._id}`} > 
+                <IoCartOutline className="cart" /> Add 
+             </Link>
             </div>
            </div>
          </div>

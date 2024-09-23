@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { MyContext } from "../../App";
 
 import "./CategorySlider.css";
+import { Link } from "react-router-dom";
 
 const CategorySlider = () => {
     
@@ -67,9 +68,14 @@ const CategorySlider = () => {
                   context?.categoryData?.map((item, index) => {
                     return <div className="category-item" key={index} >
                     <div className="info" style={{ backgroundColor : item?.color }}> 
-                     <img src={item?.photo} alt="" />  
-                     <h6> <a href="#"> {item?.name} </a>  </h6> 
-                     <span> {item?.length} </span>
+                      <Link to={`/category/${item?._id}`}> 
+                        <img src={item?.photo} alt="" />  
+                        <h6> 
+                            <Link to={`/category/${item?._id}`}>
+                              {item?.name} 
+                            </Link> 
+                        </h6> 
+                     </Link>
                      </div>
                   </div>
                   })
