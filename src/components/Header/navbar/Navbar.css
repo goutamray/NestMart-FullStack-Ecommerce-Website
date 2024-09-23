@@ -15,6 +15,38 @@
    display: flex;
    align-items: center;
    width: 270px;
+   position: relative;
+}
+
+.getAllCategories{
+  position: absolute;
+  top: 100%;
+  left: 0%;
+  background-color: #ffffff;
+  width: 270px;
+  box-shadow: var(--shadow-lg);
+  height: 250px;
+  border-radius: 10px;
+  overflow-y: scroll;
+  scrollbar-width: 2px;
+  
+}
+.getAllCategories ul{
+   padding: 10px 0px;
+}
+.getAllCategories ul li{
+  display: block;
+}
+.getAllCategories ul li a{
+  color: #253D4E;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 15px;
+  display: inline-block;
+  transition: all ease-in-out 0.3s;
+}
+.getAllCategories ul li a:hover{
+   color: var(--nest-primary);
 }
 .navbar-header .part1 .browse-button button {
   background-color: var(--nest-primary);

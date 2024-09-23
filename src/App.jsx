@@ -70,7 +70,7 @@ function App() {
                 <Route  path='/' exact={true} element={ <Home /> }/>
                 <Route  path='/about' exact={true} element={ <About /> }/>
                 <Route  path='/contact' exact={true} element={ <Contact /> }/>
-                <Route  path='/shop' exact={true} element={ <Shop /> }/>
+                <Route  path='/category/:id' exact={true} element={ <Shop /> }/>
                 <Route  path='/product/:id' exact={true} element={ <SingleProduct /> }/>
                 <Route  path='/register' exact={true} element={ <SignUp /> }/>
                 <Route  path='/login' exact={true} element={ <SignIn /> }/>

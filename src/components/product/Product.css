@@ -114,48 +114,48 @@
   transition: all 0.3s ease-in-out;
   transform: scale(1.1);
 }
-.productThumb .info{
+.productThumb .info-custom{
   margin-top: 15px;
 }
-.productThumb .info .category{
+.productThumb .info-custom .category{
   margin-top: 10px;
   color: #adadad  ;
   font-size: 12px;
 }
-.productThumb .info .title a{
+.productThumb .info-custom .title a{
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 5px;
   margin-bottom: 5px;
   color: #253D4E;
 }
-.productThumb .info .review{
+.productThumb .info-custom .review{
   margin-bottom: 5px;
 }
-.productThumb .info .author{
+.productThumb .info-custom .author{
   font-size: 14px;
   color: #B6B6B6 !important;
 }
-.productThumb .info .author p a{
+.productThumb .info-custom .author p a{
     color: var(--nest-primary);
 }
-.productThumb .info .product-card-bottom {
+.productThumb .info-custom .product-card-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.productThumb .info .product-card-bottom .product-price{
+.productThumb .info-custom .product-card-bottom .product-price{
   font-size: 18px;
   font-weight: bold;
   color: var(--nest-primary);
 }
-.productThumb .info .product-card-bottom .product-price .old-price{
+.productThumb .info-custom .product-card-bottom .product-price .old-price{
   font-size: 14px;
   color: #adadad;
   margin: 0 0 0 7px;
   text-decoration: line-through;
 }
-.productThumb .info .product-card-bottom .product-cart a {
+.productThumb .info-custom .product-card-bottom .product-cart a {
   position: relative;
   display: inline-block;
   padding: 8px 12px 6px 6px;
@@ -166,17 +166,17 @@
   font-weight: 700;
   transition: all 0.3s ease-in-out;
 }
-.productThumb .info .product-card-bottom .product-cart a .cart{
+.productThumb .info-custom .product-card-bottom .product-cart a .cart{
   font-size: 20px;
 }
-.productThumb .info .product-card-bottom .product-cart a:hover{
+.productThumb .info-custom .product-card-bottom .product-cart a:hover{
   background-color: var(--nest-primary);
   color: #fff !important;
 }
 
 
 @media (min-width : 320px) and (max-width: 576px){
-.productThumb .info{
+.productThumb .info-custom{
   margin-top: 45px;
 }
 .productThumb .product-image .overlay {

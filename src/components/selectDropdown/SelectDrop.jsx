@@ -33,7 +33,8 @@ const SelectDrop = ({ data }) => {
                   data?.map((item, index) => {
                     return  <li key={index} >
                     <Link 
-                      to="" 
+                      onClick={handleClickOpen}
+                      to={`/category/${item?._id}`} 
                       className={`${selectIndex === index ? "active" : ""}`} > 
                       {item?.name} 
                     </Link>

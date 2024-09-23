@@ -40,7 +40,7 @@ const ProductBest = (props) => {
          </div>
          </Link>
          
-         <div className="info">
+         <div className="info-part">
            <h4 className="category"> Snack</h4>
            <div className="title">
               <a href="#"> Seeds of Change Organic Quinoa, Brown, & Red Rice</a>

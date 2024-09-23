@@ -43,7 +43,7 @@ const Product = (props) => {
          </div>
          </Link>
          
-         <div className="info">
+         <div className="info-custom">
            <h4 className="category"> Snack</h4>
            <div className="title"> 
             <a href="#"> Seeds of Change Organic Quinoa, Brown, & Red Rice</a>

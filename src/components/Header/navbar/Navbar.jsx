@@ -5,23 +5,20 @@ import { FaChevronDown } from "react-icons/fa";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 import "./Navbar.css"
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MyContext } from "../../../App";
 
 
 const Navbar = () => {
   const [nestOpen, setNestOpen] = useState(false); 
-  const [nestOpenbtn, setNestOpenbtn] = useState(false); 
 
-
+  const context = useContext(MyContext); 
 
   // handle click 
   const handleClickOpen = () => {
     setNestOpen(() => !nestOpen)
   }
 
-  const handleClickOpenbtn = () => {
-    setNestOpenbtn(() => !nestOpenbtn)
-  }
 
 
 
@@ -33,62 +30,48 @@ const Navbar = () => {
           <div className="row my-custom-navbar my-3">
             <div className="col-sm-3 part1">
                <div className="browse-button ">
-                <button> <IoGrid className="grid-box" />  Browse All Categories <FaChevronDown className="down-arrow-btn"/> </button>
+                <button onClick={handleClickOpen}> 
+                  <IoGrid className="grid-box" />  
+                    Browse All Categories <FaChevronDown className="down-arrow-btn"/>
+                </button>
+                {
+                  nestOpen === true && <div className="getAllCategories">
+                  <ul>
+             
+                  {
+                    context.categoryData?.length !== 0 && 
+                    context.categoryData?.map((item, index) => {
+                      return <li className="list-inline-item list-item-single" key={index}>
+                      <Link 
+                        to={`/category/${item?._id}`}
+                        onClick={handleClickOpen}
+                       > 
+                         {item?.name} 
+                      </Link>
+                   </li>
+                    })
+                  }
+                  </ul>
+                </div>
+
+                }
+                
                </div>
             </div>
             <div className="col-sm-7 part2">
               <div className="navbar-menu">
                  <ul className="list list-inline menu-item">
 
-                    <li className="list-inline-item list-item-single ">
-                       <Link to="/" onClick={handleClickOpen}> 
-                          Home <FaChevronDown className="down-arrow-item"/> 
-                       </Link>
-                       
-                    </li>
-                    <li className="list-inline-item list-item-single">
-                       <Link to=""> About </Link>
-                    </li>
-                    <li className="list-inline-item list-item-single">
-                       <Link to="/shop"  > Shop  </Link>        
-                    </li>
-                    <li className="list-inline-item list-item-single">
-                       <Link to=""> Vendors </Link>
-                    </li>
-                    <li className="list-inline-item list-item-single">
-                       <Link to=""> Blog  </Link>     
-                    </li>
-                    <li className="list-inline-item list-item-single">
-                       <Link to="" onClick={handleClickOpenbtn} > Pages  <FaChevronDown className="down-arrow-item"/> </Link>
-                       {
-                        nestOpenbtn &&  <ul className="nested-list shadow">
-                        <li> 
-                          <a href="/"> Home </a>
-                        </li>
-                        <li> 
-                          <a href="/about"> About </a>
-                        </li>
-                        <li> 
-                          <a href="/blog"> Blog </a>
-                        </li>
-                     
-                        <li> 
-                          <a href=""> Login </a>
-                        </li>
-                        <li> 
-                          <a href="/register"> Register </a>
-                        </li>
-                        <li> 
-                          <a href="#"> Privacy Policy </a>
-                        </li>
-                       </ul>
-                       }
-                    </li>
-                    <li className="list-inline-item list-item-single">
-                       <Link to="/contact"> Contact </Link>
-                    </li>
-                   
-             
+                  {
+                    context.categoryData?.length !== 0 && 
+                    context.categoryData?.map((item, index) => {
+                      return <li className="list-inline-item list-item-single" key={index}>
+                      <Link to={`/category/${item?._id}`}> {item?.name} </Link>
+                   </li>
+                    })
+                  }
+
+                
                  </ul>
               </div>
 

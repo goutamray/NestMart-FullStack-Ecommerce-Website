@@ -25,26 +25,26 @@
     display: flex;
     justify-content: space-between;
   }
-  .news-letter .item .info{
+  .news-letter .item .info-data{
      position: absolute;
      top: 10%;
      left: 5%;
      padding-top: 50px;
      padding-bottom: 10px;
   }
-  .news-letter .item .info h2{
+  .news-letter .item .info-data h2{
     font-size: 40px;
     font-weight: 600;
     color: #253D4E;
     margin-bottom: 30px;
   }
-  .news-letter .item .info p {
+  .news-letter .item .info-data p {
     font-size: 18px;
     font-weight: 400;
     color: #7E7E7E;
     line-height: 24px;
   }
-  .news-letter .item .info p a{
+  .news-letter .item .info-data p a{
     color: var(--nest-primary);
   }
   /* form css */
@@ -249,14 +249,14 @@ color: #ADADAD;
   width: 90%;
   height: 440px;
 }
-.news-letter .item .info {
+.news-letter .item .info-data {
   width: 100%;
   left: -4%;
   padding-top: 50px;
   padding-bottom: 10px;
   text-align: center;
 }
-.news-letter .item .info h2 {
+.news-letter .item .info-data  h2 {
   font-size: 22px;
 }
 .news-letter .photo-box img {
@@ -265,7 +265,7 @@ color: #ADADAD;
   bottom: 0px;
   width: 100%;
 }
-.news-letter .item .info p {
+.news-letter .item .info-data  p {
   font-size: 13px;
 }
 .bottom-right .follow-media {
@@ -352,7 +352,7 @@ text-align: center;
 
 
 @media (min-width : 576px) and (max-width: 768px){ 
-.news-letter .item .info h2 {
+.news-letter .item .info-data  h2 {
   font-size: 25px;
   font-weight: 500;
 }
@@ -360,7 +360,7 @@ text-align: center;
   width: 92%;
   height: 250px;
 }
-.news-letter .item .info p {
+.news-letter .item .info-data  p {
   font-size: 17px;
 }
 .footer-all-part{

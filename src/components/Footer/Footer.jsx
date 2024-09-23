@@ -28,7 +28,7 @@ const Footer = () => {
         <div className="container-fluid">
              <div className="row">
                <div className="item">              
-                    <div className="info">
+                    <div className="info-data">
                          <h2> Stay home & get your daily <br/>  grocery deals </h2>
                          <p> Start Your Daily Shopping with <a href="#"> Nest Mart </a>  </p>
                          <form className="subscribe-form">
