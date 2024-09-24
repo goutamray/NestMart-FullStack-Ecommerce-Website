@@ -135,7 +135,7 @@
 .header-middle .cart-wish-account .header-cart-wishlist .dropdown-menu-abc {
   position: absolute;
   right: 22px;
-  top: 76px;
+  top: 30%;
   padding: 10px 0px;
   border: 1px solid #dcdcdc;
   border-radius: 10px;
@@ -155,7 +155,7 @@
   border: none !important;
   background: transparent !important;
   padding: 12px 5px !important;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   color: var(--nest-primary); 
   font-weight: 500;
@@ -187,7 +187,15 @@
   display: none;
 }
 
-
+button.my-login-btn {
+  padding: 7px 15px;
+  background-color: var(--nest-primary);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
 
 /***** Responsive csss ******/
 @media (min-width : 320px) and (max-width: 576px){

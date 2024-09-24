@@ -17,7 +17,7 @@ import { IoMenu } from "react-icons/io5";
 import logo from "../../assets/img/logo.svg"
 import heart  from "../../assets/img/icons/heart.svg"
 import cart  from "../../assets/img/icons/cart.svg"
-import user  from "../../assets/img/icons/user.svg"
+import userPhoto  from "../../assets/img/icons/user.svg"
 
 import ClickAwayListener from 'react-click-away-listener';  
 
@@ -28,6 +28,7 @@ import { MdOutlineSecurity } from "react-icons/md";
 
 const Header = () => {
    const [dropDownOpen, setDropDownOpen ] = useState(false); 
+   const [user, setUser] = useState(false); 
      
    // handle close
    const handleCloseDrop = () => {
@@ -159,25 +160,28 @@ const Header = () => {
                  </div>
 
            <ClickAwayListener onClickAway={() => setDropDownOpen(false) }>
-                <div className="header-cart-wishlist ">                      
-                  <div className="header-action-icon-2" onClick={handleCloseDrop}>
-                       <a href='#' className="compare-box">
-                           <img src={user} />
-                           <span ></span>
-                        </a>   
-                  
+                <div className="header-cart-wishlist ">   
+                  {
+                    user === true ?  <div className="header-action-icon-2" onClick={handleCloseDrop}>
+                    <a href='#' className="compare-box">
+                        <img src={userPhoto} />
+                        <span ></span>
+                     </a>   
                
-                      <Link 
-                        to='#' 
-                        className="compare-text hide-phone" 
-                        onClick={handleCloseDrop} >
-                        <span 
-                           className="lable ml-0" 
-                          > Account 
-                        </span>
-                      </Link>    
-                      
-                   </div>
+            
+                   <Link 
+                     to='#' 
+                     className="compare-text hide-phone" 
+                     onClick={handleCloseDrop} >
+                     <span 
+                        className="lable ml-0" 
+                       > Account 
+                     </span>
+                   </Link>    
+                   
+                </div> : <button className="my-login-btn"> Login </button>
+                  }                   
+                 
                    {
                     
                     dropDownOpen && <ul className="dropdown-menu-abc shadow">

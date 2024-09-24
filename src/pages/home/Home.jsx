@@ -217,7 +217,7 @@ const Home = () => {
                 productData.length !== 0 && 
                 productData.map((product, index) => {
                   return  <div className="item" key={index}>
-                  <ProductBest tag="new" item={product}/>  
+                  <ProductBest item={product}/>  
                </div>
                 })
               }

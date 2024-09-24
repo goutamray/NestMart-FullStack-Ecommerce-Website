@@ -1,18 +1,10 @@
 
 import { CiHeart, CiShuffle } from "react-icons/ci";
 import { FaCartPlus, FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
-import { MdKeyboardArrowUp } from "react-icons/md";
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import galary1 from "../../assets/img/thumbnail/thumbnail-7.jpg"
-import galary2 from "../../assets/img/thumbnail/thumbnail-8.jpg"
-import galary3 from "../../assets/img/thumbnail/thumbnail-9.jpg"
-import galary4 from "../../assets/img/thumbnail/thumbnail-10.jpg"
-import galary5 from "../../assets/img/thumbnail/thumbnail-11.jpg"
-import galary6 from "../../assets/img/thumbnail/thumbnail-12.jpg"
 
 import Rating from '@mui/material/Rating';
 
@@ -24,34 +16,70 @@ import "slick-carousel/slick/slick.css";
 
 import "./SingleProduct.css";
 import Product from "../../components/product/Product";
-import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
+import Counter from "../../components/counter/Counter";
+import axios from "axios";
 
 const SingleProduct = () => {
 
-  const [zoomImage, setZoomImage ] = useState("https://www.jiomart.com/images/product/original/590002136/onion-5-kg-pack-product-images-o590002136-p590002136-0-202203141906.jpg");
-
-
-  const [bigImageSize, setbigImageSize ] = useState([1500 , 1500]);
-  const [smallImageSize, setsmallImageSize ] = useState([150 , 150]);
   const [activeSize, setActiveSize ] = useState(0);
 
   const [activeTab , setActiveTab ] = useState(0); 
+  const [tabError, setTabError] = useState(false);
 
-  const [count, setCount ] = useState(1); 
+  const [productData, setProductData] = useState(null); // State to hold product data
+  const [loading, setLoading] = useState(false); 
+  const [relatedProducts, setRelatedProducts] = useState([]); 
 
-  // increment 
-  const handleIncrement = () => {
-    setCount((count) => count + 1); 
-  }; 
-  // handleDescrement 
-  const handleDescrement = () => {
-    if (count > 1 ) {
-      setCount((count) => count - 1); 
-    }
-  }; 
+  console.log(relatedProducts);
+  
 
   const zoomSliderBig = useRef(); 
   const zoomSlider = useRef(); 
+
+  const { id } = useParams(); 
+
+   // get single product data & related products 
+   const fetchSingleProduct = async (id) => {
+    try {
+      setLoading(true); // Start loading
+      setActiveSize(null); 
+
+      // Fetch the single product
+      const productRes = await axios.get(`http://localhost:5050/api/v1/product/${id}`);
+      const fetchedProduct = productRes.data.product;
+      setProductData(fetchedProduct); // Set the fetched product data to state
+
+      // Fetch related products within the same category, excluding the current product
+      if (fetchedProduct && fetchedProduct.category) {
+        const category = fetchedProduct.category;
+        try {
+          const relatedRes = await axios.get(`http://localhost:5050/api/v1/product/related-product`, {
+            params: {
+              category,
+              excludeProductId: id // Exclude the current product from the related products
+            }
+          });
+          setRelatedProducts(relatedRes.data.relatedProducts); // Set related products to state
+        } catch (error) {
+          console.error('Error fetching related products:', error);
+          setRelatedProducts([]); // Clear related products on error
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      setProductData(null); // Set to null on error
+    } finally {
+      setLoading(false); // End loading
+    }
+  };
+
+  // Fetch product when the component mounts or the 'id' parameter changes
+  useEffect(() => {
+    if (id) {
+      fetchSingleProduct(id);
+    }
+  }, [id]);
+  
 
   let settings2 = {
     dots: false,
@@ -76,42 +104,45 @@ const SingleProduct = () => {
 
   let related = {
     dots: false,
-    infinite: true,
+    infinite: relatedProducts?.length > 5, // Only enable infinite scrolling if more than 5 products
     speed: 3000,
     slidesToShow: 5,
     slidesToScroll: 1,
-    fade : false,
-    autoplay: true,
+    fade: false,
+    autoplay: relatedProducts?.length > 1, // Disable autoplay if there's only 1 product
     autoplaySpeed: 3000,
-    arrows : true,
+    arrows: true,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: relatedProducts?.length > 4,
+          dots: true,
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
+          slidesToScroll: 1,
+          infinite: relatedProducts?.length > 2,
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
-        }
-      }
-    ]
-  }
+          infinite: relatedProducts?.length > 1,
+        },
+      },
+    ],
+  };
+  
+  
 
 
   const goto = ( index) => {
@@ -122,19 +153,19 @@ const SingleProduct = () => {
 
   const isActive = (index) => {
     setActiveSize(index)
+    setTabError(false); 
   }; 
 
   useEffect(() => {
      window.scrollTo(0, 0)
   }, []); 
 
+
+  
+
   return (
     <>   
       <div className="single-product">
-
-       {/* breadcrumb */}
-       <BreadCrumb  category={"Vegetables and Tubers"} productName={"vigatable foot"}/>
-
 
         <div className="container mb-5">
            <div className="row">
@@ -144,61 +175,29 @@ const SingleProduct = () => {
                   {/* product zoom code start */}
                    <div className="col-md-4 ">
                    <Slider {...settings2} className="product-galary-slider-big" ref={zoomSliderBig}>
-                      <div className="item">
-                         <div className="product-zoom">
-                            <InnerImageZoom zoomType="hover" zoomScale="1"  src={`https://www.jiomart.com/images/product/original/590003515/onion-1-kg-product-images-o590003515-p590003515-0-202203170724.jpg?im=Resize=(${bigImageSize[0]},${bigImageSize[1]})`}  /> 
-                         </div>
-                      </div>
-                      <div className="item">
-                         <div className="product-zoom">
-                            <InnerImageZoom zoomType="hover" zoomScale="1"  src={`https://www.shutterstock.com/image-photo/onion-bulbs-shallot-vegetable-raw-260nw-2250877815.jpg?im=Resize=(${bigImageSize[0]},${bigImageSize[1]})`}  /> 
-                         </div>
-                      </div>
-            
-                      <div className="item">
-                         <div className="product-zoom">
-                            <InnerImageZoom zoomType="hover" zoomScale="1" src={`https://www.jiomart.com/images/product/original/590002136/onion-5-kg-pack-product-images-o590002136-p590002136-0-202203141906.jpg?im=Resize=(${bigImageSize[0]},${bigImageSize[1]})`}  /> 
-                         </div>
-                      </div>
-                      <div className="item">
-                         <div className="product-zoom">
-                            <InnerImageZoom zoomType="hover" zoomScale="1"  src={`https://chaldn.com/_mpimage/deshi-peyaj-local-onion-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D52358&q=low&v=1?im=Resize=(${bigImageSize[0]},${bigImageSize[1]})`}  /> 
-                         </div>
-                      </div>
-                
-                      <div className="item">
-                         <div className="product-zoom">
-                            <InnerImageZoom zoomType="hover" zoomScale="1"  src={`https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Mixed_onions.jpg/1200px-Mixed_onions.jpg?im=Resize=(${bigImageSize[0]},${bigImageSize[1]})`}  /> 
-                         </div>
-                      </div>
-                      <div className="item">
-                         <div className="product-zoom">
-                            <InnerImageZoom zoomType="hover" zoomScale="1"  src={`https://www.shutterstock.com/image-photo/onion-bulbs-shallot-vegetable-raw-260nw-2250877815.jpg?im=Resize=(${bigImageSize[0]},${bigImageSize[1]})`}  /> 
-                         </div>
-                      </div>
+                    {
+                      productData?.photo?.map((product, index) => {
+                        return   <div className="item" key={index}>
+                        <div className="product-zoom">
+                           <InnerImageZoom zoomType="hover" zoomScale="1"  src={product}  /> 
+                        </div>
+                     </div>
+                      })
+                    }
+                    
                     </Slider>
 
                      {/*galary   */}
                       <div className="zoom-galary">
                     <Slider {...settings} className="product-galary-slider" ref={zoomSlider}>
-                        <div className="item">
-                            <img src={`https://www.jiomart.com/images/product/original/590003515/onion-1-kg-product-images-o590003515-p590003515-0-202203170724.jpg?im=Resize=(${smallImageSize[0]},${smallImageSize[1]})`} alt="" onClick={() => goto(0)}/>
+                      {
+                          productData?.photo?.map((product, index) => {
+                            return   <div className="item" key={index}>
+                            <img src={product} alt="zoom-photo" onClick={() => goto(index)}/>
                         </div>
-                        <div className="item">
-                            <img src={`https://www.shutterstock.com/image-photo/onion-bulbs-shallot-vegetable-raw-260nw-2250877815.jpg?im=Resize=(${smallImageSize[0]},${smallImageSize[1]})`} alt="" onClick={() => goto(1)}/>
-                        </div>
-                        <div className="item">
-                            <img src={`https://www.jiomart.com/images/product/original/590002136/onion-5-kg-pack-product-images-o590002136-p590002136-0-202203141906.jpg?im=Resize=(${smallImageSize[0]},${smallImageSize[1]})`} alt="" onClick={() => goto(2)}/>
-                        </div>
-                        <div className="item">
-                            <img src={`https://chaldn.com/_mpimage/deshi-peyaj-local-onion-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D52358&q=low&v=1?im=Resize=(${smallImageSize[0]},${smallImageSize[1]})`} alt="" onClick={() => goto(3)}/>
-                        </div>
-                        <div className="item">
-                            <img src={`https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Mixed_onions.jpg/1200px-Mixed_onions.jpg?im=Resize=(${smallImageSize[0]},${smallImageSize[1]})`} alt="" onClick={() => goto(4)}/>
-                        </div>
-                        <div className="item">
-                            <img src={`https://www.shutterstock.com/image-photo/onion-bulbs-shallot-vegetable-raw-260nw-2250877815.jpg?im=Resize=(${smallImageSize[0]},${smallImageSize[1]})`} alt="" onClick={() => goto(5)}/>
-                        </div>
+                          })
+                      }
+                        
                      </Slider>
                       </div>    
                    </div>
@@ -208,37 +207,75 @@ const SingleProduct = () => {
                   {/* product info code start */}
                    <div className="col-md-8 product-info">
                        <div className="all-single-info">
-                           <h2> Seeds of Change Organic Quinoa, Brown </h2>
+                           <h2> {productData?.name} </h2>
                            <div className="review">
                               <span>  
-                                <Rating name="read-only" value={5} readOnly size="small"/>
+                                <Rating name="read-only" value={parseInt(productData?.rating)}  readOnly size="small"/>
                               </span> (32 reviews)
                             </div>
                             <div className="price-sec">
-                              <span className="sale-price"> $38 </span>
+                              <span className="sale-price"> ${productData?.oldPrice} </span>
                               <div className="reg-price">
-                                 <span className="offer"> 26% Off </span>
-                                 <span className="regular"> $52 </span>
+                                 <span className="offer"> {productData?.discount} % Off </span>
+                                 <span className="regular"> ${productData?.price} </span>
                               </div>
                             </div>
                             <div className="short-desc">
-                              <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi</p>
+                              <p> {productData?.description } </p>
                             </div>
-                            <div className="productSize d-flex align-items-center mt-3">
-                              <span> Size / Weight: </span>
-                              <ul className='list list-inline'>
-                                <li className='list-inline-item'> <a href="#" className={`tag ${activeSize === 0 ? "active" : ""}`} onClick={() => isActive(0)}> 50kg </a></li>
-                                <li className='list-inline-item'> <a href="#" className={`tag ${activeSize === 1 ? "active" : ""}`}  onClick={() => isActive(1)}> 60kg </a></li>
-                                <li className='list-inline-item'> <a href="#" className={`tag ${activeSize === 2 ? "active" : ""}`} onClick={() => isActive(2)} > 80kg </a></li>
-                                <li className='list-inline-item'> <a href="#" className={`tag ${activeSize === 3 ? "active" : ""}`}  onClick={() => isActive(3)}> 100kg </a></li>
-                                <li className='list-inline-item'> <a href="#" className={`tag ${activeSize === 4 ? "active" : ""}`}  onClick={() => isActive(4)}> 150kg </a></li>
-                              </ul>
-                            </div>
+                        {/* product Rams  */}
+                            {
+                               productData?.productRams?.length !== 0 &&      <div className="productSize d-flex align-items-center mt-3">
+                               <span> Rams :  </span>
+                               <ul className='list list-inline'>
+                                {
+                                  productData?.productRams?.map((item, index) => {
+                                    return  <li className='list-inline-item' key={index}> 
+                                    <a href="#" className={`tag ${activeSize === index ? "active" : ""}`} onClick={() => isActive(index)}> {item} </a>
+                                  </li>
+                                  })
+                                }
+                               </ul>
+                             </div>
+                            }
+                       
+                       {/* product Size  */}
+                            {
+                               productData?.productSize?.length !== 0 &&      <div className="productSize d-flex align-items-center mt-3">
+                               <span> Size :  </span>
+                               <ul className='list list-inline'>
+                                {
+                                  productData?.productSize?.map((item, index) => {
+                                    return  <li className='list-inline-item' key={index}> 
+                                    <a href="#" className={`tag ${activeSize === index ? "active" : ""}`} onClick={() => isActive(index)}> {item} </a>
+                                  </li>
+                                  })
+                                }
+                               </ul>
+                             </div>
+                            }
+
+
+                       {/* product Weight  */}
+                            {
+                               productData?.productWeight?.length !== 0 &&      <div className="productSize d-flex align-items-center mt-3">
+                               <span> Weight :  </span>
+                               <ul className='list list-inline'>
+                                {
+                                  productData?.productWeight?.map((item, index) => {
+                                    return  <li className='list-inline-item' key={index}> 
+                                    <a href="#" className={`tag ${activeSize === index ? "active" : ""}`} onClick={() => isActive(index)}> {item} </a>
+                                  </li>
+                                  })
+                                }
+                               </ul>
+                             </div>
+                            }
+                       
+
                             <div className="product-counter ">
-                               <div className="counter d-flex align-items-center">
-                                 <h1> { count } </h1>
-                                 <button className='upper' onClick={handleIncrement} > <MdKeyboardArrowUp /> </button>
-                                 <button className='lower' onClick={handleDescrement}> <IoIosArrowDown /> </button>
+                               <div className="counter-box d-flex align-items-center">
+                                    <Counter />
                                </div>
                                <div className="add-to-cart-btn">
                                    <Link to=""> <FaCartPlus className='cart-icon'/> Add to cart </Link>
@@ -254,31 +291,20 @@ const SingleProduct = () => {
                             <div className="product-all-info">
                               <div className="left-info">
                                   <ul>
-                                    <li> Type : <span> Organic </span></li>
-                                    <li> MFG : <span> Jun 4.2024 </span></li>
-                                    <li> LIFE : <span> 70 days </span></li>
+                                    <li> Brand : <span> Organic </span></li>
+                                    <li> Tags :
+                                       <a href="#"> {productData?.tag} </a>
+                                     </li>
                                   </ul>
                               </div>
                               <div className="left-info">
                                  <ul>
-                                    <li> SKU : <a href="#"> FWM15VKT </a>  </li>
-                                    <li> Tags :
-                                       <a href="#"> Snack, </a>
-                                       <a href="#"> Organic, </a> 
-                                       <a href="#"> Brown </a>
-                                     </li>
-                                    <li> Stock :  <a href="#"> 8 Items In Stock</a>  </li>
-                               
+                                    <li> Stock :  <a href="#"> {productData?.countInStock} Items In Stock</a>  </li>
                                   </ul>
                               </div>
                             </div>
                        </div>
-
-
-
                    </div>
-               
-
                  </div>
 
                 {/* product tab details  */}
@@ -292,14 +318,8 @@ const SingleProduct = () => {
                   
                   {
                     activeTab === 0 && <div className="tab-content mt-3">
-                    <p className="all-small-font"> Uninhibited carnally hired played in whimpered dear gorilla koala depending and much yikes off far quetzal goodness and from for grimaced goodness unaccountably and meadowlark near unblushingly crucial scallop tightly neurotic hungrily some and dear furiously this apart. </p> <br/>
-                    <p className="all-small-font"> Uninhibited carnally hired played in whimpered dear gorilla koala depending and much yikes off far quetzal goodness and from for grimaced goodness unaccountably and meadowlark near unblushingly crucial scallop tightly neurotic hungrily some and dear furiously this apart. </p>
-                    <h3 className="meduim-text"> Packaging & Delivery</h3>
-                    <p className="all-small-font"> Less lion goodness that euphemistically robin expeditiously bluebird smugly scratched far while thus cackled sheepishly rigid after due one assenting regarding censorious while occasional or this more crane went more as this less much amid overhung anathematic because much held one exuberantly sheep goodness so where rat wry well concomitantly.</p>
-
-                    <h3 className="meduim-text" > Suggested Use </h3>
-                    <p className="all-small-font"> Refrigeration not necessary.</p>
-                    <p className="all-small-font"> Stir before serving </p>
+                    <p className="all-small-font"> {productData?.description} </p> <br/>
+               
                   </div>
                   }
                     
@@ -417,7 +437,7 @@ const SingleProduct = () => {
                                       <div className="review-date">
                                           <p className="now-date"> December 4, 2024 at 3:12 pm</p>
                                           <p className="review-star"> 
-                                           <span> <FaStar /> <FaStar /><FaStar /><FaStar /> <FaStarHalfAlt />  </span>
+                                           <span> <Rating name="read-only" value={parseInt(productData?.rating)}  readOnly size="small"/>  </span>
                                            </p>
                                        </div>
                                          <p className="message"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt </p>
@@ -435,7 +455,7 @@ const SingleProduct = () => {
                                       <div className="review-date">
                                           <p className="now-date"> December 4, 2024 at 3:12 pm</p>
                                           <p className="review-star"> 
-                                           <span> <FaStar /> <FaStar /><FaStar /><FaStar /> <FaStarHalfAlt />  </span>
+                                           <span> <Rating name="read-only" value={parseInt(productData?.rating)}  readOnly size="small"/> </span>
                                            </p>
                                        </div>
                                          <p className="message"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt </p>
@@ -453,7 +473,7 @@ const SingleProduct = () => {
                                       <div className="review-date">
                                           <p className="now-date"> December 4, 2024 at 3:12 pm</p>
                                           <p className="review-star"> 
-                                           <span> <FaStar /> <FaStar /><FaStar /><FaStar /> <FaStarHalfAlt />  </span>
+                                           <span> <Rating name="read-only" value={parseInt(productData?.rating)}  readOnly size="small"/> </span>
                                            </p>
                                        </div>
                                          <p className="message"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt </p>
@@ -463,7 +483,7 @@ const SingleProduct = () => {
 
                                   <div className="review-form">
                                      <h3> Add a review </h3>
-                                     <span className="review-form-data"> <FaStar /> <FaStar /><FaStar /><FaStar /> <FaStarHalfAlt /> </span>
+                                    
                                  <div className="form"> 
                                      <div className="form-group my-2">
                                         <textarea name="" cols="30" rows="5" className="form-control" placeholder="Write Comment"></textarea>
@@ -474,15 +494,28 @@ const SingleProduct = () => {
                                             <input type="text" className="form-control" placeholder="Name"/>
                                           </div>
                                        </div>
-                                       <div className="col-md-6">
-                                         <div className="form-group">
-                                            <input type="text" className="form-control" placeholder="Email"/>
-                                          </div>
+                                 
+                                     <div className="col-md-6">
+                                       <div className="form-group custom-review-data">
+                                        <p> Add Review </p>
+                                        <span className="review-form-data">
+                                           <Rating
+                                               size="small"
+                                                name="customerRating"
+                                                value={4}
+                                                // onChange={(event, newValue) => {
+                                                //   setRating(newValue);
+                                                //   setInput((prev) => ({
+                                                //     ...prev,
+                                                //     customerRating : newValue
+                                                //   }))
+                                                // }}
+                                              />
+                                          </span>
                                        </div>
-                                     </div>
-                                     <div className="form-group">
-                                        <input type="text" className="form-control" placeholder="Website"/>
-                                     </div>                                   
+                                    
+                                      </div>                                   
+                                    </div>                                   
                                      <button className="submit-btn"> Submit Review </button>
                                   </div>
 
@@ -494,7 +527,7 @@ const SingleProduct = () => {
                                <div className="review-details">
                                     <h4> Customer reviews </h4>
                                     <div className="review-count">
-                                      <p> <span> <FaStar /> <FaStar /><FaStar /><FaStar /> <FaStarHalfAlt /></span> <span className="total"> 4.8 out of 5 </span> </p>
+                                      <p> <span> <Rating name="read-only" value={parseInt(productData?.rating)}  readOnly size="small"/></span> <span className="total"> 4.8 out of 5 </span> </p>
                                     </div>
 
                                      <div className="progress-bar-item">
@@ -548,21 +581,19 @@ const SingleProduct = () => {
                   <div className="related-product">
                     <h5> Related products </h5>
                       <Slider {...related} className="product-slider-main">
-                        <div className="item">
-                          <Product tag="new"/>  
-                        </div>
-                        <div className="item">
-                          <Product tag="hot"/>  
-                        </div>
-                        <div className="item">
-                          <Product tag="best"/>  
-                        </div>
-                        <div className="item">
-                          <Product tag="sale"/>  
-                        </div>
-                        <div className="item">
-                          <Product tag="hot"/>  
-                        </div>                
+                      {
+                        relatedProducts?.length > 0 ? (
+                          relatedProducts.map((product, index) => (
+                            <div className="item" key={product.id || index}>
+                              <Product item={product} />
+                            </div>
+                          ))
+                        ) : (
+                          <p>No related products available</p>
+                        )
+                      }
+
+                      
                       </Slider>
                   </div>
              </div>

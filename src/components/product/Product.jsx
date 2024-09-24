@@ -11,9 +11,6 @@ import "./Product.css"
 
 const Product = (props) => {
 
-  console.log(props.item);
-  
-
   return (
           <>
 

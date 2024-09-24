@@ -88,13 +88,19 @@
 }
 .product-info .price-sec .reg-price .offer{
   font-size: 12px;
-  font-weight: 600;
-  color: #FDC040;
+  font-weight: 500;
+  color: #f6f6f6;
+  background-color: #f12f16;
+  width: 60px;
+  border-radius: 5px;
+  text-align: center;
+  padding: 2px 0px;
 }
 .product-info .price-sec .reg-price .regular{
 font-size: 28px;
 font-weight: 600;
 color: #B6B6B6;
+text-decoration: line-through;
 }
 .short-desc{
   padding: 10px 0px;
@@ -363,7 +369,15 @@ color: #B6B6B6;
   border: 1px solid var(--nest-primary);
   margin-top: 20px;
 }
-
+.custom-review-data{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.review-form-data{
+  position: relative;
+  top: 3px;
+}
 
 
 /***** single-progress bar *******/
@@ -417,8 +431,9 @@ color: #B6B6B6;
   padding: 5px 10px;
 
 }
-
-
+.slick-track {
+  margin-right: auto !important;
+}
 
 
 /******************* Responsive  css  ****************/
@@ -441,6 +456,7 @@ color: #B6B6B6;
 }
 .product-info .price-sec .reg-price .regular {
   font-size: 18px;
+
 }
 .product-info .short-desc p {
   font-size: 14px;
