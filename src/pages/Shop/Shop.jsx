@@ -1,28 +1,21 @@
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 // components 
 import SideBar from "../../components/sideBer/SideBar";
-import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import ProductBest from "../../components/productBest/ProductBest";
 
-// react icons 
-import { IoGrid } from "react-icons/io5";
-import { FaSortAmountDown } from "react-icons/fa";
-import { FaAngleDown } from "react-icons/fa6";
-
+import axios from "axios";
 
 import "./Shop.css";
 const Shop = () => {
 
-  const [dropDownOpen, setDropDownOpen ] = useState(false); 
-  const [dropDownOpen2, setDropDownOpen2 ] = useState(false); 
-
   const [isOpenSideBar, setIsOpenSideBar ] = useState(false); 
-
+  const [productData, setProductData] = useState([]); 
+  const [loading, setLoading] = useState(true);
 
   // open filter 
   const openSideBarData = () => {
@@ -30,16 +23,95 @@ const Shop = () => {
   }
 
 
-     // handle close
-     const handleCloseDrop = () => {
-      setDropDownOpen(() => !dropDownOpen)
-     }
+  // get params id 
+  const { id } = useParams(); 
+
+  // Function to fetch products based on the category ID or fetch all products if no category ID
+  const fetchProducts = async (categoryId) => {
+    try {
+      setLoading(true); // Start loading
+      let url = categoryId ? 
+        `http://localhost:5050/api/v1/product?category=${categoryId}` : 
+        `http://localhost:5050/api/v1/product`;
+
+      const response = await axios.get(url);
+      setProductData(response.data.productList || []); // Set the fetched product data to state
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setProductData([]); // Set to empty array on error
+    } finally {
+      setLoading(false); // End loading
+    }
+  };
+
+  // Fetch products when the component mounts or the 'id' parameter changes
+  useEffect(() => {
+    fetchProducts(id);
+  }, [id]);
   
-     // handle close
-     const handleCloseDrop2 = () => {
-      setDropDownOpen2(() => !dropDownOpen2)
-     }
+  // filter category by sidebar content 
+  const filterData = async (id) => {
+    try {
+      setLoading(true); // Start loading
+      let url = id ? 
+        `http://localhost:5050/api/v1/product?category=${id}` : 
+        `http://localhost:5050/api/v1/product`;
+
+      const response = await axios.get(url);
+      setProductData(response.data.productList || []); // Set the fetched product data to state
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setProductData([]); // Set to empty array on error
+    } finally {
+      setLoading(false); // End loading
+    }
+  };
+
+  // filter by price 
+  const filterByPrice = async (price, categoryId) => {
+    try {
+      console.log('Price range:', price, 'Category:', categoryId); // Add logging here
+      setLoading(true);
   
+      let url = `http://localhost:5050/api/v1/product?`;
+
+        if (price && price.length === 2) {
+          url += `minPrice=${parseFloat(price[0])}&maxPrice=${parseFloat(price[1])}`;
+        }
+
+        if (categoryId) {
+          url += `${url.includes('?') ? '&' : ''}category=${categoryId}`;
+        }
+      
+      const response = await axios.get(url);
+      setProductData(response.data.productList || []);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setProductData([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // filter by rating 
+  const filterByRating = async (rating, categoryId) => {
+    try {
+      console.log('Filtering by rating:', rating, 'and category:', categoryId); // Log the inputs
+      setLoading(true);
+      const url = categoryId 
+        ? `http://localhost:5050/api/v1/product?rating=${rating}&category=${categoryId}` 
+        : `http://localhost:5050/api/v1/product`;
+      
+      const response = await axios.get(url);
+      setProductData(response.data.productList || []);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setProductData([]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
 
   return (
     <>
@@ -48,7 +120,6 @@ const Shop = () => {
            onClick={openSideBarData}> 
            Open Filters 
         </button>
-
         {
           isOpenSideBar === true &&  <SideBar isOpenSideBar={isOpenSideBar} openSideBarData={openSideBarData}/> 
         }
@@ -82,74 +153,38 @@ const Shop = () => {
           <div className="container-fluid">
             <div className="row">
                <div className="col-lg-3 col-md-3  left-sidebar">
-                   <SideBar isOpenSideBar={isOpenSideBar} openSideBarData={openSideBarData}/> 
+                  <SideBar 
+                    filterData={filterData} 
+                    filterByPrice={filterByPrice}  // Correctly passed function
+                    filterByRating={filterByRating}
+                    isOpenSideBar={isOpenSideBar}
+                    openSideBarData={openSideBarData}
+                  />
                </div>
 
                <div className="col-lg-9 col-md-9 right-sidebar popular-products ">
                <div className="top-strip d-flex align-items-center justify-content-between">
-                  <p> We found <span style={{color: "#3BB77E"}}> 29 </span> items for you! </p>
+                  <p> We found <span style={{color: "#3BB77E"}}> ( {productData?.length } )  </span> items for you! </p>
                   <div className="ml-auto  d-flex align-items-center show-count-product ">
-                      <div className="tab-item">
-                        <button className="show-btn" onClick={handleCloseDrop }> <IoGrid /> show : 50 <FaAngleDown /> </button>
-                        {
-                          dropDownOpen && <ul className="dropdown-menu-abc shadow ">
-                          <li className="drop-down-hover" > <button onClick={() => setDropDownOpen(false)}> 50 </button></li>
-                          <li className="drop-down-hover" > <button onClick={() => setDropDownOpen(false)}> 100 </button></li>
-                          <li className="drop-down-hover"> <button onClick={() => setDropDownOpen(false)}> 150 </button></li>
-                          <li className="drop-down-hover"> <button onClick={() => setDropDownOpen(false)}> 200 </button></li>
-                          <li className="drop-down-hover"> <button onClick={() => setDropDownOpen(false)}> All </button></li>
-                          </ul>
-                        }
-                        
-                      </div>
-                      <div className="tab-item">
-                        <button className="show-btn ms-3" onClick={ handleCloseDrop2 }> <FaSortAmountDown />  Sort by: Featured <FaAngleDown /> </button>
-                         {
-                          dropDownOpen2 && <ul className="dropdown-menu-abc shadow ">
-                          <li className="drop-down-hover" onClick={() => setDropDownOpen2(false)}> <button > Featured </button></li>
-                          <li className="drop-down-hover" onClick={() => setDropDownOpen2(false)}> <button > Price: Low to High </button></li>
-                          <li className="drop-down-hover" onClick={() => setDropDownOpen2(false)}> <button > Price: High to Low </button></li>
-                          <li className="drop-down-hover" onClick={() => setDropDownOpen2(false)}> <button > Release Date </button></li>
-                          <li className="drop-down-hover" onClick={() => setDropDownOpen2(false)}> <button > Avg. Rating </button></li>
-                          </ul>
-                         }
-                      </div>
+                      
                   </div>
                </div>
 
                    <div className="row product-row ms-3">
-                      <div className="item">
-                          <ProductBest tag="new"/> 
-                      </div>
-                      <div className="item">
-                          <ProductBest tag="best"/> 
-                      </div>
-                      <div className="item">
-                          <ProductBest tag="sale"/> 
-                      </div>
-                      <div className="item">
-                          <ProductBest tag="hot"/> 
-                      </div>
-                      <div className="item">
-                          <ProductBest tag="new"/> 
-                      </div>
-                      <div className="item">
-                          <ProductBest tag="hot"/> 
-                      </div>
-                      <div className="item">
-                          <ProductBest tag="new"/> 
-                      </div>
-                      <div className="item">
-                          <ProductBest tag="best"/> 
-                      </div>
-                      <div className="item">
-                          <ProductBest tag="sale"/> 
-                      </div>
-                      <div className="item">
-                          <ProductBest tag="new"/> 
-                      </div>
-                     
-                      
+                   {
+                   loading ? (
+                          <p>Loading...</p>
+                        ) : productData.length > 0 ? (
+                          productData.map((item) => (
+                            <div className="item" key={item?._id}>
+                            <ProductBest  item={item}/> 
+                          </div>
+                    
+                          ))
+                        ) : (
+                          <p className="no-product">No products found.</p>
+                        )}
+                   
                    </div>
                </div>
             </div>

@@ -87,7 +87,7 @@
 
 
 /* filter section css */
-.customer-checkbox h6{
+.customer-checkbox h2{
   font-size: 16px;
   font-weight: 700;
   color:  #212529;
@@ -141,7 +141,9 @@
 span.ml-auto.second-price {
   margin-left: 16px;
 }
-
+.priceRange{
+  margin-top: 10px;
+}
 
 /**** Responsive css *****/
 @media (min-width : 320px) and (max-width: 576px){
