@@ -135,7 +135,7 @@
 .header-middle .cart-wish-account .header-cart-wishlist .dropdown-menu-abc {
   position: absolute;
   right: 22px;
-  top: 30%;
+  top: 17%;
   padding: 10px 0px;
   border: 1px solid #dcdcdc;
   border-radius: 10px;
@@ -196,6 +196,10 @@ button.my-login-btn {
   font-size: 15px;
   font-weight: 500;
 }
+button.my-login-btn a{
+  color: #fff;
+}
+
 
 /***** Responsive csss ******/
 @media (min-width : 320px) and (max-width: 576px){

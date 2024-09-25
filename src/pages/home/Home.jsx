@@ -31,8 +31,6 @@ const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [products, setProducts] = useState([]);
 
- 
-
     var settings = {
       dots: false,
       infinite: true,
@@ -92,6 +90,7 @@ const Home = () => {
     }
  }, [categoryAllData]);
 
+ // fetch category product 
  const fetchProducts = async (category) => {
     try {
        const response = await axios.get(`http://localhost:5050/api/v1/product?category=${category}`);
@@ -109,6 +108,9 @@ const Home = () => {
  };
 
  
+ useEffect(() => {
+   window.scrollTo(0, 0); 
+ }, []); 
 
   return (
     <> 

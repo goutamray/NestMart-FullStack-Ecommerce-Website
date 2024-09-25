@@ -2,8 +2,8 @@
 import SelectDrop from "../selectDropdown/SelectDrop";
 import Navbar from "../Header/navbar/Navbar"
 
-import {  useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import {  useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 // react icons 
 import { IoIosSearch } from "react-icons/io";
@@ -25,10 +25,12 @@ import ClickAwayListener from 'react-click-away-listener';
 import "./Header.css";  
 import { MyContext } from "../../App";
 import { MdOutlineSecurity } from "react-icons/md";
+import createToast from "../../utils/toastify";
 
 const Header = () => {
    const [dropDownOpen, setDropDownOpen ] = useState(false); 
-   const [user, setUser] = useState(false); 
+
+   const navigate = useNavigate();
      
    // handle close
    const handleCloseDrop = () => {
@@ -37,6 +39,35 @@ const Header = () => {
    }
 
    const context = useContext(MyContext); 
+
+  //user logout 
+  const handleLogout = () => {
+      localStorage.clear();
+  
+      setTimeout(() => {
+          navigate("/login");
+          createToast("User Logout Successful", "success");
+      }, 2000);
+  };  
+
+  // Check login status on component mount
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+     
+      if (token) {
+          context.setIsLogin(true); 
+          const userData = JSON.parse(localStorage.getItem("user"));
+          context.setUser(userData); 
+      } else {
+          context.setIsLogin(false); 
+          context.setUser({
+            name: "",
+            email: "",
+            userId: ""
+          });
+      }
+  }, [context]);
+
 
   return (
     <>
@@ -162,40 +193,47 @@ const Header = () => {
            <ClickAwayListener onClickAway={() => setDropDownOpen(false) }>
                 <div className="header-cart-wishlist ">   
                   {
-                    user === true ?  <div className="header-action-icon-2" onClick={handleCloseDrop}>
-                    <a href='#' className="compare-box">
-                        <img src={userPhoto} />
-                        <span ></span>
-                     </a>   
-               
-            
-                   <Link 
-                     to='#' 
-                     className="compare-text hide-phone" 
-                     onClick={handleCloseDrop} >
-                     <span 
-                        className="lable ml-0" 
-                       > Account 
-                     </span>
-                   </Link>    
-                   
-                </div> : <button className="my-login-btn"> Login </button>
+                     context?.isLogin !== true  ?    <button className="my-login-btn"> 
+                     <Link to="/login"> Login </Link>
+                  </button>
+                     
+                  : 
+                  <div className="header-action-icon-2" onClick={handleCloseDrop}>
+                      <a href='#' className="compare-box">
+                          <img src={userPhoto} />
+                          <span ></span>
+                      </a>   
+                      <Link 
+                        to='#' 
+                        className="compare-text hide-phone" 
+                        onClick={handleCloseDrop} >
+                        <span 
+                            className="lable ml-0" 
+                          > Account 
+                        </span>
+                      </Link>    
+                  </div> 
+              
                   }                   
                  
                    {
                     
                     dropDownOpen && <ul className="dropdown-menu-abc shadow">
-                      <li className="drop-down-hover"> <FiUser /> 
+                      <li className="drop-down-hover" onClick={handleCloseDrop}> 
+                          <FiUser /> 
                           <Link to="/my-account" > My Account </Link>
                       </li>
-                      <li className="drop-down-hover"> <CiLocationOn /> 
-                        <Link to="/order-truck"> Order Tracking </Link>
+                      <li className="drop-down-hover" onClick={handleCloseDrop} > 
+                         <CiLocationOn /> 
+                         <Link to="/order-truck"> Order Tracking </Link>
                       </li>
-                      <li className="drop-down-hover"> <CiHeart /> 
-                        <Link to="/wishlist"> My Wishlist </Link>
+                      <li className="drop-down-hover" onClick={handleCloseDrop} > 
+                         <CiHeart /> 
+                         <Link to="/wishlist"> My Wishlist </Link>
                       </li>
-                      <li className="drop-down-hover"> <LuLogOut /> 
-                        <Link to=""> Sign out </Link>
+                      <li className="drop-down-hover" onClick={handleCloseDrop} >
+                         <LuLogOut /> 
+                        <Link to="" onClick={handleLogout}> Sign out </Link>
                       </li>
                   </ul>
                    }

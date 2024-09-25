@@ -38,8 +38,8 @@ const Navbar = () => {
                   <ul>
              
                   {
-                    context.categoryData?.length !== 0 && 
-                    context.categoryData?.map((item, index) => {
+                    context?.categoryData?.length !== 0 && 
+                    context?.categoryData?.map((item, index) => {
                       return <li className="list-inline-item list-item-single" key={index}>
                       <Link 
                         to={`/category/${item?._id}`}
@@ -62,8 +62,8 @@ const Navbar = () => {
                  <ul className="list list-inline menu-item">
 
                   {
-                    context.categoryData?.length !== 0 && 
-                    context.categoryData?.map((item, index) => {
+                    context?.categoryData?.length !== 0 && 
+                    context?.categoryData?.map((item, index) => {
                       return <li className="list-inline-item list-item-single" key={index}>
                       <Link to={`/category/${item?._id}`}> {item?.name} </Link>
                    </li>

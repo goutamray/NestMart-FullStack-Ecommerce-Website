@@ -25,39 +25,77 @@ import NotFound from './pages/NotFound/NotFound'
 import { createContext, useEffect, useState } from 'react'
 import { fetchDataFromApi } from './utils/api'
 
+import { ToastContainer } from 'react-toastify'
+
 // context 
 const MyContext = createContext();
 
 import './App.css'
 function App() {
   const [categoryData, setCategoryData] = useState([]); 
+  const [isLogin, setIsLogin] = useState(false);  
 
-
-
+  const [user, setUser] = useState(() => {
+    return JSON.parse(localStorage.getItem("user")) || {
+      name: "",
+      email: "",
+      userId: ""
+    };
+  });
 
    // get all category
    useEffect(() => {
-
-    fetchDataFromApi("/").then((res) => {
-       setCategoryData(res.categoryList); 
-    });
-
-  
+     fetchDataFromApi("/").then((res) => {
+        setCategoryData(res.categoryList); 
+     });
   }, []);
+
+    // login & logout 
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+  
+      if (token) {
+        setIsLogin(true); 
+        const userData = JSON.parse(localStorage.getItem("user"));
+        setUser(userData); 
+      } else {
+        setIsLogin(false); 
+        setUser({
+          name: "",
+          email: "",
+          userId: ""
+        });
+      }
+    }, []);
 
 
   // send all data
   const values = {
     categoryData,
     setCategoryData, 
-
-
-
+    isLogin,
+    setIsLogin,
+    user,
+    setUser,
+    
   }
  
   
   return (
     <>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
        <BrowserRouter >
 
          <MyContext.Provider value={values}>
