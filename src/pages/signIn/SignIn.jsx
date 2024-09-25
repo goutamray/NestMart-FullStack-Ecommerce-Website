@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
 // import images 
 import googleImage from "../../assets/img/icons/logo-google.svg";
- import loginImg from "../../assets/img/thumbnail/login-1.png";
+import loginImg from "../../assets/img/thumbnail/login-1.png";
 
+import { MyContext } from "../../App";
+import createToast from "../../utils/toastify";
+import { createNewUser, loginGoogleUserData } from "../../utils/api";
+
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { fireBaseApp } from "../../firebase/firebase";
+
+const auth = getAuth(fireBaseApp); 
+const provider = new GoogleAuthProvider();
 
 import "./SignIn.css"
-import createToast from "../../utils/toastify";
-import { createNewUser } from "../../utils/api";
+
 const SignIn = () => {
   const [showPassword, setShowPassword ] = useState(false); 
   const [formFields, setFormFields] = useState({
@@ -28,6 +36,7 @@ const SignIn = () => {
   }; 
     
   const navigate = useNavigate();
+  const context = useContext(MyContext)
 
   // Handle form submit 
   const handleLoginFormSubmit = (e) => {
@@ -78,6 +87,56 @@ const SignIn = () => {
     };
 
 
+  // handle google login 
+  const signInWithGoogle = async () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      
+      const fields = {
+        name : user.providerData[0].displayName,
+        email: user.providerData[0].email,
+        password : null,
+        photo : user.providerData[0].photoURL,
+        phone : user.providerData[0].phoneNumber,
+        isAdmin : false,
+      }
+     
+      loginGoogleUserData("/authwithgoogle", fields).then((res) => {
+        try {
+           if (res.error !== true) {
+             localStorage.setItem("token", res.token);
+             const user = {
+              name : res?.user?.name,
+              email : res?.user?.email,
+              userId : res?.user?.id
+             };
+            localStorage.setItem("user" , JSON.stringify(user));
+            createToast("User Login Successfull", "success");
+            setTimeout(() => {
+              navigate("/");
+              context.isLogin(true);
+              setLoading(false);
+            }, 2000);
+
+           }else{
+            setLoading(false);
+           }
+        } catch (error) {
+           console.log(error.message);
+           setLoading(false);
+        }
+
+      })
+      
+
+    }).catch((error) => {
+      const email = error.customData.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    });
+  }
 
 
   return (
@@ -148,7 +207,11 @@ const SignIn = () => {
                       
                               <div className="or text-center p-2"> <p> OR  </p></div>
                               <div className="google-btn">
-                                <button > <img src={googleImage} alt="" /> Sign In With Google </button>
+
+                                <button onClick={signInWithGoogle}> 
+                                  <img src={googleImage} alt="" /> Sign In With Google 
+                                </button>
+
                               </div>
                               
                               <div className="not-account mt-3">
