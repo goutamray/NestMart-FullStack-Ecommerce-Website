@@ -1,24 +1,26 @@
 
 import { CiHeart, CiShuffle } from "react-icons/ci";
-import { FaCartPlus, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaCartPlus } from "react-icons/fa";
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 import { Link, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from 'react';
 
 
 import Rating from '@mui/material/Rating';
 
 import Slider from "react-slick";
 // slider css  import 
-import { useEffect, useRef, useState } from 'react';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
-import "./SingleProduct.css";
+import { CircularProgress } from "@mui/material";
+
 import Product from "../../components/product/Product";
 import Counter from "../../components/counter/Counter";
 import axios from "axios";
 
+import "./SingleProduct.css";
 const SingleProduct = () => {
 
   const [activeSize, setActiveSize ] = useState(0);
@@ -30,7 +32,24 @@ const SingleProduct = () => {
   const [loading, setLoading] = useState(false); 
   const [relatedProducts, setRelatedProducts] = useState([]); 
 
-  console.log(relatedProducts);
+  const [rating, setRating] = useState(0)
+
+  const [input, setInput ] = useState({
+      productId : "",
+      customerName : "",
+      customerId : "",
+      customerRating : null,
+      review : "",
+  })
+
+  
+ // handle review change 
+ const handleReviewChange = (e) => {
+  setInput((prevState) => ({
+    ...prevState,
+    [e.target.name] : e.target.value
+  }))
+ }; 
   
 
   const zoomSliderBig = useRef(); 
@@ -142,9 +161,6 @@ const SingleProduct = () => {
     ],
   };
   
-  
-
-
   const goto = ( index) => {
     zoomSlider.current.slickGoTo(index);
     zoomSliderBig.current.slickGoTo(index);
@@ -155,6 +171,19 @@ const SingleProduct = () => {
     setActiveSize(index)
     setTabError(false); 
   }; 
+
+ const handleReviewSubmit = (e) => {
+     e.preventDefault();
+    //  setLoading(true); 
+
+
+     console.log(input);
+     
+ }
+
+
+
+
 
   useEffect(() => {
      window.scrollTo(0, 0)
@@ -483,42 +512,52 @@ const SingleProduct = () => {
 
                                   <div className="review-form">
                                      <h3> Add a review </h3>
-                                    
-                                 <div className="form"> 
-                                     <div className="form-group my-2">
-                                        <textarea name="" cols="30" rows="5" className="form-control" placeholder="Write Comment"></textarea>
-                                     </div>
-                                     <div className="row my-3">
-                                       <div className="col-md-6">
-                                          <div className="form-group">
-                                            <input type="text" className="form-control" placeholder="Name"/>
+                                    <form onClick={handleReviewSubmit}>
+                                      <div className="form"> 
+                                          <div className="form-group my-2">
+                                              <textarea 
+                                                  name="review" 
+                                                  cols="30" 
+                                                  rows="5" 
+                                                  className="form-control" placeholder="Write Comment"
+                                                  value={input.review}
+                                                  onChange={handleReviewChange}
+                                                  >
+                                                  </textarea>
                                           </div>
-                                       </div>
-                                 
-                                     <div className="col-md-6">
-                                       <div className="form-group custom-review-data">
-                                        <p> Add Review </p>
-                                        <span className="review-form-data">
-                                           <Rating
-                                               size="small"
+                                          <div className="row my-3">
+                                          <div className="col-md-6">
+                                            <div className="form-group custom-review-data">
+                                              <p> Add Review </p>
+                                              <span className="review-form-data">
+                                              <Rating
                                                 name="customerRating"
-                                                value={4}
-                                                // onChange={(event, newValue) => {
-                                                //   setRating(newValue);
-                                                //   setInput((prev) => ({
-                                                //     ...prev,
-                                                //     customerRating : newValue
-                                                //   }))
-                                                // }}
+                                                value={input.customerRating}
+                                                onChange={(event, newValue) => {
+                                                  setRating(newValue);
+                                                  setInput((prev) => ({
+                                                    ...prev,
+                                                    customerRating : newValue
+                                                  }))
+                                                }}
                                               />
-                                          </span>
-                                       </div>
-                                    
-                                      </div>                                   
-                                    </div>                                   
-                                     <button className="submit-btn"> Submit Review </button>
-                                  </div>
-
+                                                </span>
+                                            </div>
+                                          
+                                            </div>                                   
+                                          </div>                                   
+                                          <button 
+                                              type="submit" 
+                                              className="submit-btn"> 
+                                                {
+                                                  loading === true ?   
+                                                  <CircularProgress color="inherit" className="ml-3 loader "/> : 
+                                                  "Submit Review"
+                                                }
+                                         
+                                           </button>
+                                        </div>
+                                    </form>  
                                  </div>                       
                                </div>
                           </div>
