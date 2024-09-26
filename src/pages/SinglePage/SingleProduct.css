@@ -378,7 +378,9 @@ text-decoration: line-through;
   position: relative;
   top: 3px;
 }
-
+.card-info {
+  width: 100%;
+}
 
 /***** single-progress bar *******/
  .progress-bar-item .single-progress{

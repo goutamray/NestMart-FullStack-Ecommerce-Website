@@ -21,6 +21,8 @@ import Counter from "../../components/counter/Counter";
 import axios from "axios";
 
 import "./SingleProduct.css";
+import createToast from "../../utils/toastify";
+import { createReviewData, getReviewData } from "../../utils/api";
 const SingleProduct = () => {
 
   const [activeSize, setActiveSize ] = useState(0);
@@ -31,6 +33,7 @@ const SingleProduct = () => {
   const [productData, setProductData] = useState(null); // State to hold product data
   const [loading, setLoading] = useState(false); 
   const [relatedProducts, setRelatedProducts] = useState([]); 
+  const [reviewsData, setReviewsData] = useState([]);
 
   const [rating, setRating] = useState(0)
 
@@ -172,18 +175,49 @@ const SingleProduct = () => {
     setTabError(false); 
   }; 
 
+
+  // handle submit review 
  const handleReviewSubmit = (e) => {
      e.preventDefault();
-    //  setLoading(true); 
+     setLoading(true); 
 
 
-     console.log(input);
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    input.customerId = user?.userId;
+    input.productId = id;
+    input.customerName = user?.name;
+
+      // Validate all inputs 
+      if (!input.review || !input.customerRating) {
+       setLoading(false);
+       createToast("All fields are required", );
+       return;
+     }
+
+    createReviewData("/", input).then((res) => {
+       createToast("Review Submitted Successful", "success");
+       setLoading(false);
+       // empty 
+       setInput({
+         review: "",
+         customerRating: "",
+       });
+
+       getReviewData(`/review?productId=${id}`).then((res) => {
+         setReviewsData(res.reviews); 
+       })
+
+    })
      
  }
 
-
-
-
+   // product review 
+   useEffect(() => {
+    getReviewData(`/review?productId=${id}`).then((res) => {
+      setReviewsData(res.reviews); 
+    })
+  }, [id]); 
 
   useEffect(() => {
      window.scrollTo(0, 0)
@@ -455,64 +489,33 @@ const SingleProduct = () => {
                                <div className="review-customer">
                                   <h4> Customer questions & answers  </h4>
 
-                                  <div className="card p-3 review-card mb-4">
+                                  {
+                                    reviewsData?.length !== 0 && 
+                                    reviewsData?.slice(0)?.reverse()?.map((item, index) => {
+                                      return  <div className="card p-3 review-card mb-4" key={index}>
                                       <div className="image-item">
                                         <div className="rounded-circle">
                                             <img src="https://nest-frontend-v6.netlify.app/assets/imgs/blog/author-2.png" alt="" />
                                          </div>
-                                         <p> Sienna </p>
+                                         <p> {item?.customerName} </p>
                                       </div>
                                    <div className="card-info">
                                       <div className="review-date">
                                           <p className="now-date"> December 4, 2024 at 3:12 pm</p>
                                           <p className="review-star"> 
-                                           <span> <Rating name="read-only" value={parseInt(productData?.rating)}  readOnly size="small"/>  </span>
+                                           <span> <Rating name="read-only" value={parseInt(item?.customerRating)}  readOnly size="small"/>  </span>
                                            </p>
                                        </div>
-                                         <p className="message"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt </p>
+                                         <p className="message"> {item?.review}  </p>
                                      </div>
                                   </div>
 
-                                  <div className="card p-3 review-card mb-4">
-                                      <div className="image-item">
-                                        <div className="rounded-circle">
-                                            <img src="https://nest-frontend-v6.netlify.app/assets/imgs/blog/author-3.png" alt="" />
-                                         </div>
-                                         <p> Brenna </p>
-                                      </div>
-                                   <div className="card-info">
-                                      <div className="review-date">
-                                          <p className="now-date"> December 4, 2024 at 3:12 pm</p>
-                                          <p className="review-star"> 
-                                           <span> <Rating name="read-only" value={parseInt(productData?.rating)}  readOnly size="small"/> </span>
-                                           </p>
-                                       </div>
-                                         <p className="message"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt </p>
-                                     </div>
-                                  </div>
-
-                                  <div className="card p-3 review-card mb-4">
-                                      <div className="image-item">
-                                        <div className="rounded-circle">
-                                            <img src="https://nest-frontend-v6.netlify.app/assets/imgs/blog/author-4.png" alt="" />
-                                         </div>
-                                         <p> Gemma </p>
-                                      </div>
-                                   <div className="card-info">
-                                      <div className="review-date">
-                                          <p className="now-date"> December 4, 2024 at 3:12 pm</p>
-                                          <p className="review-star"> 
-                                           <span> <Rating name="read-only" value={parseInt(productData?.rating)}  readOnly size="small"/> </span>
-                                           </p>
-                                       </div>
-                                         <p className="message"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt </p>
-                                     </div>
-                                  </div>
-
+                                    })
+                                  }
 
                                   <div className="review-form">
                                      <h3> Add a review </h3>
-                                    <form onClick={handleReviewSubmit}>
+                                    <form onSubmit={handleReviewSubmit}>
                                       <div className="form"> 
                                           <div className="form-group my-2">
                                               <textarea 
