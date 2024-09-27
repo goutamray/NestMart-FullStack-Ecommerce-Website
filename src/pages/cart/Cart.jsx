@@ -1,14 +1,75 @@
 
+import QuantityBox from "../../components/counter/quantityBox";
 
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { PiSignOutBold } from "react-icons/pi";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-import Counter from "../../components/counter/Counter";
+import { useContext, useEffect, useState } from "react";
 
 import "./Cart.css"; 
+import { fetchCartDataFromApi } from "../../utils/api";
+import { MyContext } from "../../App";
+
 const Cart = () => {
+  const [productQuantity, setProductQuantity] = useState(); 
+  const [changeQuantity, setChangeQuantity] = useState(0); 
+  const [cartData, setCartData] = useState([]); 
+
+  const context = useContext(MyContext)
+
+  useEffect(() => {
+    fetchCartDataFromApi("/").then((res) => {
+      setCartData(res.cartList); 
+    });
+
+    // real time data update 
+    context.getCartData(); 
+
+   }, [context]); 
+
+  // quantity 
+   const quantity = (val) => {
+    setProductQuantity(val); 
+    setChangeQuantity(val); 
+  }
+
+  // select item data 
+  // const selectedItem = (item, quantityVal) => {
+
+  //   if (changeQuantity !== 0) {
+  //     setIsLoading(true);
+
+  //     const user = JSON.parse(localStorage.getItem("user"));
+      
+  //     cartFields.productTitle = item?.productTitle
+  //     cartFields.image = item?.image
+  //     cartFields.rating = item?.rating
+  //     cartFields.price = item?.price
+  //     cartFields.quantity = quantityVal
+  //     cartFields.subTotal = parseInt(item?.price * quantityVal) 
+  //     cartFields.productId = item?.productId
+  //     cartFields.userId = user?.userId
+  
+  //     // update cart data
+  //     editcartData(`/${item?._id}`, cartFields).then(() => {
+      
+  //         setTimeout(() => {
+  //           setIsLoading(false); 
+  //         }, 1000);
+  
+  //         // refresh databse 
+  //         fetchCartDataFromApi("/").then((res) => {
+  //           setCartData(res.cartList); 
+  //         });
+  
+  //     });
+
+  //   }
+  // }
+
+
   return (
     <>
  
@@ -63,7 +124,13 @@ const Cart = () => {
                             <td className="product-price"> $ 20  </td>
                             <td className="mobile-hide"> 
                               <div className="cart-counter">
-                                  <Counter  />
+                                    <QuantityBox 
+                                        //  value = {item?.quantity}
+                                         quantity = {quantity} 
+                                        //  item = {item} 
+                                        //  selectedItem = {selectedItem}
+                                         
+                                       />
                               </div>
                             </td>
                             <td className="subTotal"> $120 </td>

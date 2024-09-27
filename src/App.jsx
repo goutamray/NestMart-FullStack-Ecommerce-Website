@@ -23,9 +23,10 @@ import NotFound from './pages/NotFound/NotFound'
 
 
 import { createContext, useEffect, useState } from 'react'
-import { fetchDataFromApi } from './utils/api'
+import { createCartData, fetchCartDataFromApi, fetchDataFromApi } from './utils/api'
 
 import { ToastContainer } from 'react-toastify'
+import createToast from './utils/toastify'
 
 // context 
 const MyContext = createContext();
@@ -34,6 +35,9 @@ import './App.css'
 function App() {
   const [categoryData, setCategoryData] = useState([]); 
   const [isLogin, setIsLogin] = useState(false);  
+  const [addingCart, setAddingCart] = useState(false); 
+  
+  const [cartData, setCartData ] = useState(); 
 
   const [user, setUser] = useState(() => {
     return JSON.parse(localStorage.getItem("user")) || {
@@ -68,6 +72,53 @@ function App() {
       }
     }, []);
 
+  // get cart data 
+  const getCartData = () => {
+    // cart all data
+   fetchCartDataFromApi("/").then((res) => {
+         setCartData(res.cartList);
+   }); 
+  }; 
+ 
+
+
+  // add to cart 
+  const addToCart = (data) => {
+    setAddingCart(true); 
+    
+      // create new cart product 
+      createCartData("/add", data).then((res) => {
+            
+      if (res.status === true) {
+        // Product added successfully
+        createToast("Successfully Product Added", "success");
+    
+          setTimeout(() => {
+            setAddingCart(false); 
+          }, 2000);
+    
+          getCartData(); 
+    
+          return;
+    
+            } else if (res.status === false) {
+              // Product already in the cart or some other issue
+              return createToast("Product Already Added");
+            } else {
+              // Handle unexpected statuses
+              return createToast("An unexpected error occurred", "error");
+            }
+          }).catch((error) => {
+            // Handle any network or other errors
+            console.error("Error adding product to cart:", error);
+            createToast("Product Already Added", );
+            setAddingCart(false); 
+            return;
+          });
+
+   };
+        
+
 
   // send all data
   const values = {
@@ -77,6 +128,13 @@ function App() {
     setIsLogin,
     user,
     setUser,
+    addToCart,
+    addingCart,
+    setAddingCart,
+    cartData,
+    setCartData,
+    getCartData,
+
     
   }
  

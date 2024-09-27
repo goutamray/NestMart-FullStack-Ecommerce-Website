@@ -4,7 +4,7 @@ import { FaCartPlus } from "react-icons/fa";
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 
 import Rating from '@mui/material/Rating';
@@ -16,13 +16,15 @@ import "slick-carousel/slick/slick.css";
 
 import { CircularProgress } from "@mui/material";
 
-import Product from "../../components/product/Product";
-import Counter from "../../components/counter/Counter";
-import axios from "axios";
-
-import "./SingleProduct.css";
 import createToast from "../../utils/toastify";
 import { createReviewData, getReviewData } from "../../utils/api";
+import QuantityBox from "../../components/counter/quantityBox";
+
+import Product from "../../components/product/Product";
+import axios from "axios";
+import { MyContext } from "../../App";
+
+import "./SingleProduct.css";
 const SingleProduct = () => {
 
   const [activeSize, setActiveSize ] = useState(0);
@@ -35,7 +37,12 @@ const SingleProduct = () => {
   const [relatedProducts, setRelatedProducts] = useState([]); 
   const [reviewsData, setReviewsData] = useState([]);
 
-  const [rating, setRating] = useState(0)
+  const [productQuantity, setProductQuantity] = useState(); 
+  const [cartFields, setCartFields] = useState({}); 
+
+  const [rating, setRating] = useState(0);
+
+  const context = useContext(MyContext);
 
   const [input, setInput ] = useState({
       productId : "",
@@ -57,7 +64,6 @@ const SingleProduct = () => {
 
   const zoomSliderBig = useRef(); 
   const zoomSlider = useRef(); 
-
   const { id } = useParams(); 
 
    // get single product data & related products 
@@ -224,6 +230,33 @@ const SingleProduct = () => {
   }, []); 
 
 
+    // quantity 
+    const quantity = (val) => {
+      setProductQuantity(val); 
+    }
+  
+  // add to cart 
+  const addToCart = () => {
+
+    if (activeSize !== null) {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      cartFields.productTitle = productData?.name
+      cartFields.image = productData?.photo[0]
+      cartFields.rating = productData?.rating
+      cartFields.price = productData?.oldPrice
+      cartFields.quantity = productQuantity
+      cartFields.subTotal = parseInt(productData?.oldPrice * productQuantity) 
+      cartFields.productId = productData?._id
+      cartFields.userId = user?.userId
+  
+      context.addToCart(cartFields);
+    }else{
+      setTabError(true); 
+    }
+  }
+
+
   
 
   return (
@@ -290,7 +323,7 @@ const SingleProduct = () => {
                             {
                                productData?.productRams?.length !== 0 &&      <div className="productSize d-flex align-items-center mt-3">
                                <span> Rams :  </span>
-                               <ul className='list list-inline'>
+                               <ul className={`list list-inline ${tabError === true && 'error'}`}>
                                 {
                                   productData?.productRams?.map((item, index) => {
                                     return  <li className='list-inline-item' key={index}> 
@@ -306,7 +339,7 @@ const SingleProduct = () => {
                             {
                                productData?.productSize?.length !== 0 &&      <div className="productSize d-flex align-items-center mt-3">
                                <span> Size :  </span>
-                               <ul className='list list-inline'>
+                               <ul className={`list list-inline ${tabError === true && 'error'}`}>
                                 {
                                   productData?.productSize?.map((item, index) => {
                                     return  <li className='list-inline-item' key={index}> 
@@ -323,7 +356,7 @@ const SingleProduct = () => {
                             {
                                productData?.productWeight?.length !== 0 &&      <div className="productSize d-flex align-items-center mt-3">
                                <span> Weight :  </span>
-                               <ul className='list list-inline'>
+                               <ul className={`list list-inline ${tabError === true && 'error'}`}>
                                 {
                                   productData?.productWeight?.map((item, index) => {
                                     return  <li className='list-inline-item' key={index}> 
@@ -338,16 +371,30 @@ const SingleProduct = () => {
 
                             <div className="product-counter ">
                                <div className="counter-box d-flex align-items-center">
-                                    <Counter />
+
+                                <QuantityBox  quantity={quantity}/>
+
                                </div>
                                <div className="add-to-cart-btn">
-                                   <Link to=""> <FaCartPlus className='cart-icon'/> Add to cart </Link>
+                               <button 
+                                 className="cart-btn" 
+                                 onClick={() => addToCart()}> 
+                                 {
+                                  context.addingCart === true ? "Adding...." : "Add To Cart"
+                                 }
+                                      
+                              </button>
+                               
                                </div>
                                <div className="wishlist same-btn ">
-                                  <p> <CiHeart className='heart'/> </p>
+                                  <p> 
+                                     <CiHeart className='heart'/> 
+                                  </p>
                                </div>
                                <div className="compare same-btn ">
-                                  <p> <CiShuffle className='heart'/>  </p>
+                                  <p> 
+                                    <CiShuffle className='heart'/> 
+                                  </p>
                                </div>
                             </div>
 

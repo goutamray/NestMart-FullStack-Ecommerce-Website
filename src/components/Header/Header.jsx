@@ -55,11 +55,11 @@ const Header = () => {
     const token = localStorage.getItem("token");
      
       if (token) {
-          context.setIsLogin(true); 
+          context?.setIsLogin(true); 
           const userData = JSON.parse(localStorage.getItem("user"));
           context.setUser(userData); 
       } else {
-          context.setIsLogin(false); 
+          context?.setIsLogin(false); 
           context.setUser({
             name: "",
             email: "",
@@ -182,7 +182,9 @@ const Header = () => {
                    <div className="header-action-icon-2">
                        <Link to='/cart' className="compare-box">
                            <img src={cart} />
-                           <span className="pro-count blue">2 </span>
+                           <span className="pro-count blue">
+                               { context?.cartData?.length }
+                            </span>
                         </Link>
                       <Link to='/cart' className="compare-text hide-phone">
                         <span className="lable ml-0">Cart</span>

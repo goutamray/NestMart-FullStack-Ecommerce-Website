@@ -116,8 +116,70 @@ export const getReviewData = async(url ) => {
 };
 
 
+/**
+ * Create cart data
+ * @param {string} url - The endpoint URL (e.g., "/add")
+ * @param {FormData} formData - The form data to submit
+ * @returns {Promise<Object>} - The response data from the server
+ */
+export const createCartData = async(url, formData) => {
+   try {
+      const response = await axios.post(`http://localhost:5050/api/v1/cart${url}`, formData); 
+      return response.data;
+   } catch (error) {
+      console.error('Error submitting form data:', error.message);
+      throw error; 
+   }
+};
+
+/**
+ *  fetch cart data from api
+ * @param {*} url 
+ * @returns 
+ */
+export const fetchCartDataFromApi = async(url) => {
+   try {
+      const response = await axios.get("http://localhost:5050/api/v1/cart"+url);
+      return response.data;
+   } catch (error) {
+      console.error('Error submitting form data:', error.message);
+      throw error; 
+   }  
+}; 
 
 
+/**
+ * delete cart data from api 
+ * @param {*} id 
+ * @returns 
+ */
+export const deleteCartData = async( id ) => {
+   try {
+      const res = await axios.delete(`http://localhost:5050/api/v1/cart${id}`); 
+      return res.data; 
+   } catch (error) {
+      console.error('Error submitting form data:', error.message);
+      throw error; 
+   }
+}; 
+
+
+/**
+ * edit cart data from api 
+ * @param {*} url 
+ * @param {*} updatedData 
+ * @returns 
+ */
+export const editcartData = async( url, updatedData ) => {
+   try {
+    const res = await axios.patch(`http://localhost:5050/api/v1/cart${url}`, updatedData); 
+    return res.data;  
+   } catch (error) {
+    console.error('Error submitting form data:', error.message);
+    throw error; // Re-throw the error for handling in the calling func
+   }
+ }; 
+ 
 
 
 
