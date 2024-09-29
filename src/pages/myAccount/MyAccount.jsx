@@ -1,9 +1,11 @@
 
-
-import {  useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import avaterPhoto from "../../assets/avater/aaaa.jpg"; 
 
+// loading 
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -14,17 +16,23 @@ import TabPanel from '@mui/lab/TabPanel';
 import TextField from '@mui/material/TextField';
 
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { fetchUserDataFromApi, updateUserData } from "../../utils/api";
+import createToast from "../../utils/toastify";
+import axios from "axios";
 
 import "./MyAccount.css"; 
 
 const MyAccount = () => {
+  const [isLogin, setIsLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [userData, setUserData] = useState([]);
 
   const [input, setInput] = useState({
     name: "",
     email: "",
     phone: "",
-    photo: "", // This will store the file object temporarily
-    previewPhoto: "", // For image preview
+    photo: "", 
+    previewPhoto: "",
   });
 
   const [fields, setfields] = useState({
@@ -33,7 +41,7 @@ const MyAccount = () => {
     confirmPassword: "",
   });
   
-
+  const navigate = useNavigate();
 
   const [value, setValue] = useState('1');
 
@@ -62,6 +70,141 @@ const MyAccount = () => {
       }));
     };
 
+  useEffect(() => {
+    window.scrollTo(0,0);
+
+    const token = localStorage.getItem("token");
+
+    if (token !== null && token !== undefined && token !== "") {
+      setIsLogin(true);
+    }else{
+      navigate("/signIn"); 
+    }
+
+  }, []);
+
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user && user?.userId) {
+      fetchUserDataFromApi(`/${user?.userId}`).then((res) => {
+        if (res) {
+          setUserData(res);
+
+          console.log(res);
+          
+
+          // Ensure response has required fields before setting input state
+          setInput({
+            name: res.user?.name || "",
+            email: res.user?.email || "",
+            phone: res.user?.phone || "",
+            photo: res.user?.photo || "", // Ensure you are using the URL returned from API
+            previewPhoto: res.user?.photo || avaterPhoto, // Default to avatar photo if no photo is available
+          });
+        }
+      });
+    } else {
+      console.error("User not found in localStorage");
+    }
+  }, []);
+
+
+
+// handle user update 
+const handleUserUpdate = (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+
+  // Validation
+  if (!input.name || !input.email || !input.phone) {
+    setIsLoading(false);
+    createToast("All fields are required");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('name', input.name);
+  formData.append('email', input.email);
+  formData.append('phone', input.phone);
+  if (input.photo) {
+    formData.append('photo', input.photo);
+  }
+
+  // Get token and user data
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
+
+
+  if (user?.userId && token) {
+    updateUserData(`/${user?.userId}`, formData)
+      .then((res) => {
+        setIsLoading(false);
+        createToast("User updated successfully!", "success");
+      })
+  } else {
+    setIsLoading(false);
+    createToast("User or token not found", "error");
+  }
+};
+
+
+// change password value 
+const handlePassword = (e) => {
+  setfields((prev) => ({
+    ...prev,
+    [e.target.name]: e.target.value
+  }));
+}
+
+// handle password submit
+const handlePasswordSubmit = (e) => {
+  e.preventDefault();
+
+  // Validation
+  if (!fields.oldPassword || !fields.newPassword || !fields.confirmPassword) {
+      setIsLoading(false);
+      createToast("All fields are required");
+      return;
+  }
+
+  if (fields.newPassword !== fields.confirmPassword) {
+    setIsLoading(false);
+    createToast("New Password and Confirm Password do not match");
+    return;
+  }
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user && user.userId) {
+    // Create JSON payload
+    const requestData = {
+      oldPassword: fields.oldPassword,
+      newPassword: fields.newPassword,
+    };
+
+    // Use Axios to send a PATCH request
+    axios.patch(`http://localhost:5050/api/v1/user/changePassword/${user.userId}`, requestData)
+      .then((res) => {
+        console.log("Password updated successfully:", res);
+        createToast("Password updated successfully", "success");
+
+        setfields({
+          oldPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        })
+
+      })
+      .catch((error) => {
+        console.error("Error updating password:", error);
+        createToast("Error updating password", "error");
+      });
+  } else {
+    createToast("User not found", "error");
+  }
+};
 
   return (
     <>
@@ -90,14 +233,14 @@ const MyAccount = () => {
                         </TabList>
                       </Box>                     
                      <TabPanel value="1">
-                        <form >
+                        <form onSubmit={handleUserUpdate}>
                           <div className="row mt-3">
                             <div className="col-md-3">  
                                     <div className="user-data">
                                        <div className="user-photo">
                                           <img src={input.previewPhoto || avaterPhoto} alt="User" />
                                        </div>
-                                       <div className="overlay-data">
+                                       <div className="overlay-upload">
                                           <label htmlFor="photo-upload" className="file-upload-label">
                                             <FaCloudUploadAlt /> Upload
                                           </label>
@@ -160,7 +303,13 @@ const MyAccount = () => {
                                     <button 
                                        type="submit" 
                                        className="save-btn"> 
-                                         save
+                                       {
+                                          isLoading === true ?   
+                                          <CircularProgress color="inherit" className="ml-3 loader "/> 
+                                          : "Save" 
+                                        }
+                                            
+                                        
                                     </button>
                                  </div>
                              </div>
@@ -169,7 +318,7 @@ const MyAccount = () => {
                         </form>
                       </TabPanel>
                       <TabPanel value="2">
-                      <form>
+                      <form onSubmit={handlePasswordSubmit}>
                           <div className="row mt-3">
                              <div className="col-md-12">
                                 <div className="row">
@@ -182,7 +331,7 @@ const MyAccount = () => {
                                             variant="outlined" 
                                             name="oldPassword"
                                             value={fields.oldPassword}
-                                            
+                                            onChange={handlePassword}
                                           />
                                      </div>
                                     </div>
@@ -195,7 +344,7 @@ const MyAccount = () => {
                                             variant="outlined"
                                             name="newPassword" 
                                             value={fields.newPassword}
-                                           
+                                            onChange={handlePassword}
                                           />
                                      </div>
                                    </div>
@@ -208,7 +357,7 @@ const MyAccount = () => {
                                             variant="outlined"
                                             name="confirmPassword"
                                             value={fields.confirmPassword} 
-                                           
+                                            onChange={handlePassword}
                                           />
                                      </div>
                                    </div>

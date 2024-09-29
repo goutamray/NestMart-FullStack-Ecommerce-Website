@@ -26,9 +26,11 @@ import "./Header.css";
 import { MyContext } from "../../App";
 import { MdOutlineSecurity } from "react-icons/md";
 import createToast from "../../utils/toastify";
+import { fetchWishlistDataFromApi } from "../../utils/api";
 
 const Header = () => {
    const [dropDownOpen, setDropDownOpen ] = useState(false); 
+   const [myListData, setMyListData] = useState([]); 
 
    const navigate = useNavigate();
      
@@ -67,6 +69,21 @@ const Header = () => {
           });
       }
   }, []);
+
+
+  // wishlist count 
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+      fetchWishlistDataFromApi(`?userId=${user?.userId}`).then((res) => {
+        setMyListData(res.wishlist); 
+      });
+
+    // real time data update 
+    context.getCartData(); 
+
+  }, [context]); 
+
 
 
   return (
@@ -170,7 +187,9 @@ const Header = () => {
                    <div className="header-action-icon-2">
                        <Link to='/wishlist' className="compare-box">
                            <img src={heart} />
-                           <span className="pro-count blue">6 </span>
+                           <span className="pro-count blue">
+                               {myListData?.length}
+                            </span>
                         </Link>
                       <Link to='/wishlist' className="compare-text hide-phone">
                           <span className="lable ml-0"> Wishlist </span>
@@ -187,7 +206,7 @@ const Header = () => {
                             </span>
                         </Link>
                       <Link to='/cart' className="compare-text hide-phone">
-                        <span className="lable ml-0">Cart</span>
+                          <span className="lable ml-0">Cart</span>
                       </Link>
                    </div>        
                  </div>

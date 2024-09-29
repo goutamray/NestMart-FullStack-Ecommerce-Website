@@ -3,7 +3,7 @@ import { CiHeart, CiShuffle } from "react-icons/ci";
 import { FaCartPlus } from "react-icons/fa";
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useRef, useState } from 'react';
 
 
@@ -26,13 +26,12 @@ import { MyContext } from "../../App";
 
 import "./SingleProduct.css";
 const SingleProduct = () => {
-
   const [activeSize, setActiveSize ] = useState(0);
 
   const [activeTab , setActiveTab ] = useState(0); 
   const [tabError, setTabError] = useState(false);
 
-  const [productData, setProductData] = useState(null); // State to hold product data
+  const [productData, setProductData] = useState(null); 
   const [loading, setLoading] = useState(false); 
   const [relatedProducts, setRelatedProducts] = useState([]); 
   const [reviewsData, setReviewsData] = useState([]);
@@ -41,8 +40,8 @@ const SingleProduct = () => {
   const [cartFields, setCartFields] = useState({}); 
 
   const [rating, setRating] = useState(0);
-
   const context = useContext(MyContext);
+  const navigate = useNavigate(); 
 
   const [input, setInput ] = useState({
       productId : "",
@@ -251,6 +250,10 @@ const SingleProduct = () => {
       cartFields.userId = user?.userId
   
       context.addToCart(cartFields);
+
+      setTimeout(() => {
+        navigate("/cart"); 
+      }, 2000);
     }else{
       setTabError(true); 
     }

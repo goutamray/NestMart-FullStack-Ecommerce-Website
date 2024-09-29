@@ -2,14 +2,16 @@
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
 import "./Checkout.css"; 
+import { createOrderData, fetchCartDataFromApi } from '../../utils/api';
+import createToast from '../../utils/toastify';
 
 const Checkout = () => {
-
+  const [cartData, setCartData] = useState([]); 
   
   const navigate = useNavigate(); 
   
@@ -33,7 +35,60 @@ const Checkout = () => {
     }))
    }; 
 
+   // get all cart list data 
+   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    fetchCartDataFromApi(`?userId=${user?.userId}`).then((res) => {
+      setCartData(res.cartList); 
+    });
+   }, []); 
 
+
+  // handleCheckOutSubmit
+  const handleCheckOutSubmit = (e) => {
+    e.preventDefault();
+   
+
+      // validation 
+      if (
+       !input.name || 
+       !input.email || 
+       !input.phone || 
+       !input.address || 
+       !input.city || 
+       !input.country || 
+       !input.zipCode || 
+       !input.state 
+       ) {
+      return createToast("All fields are Required");
+     }
+
+     // order create 
+     createOrderData("/create", input).then((res) => {
+       createToast("Your Order Successfully Done", "success");
+
+       navigate("/thank-you")
+     })
+
+     // empty input
+     setInput({
+       name : "",
+       email : "",
+       phone : "",
+       country : "",
+       zipCode : "",
+       address : "",
+       appartment : "",
+       city : "",
+       state : "",
+     })
+
+}
+
+// scroll top
+useEffect(() => {
+  window.scrollTo(0, 0); 
+}, []);
 
 
   return (
@@ -41,10 +96,10 @@ const Checkout = () => {
 
       <section className="checkout-section">
         <div className="container">
-          <form > 
+          <form onSubmit={handleCheckOutSubmit}> 
             <div className="row">
               <div className="col-md-8 checkout-left">
-                <div className="card p-3"> 
+              <div className="card p-3"> 
                     <h2 className='billing-info'> Billings Details </h2>
 
                     <div className="row mt-3">
@@ -151,7 +206,6 @@ const Checkout = () => {
                       <div className="row mt-3">
                         <div className="col-md-6">
                           <div className="form-group">
-                          <h2 className='lavel-data'> Phone </h2>
                             <TextField 
                               fullWidth
                               label="Phone Number" 
@@ -165,7 +219,6 @@ const Checkout = () => {
                         </div>
                         <div className="col-md-6">
                           <div className="form-group">
-                          <h2 className='lavel-data'> Email </h2>
                             <TextField 
                               className='custom-width'
                               fullWidth 
@@ -193,14 +246,24 @@ const Checkout = () => {
                         </tr>
                      </thead>
                      <tbody>
-                    <tr className='table-padding'>
-                          <td> this is product <b> ×  5</b> </td>
-                          <td className='custom-price'> 500 </td>
+                      {
+                        cartData?.length !== 0 &&
+                        cartData?.map((item, index) => {
+                          return <tr className='table-padding' key={index}>
+                          <td> {item?.productTitle?.substr(0, 20) + "..."} <b> ×  {item?.quantity}</b> </td>
+                          <td className='custom-price'> {item?.subTotal} </td>
                         </tr>
+                        })
+                      }
+                        
                         <tr>
                           <td className='text-bold-data'> Subtotal </td>
                           <td className='custom-price text-bold-data'>   
-                           Tk 500  
+                           Tk {
+                                 cartData?.length !== 0
+                                 ? cartData.reduce((total, item) => total + (parseFloat(item?.price) * item.quantity), 0)
+                                 : 0
+                              }  
                           </td>
                         </tr>
                      </tbody>
