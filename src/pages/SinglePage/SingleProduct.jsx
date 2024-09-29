@@ -535,7 +535,8 @@ const SingleProduct = () => {
                           <div className="col-md-8">
                                <div className="review-customer">
                                   <h4> Customer questions & answers  </h4>
-
+                                  
+                                  <div className="all-review-list">
                                   {
                                     reviewsData?.length !== 0 && 
                                     reviewsData?.slice(0)?.reverse()?.map((item, index) => {
@@ -548,7 +549,7 @@ const SingleProduct = () => {
                                       </div>
                                    <div className="card-info">
                                       <div className="review-date">
-                                          <p className="now-date"> December 4, 2024 at 3:12 pm</p>
+                                          <p className="now-date"> {item?.createdAt?.split("T")[0]} </p>
                                           <p className="review-star"> 
                                            <span> <Rating name="read-only" value={parseInt(item?.customerRating)}  readOnly size="small"/>  </span>
                                            </p>
@@ -559,6 +560,8 @@ const SingleProduct = () => {
 
                                     })
                                   }
+                                 </div>
+                            
 
                                   <div className="review-form">
                                      <h3> Add a review </h3>

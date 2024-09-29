@@ -7,15 +7,57 @@ import { Link } from "react-router-dom";
 import Rating from '@mui/material/Rating';
 
 import "./Product.css"
+import { createWishListData } from "../../utils/api";
+import createToast from "../../utils/toastify";
 
 
 const Product = (props) => {
 
-  return (
-          <>
+  // add to wish list 
+  const addToWishList = (id) => {
+    const user = JSON.parse(localStorage.getItem("user"));
 
-      <div className="productThumb my-2">
+    if (user !== undefined && user !== null && user !== "")  {
+      const data = {
+        productTitle : props?.item?.name,
+        image : props?.item?.photo[0],
+        rating : props?.item?.rating,
+        price : props?.item?.oldPrice,
+        productId : id,
+        userId : user?.userId,
+      }
   
+      createWishListData(`/`, data).then((res) => {
+  
+        if (res.status === true) {
+          // Product Wishlist added successfully
+          createToast("Product Added Wish List", "success");
+          return;
+  
+        } else if (res.status === false) {
+          // Product already in the cart or some other issue
+          return createToast("Product Already Wish List Added");
+        } else {
+          // Handle unexpected statuses
+          return createToast("An unexpected error occurred", "error");
+        }
+      }).catch((error) => {
+        // Handle any network or other errors
+        console.error("Error adding product to cart:", error);
+        createToast("Product Already Wish Listed", );
+        return;
+      });
+
+    }else{
+      createToast("Please Login Your Account");
+    }
+
+  }
+
+  return (
+
+    <>
+      <div className="productThumb my-2">
           {
             props.item?.tag?.length > 0 ?
              <span className={`badge ${props.item?.tag}`}> 
@@ -25,7 +67,7 @@ const Product = (props) => {
       
         <Link > 
           <div className="product-image">      
-          <div className="custom-photo-box">
+            <div className="custom-photo-box">
                  <img style={{width: "100%"}} src={props?.item?.photo[0]} alt="product-photo" />
             </div>
 
@@ -33,15 +75,12 @@ const Product = (props) => {
                 <ul className="list list-inline">
                     <li className="list-inline-item">
                       <a href="#"> <MdOutlineRemoveRedEye /> </a>
-                     
                     </li>
-                    <li className="list-inline-item">
+                    <li 
+                       className="list-inline-item second-wish"
+                        onClick={() => addToWishList(props?.item?._id)}
+                        >
                       <a href="#" > <CiHeart /> </a>
-                     
-                    </li>
-                    <li className="list-inline-item" >
-                      <a href="#" > <CiShuffle /> </a>
-                     
                     </li>
                 </ul>
              </div>

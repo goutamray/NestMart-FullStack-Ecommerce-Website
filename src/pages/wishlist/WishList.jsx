@@ -1,15 +1,55 @@
 
 // react icons
 import { RiDeleteBin6Fill } from "react-icons/ri"
+import { FaHome } from "react-icons/fa";
 
 import { Link } from "react-router-dom"
 import Rating from '@mui/material/Rating';
 
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { deleteWishlistData, fetchWishlistDataFromApi } from "../../utils/api";
+
+import emptyCart from "../../assets/banner/emptyCart.png"
+
+import createToast from "../../utils/toastify";
+import { MyContext } from "../../App";
 
 
-import "./Wishlist.css"
+import "./Wishlist.css";
+
 const WishList = () => {
+  const [myListData, setMyListData] = useState([]); 
+  const context = useContext(MyContext); 
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+      fetchWishlistDataFromApi(`?userId=${user?.userId}`).then((res) => {
+        setMyListData(res.wishlist); 
+      });
+
+    // real time data update 
+    context.getCartData(); 
+
+  }, [context]); 
+
+
+
+ // delete cart product 
+ const removeProduct = (id) => {
+  deleteWishlistData(`/${id}`).then((res) => {
+    createToast("Wish List Product Deleted Successfull", "success");
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    // refresh database 
+    fetchWishlistDataFromApi(`?userId=${user?.userId}`).then((res) => {
+      setMyListData(res.wishlist); 
+    });
+
+    context.getCartData(); 
+  })
+ }; 
 
 
  useEffect(() => {
@@ -26,7 +66,7 @@ const WishList = () => {
                <div className="top-part-cart">
                     <h1 className="head-cart"> Your WishList </h1>
                     <p> There are 
-                      <span> (5)  </span>
+                      <span> {myListData?.length} </span>
                        products in your wishList 
                     </p>                    
               </div>
@@ -34,7 +74,8 @@ const WishList = () => {
           </div>
 
 
-
+   {
+    myListData?.length !== 0 ? 
    
           <div className="row my-cart-row">
             <div className="col-md-12">
@@ -50,45 +91,52 @@ const WishList = () => {
                                 </tr>           
                             </thead>
                             <tbody>   
-                             <tr>
+                              {
+                                 myListData?.length !== 0 &&
+                                 myListData?.map((item, index) => {
+                                  return <tr key={index}>
                                   <td> 
                                     <div className="table-box d-flex align-items-center">
                                         <div className="image">
                                             <Link to=""> 
-                                                <img src="" alt="" />
+                                                <img src={item?.image} alt={item?.productTitle} />
                                             </Link>  
                                         </div>
                                         <div className="product-content">
-                                        <Link to="">
-                                             <h5> this is title  </h5> 
+                                        <Link to={item?.productId ? `/product/${item.productId}` : "#"}>
+                                             <h5> {item?.productTitle}  </h5> 
                                           </Link>  
-                                          <Rating name="half-rating" value={5}  readOnly  size="small" />               
+                                          <Rating name="half-rating" value={item?.rating}  readOnly  size="small" />               
                                         </div>
                                     </div>
                                   </td>
-                                  <td className="product-price"> Tk 5 </td>
+                                  <td className="product-price"> Tk {item?.price} </td>
                                   <td className="delete-product"> 
-                                      <span >  <RiDeleteBin6Fill  /> 
+                                      <span onClick={() => removeProduct(item?._id)}>  <RiDeleteBin6Fill  /> 
                                       </span>
                                   </td>
                                 </tr> 
-                                     
+                                }) 
+                              }           
                             </tbody>
                         </table>
                       </div>
                     </div>
                  </div>
           </div> 
-          
-          {/* <div className="empty-cart">
+          : 
+          <div className="empty-cart">
              <img src={emptyCart} alt="emptyCart" />
             <h2> Your Cart is currently empty </h2>
-          
-  
-               <Link to="/">  <span> <FaHome /> </span>  Continue Shipping  </Link> 
+               <Link to="/"> 
+                  <span> 
+                    <FaHome /> 
+                  </span>  
+                   Continue Shipping  
+               </Link> 
         
-        </div> */}
-     
+        </div>
+      }
 
         </div>
       </div>

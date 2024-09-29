@@ -7,7 +7,51 @@ import Rating from '@mui/material/Rating';
 import { Link } from "react-router-dom";
 
 import "./ProductBest.css"; 
+import { createWishListData } from "../../utils/api";
+import createToast from "../../utils/toastify";
 const ProductBest = (props) => {
+
+    // add to wish list 
+    const addToWishList = (id) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+  
+      if (user !== undefined && user !== null && user !== "")  {
+        const data = {
+          productTitle : props?.item?.name,
+          image : props?.item?.photo[0],
+          rating : props?.item?.rating,
+          price : props?.item?.oldPrice,
+          productId : id,
+          userId : user?.userId,
+        }
+    
+        createWishListData(`/`, data).then((res) => {
+    
+          if (res.status === true) {
+            // Product Wishlist added successfully
+            createToast("Product Added Wish List", "success");
+            return;
+    
+          } else if (res.status === false) {
+            // Product already in the cart or some other issue
+            return createToast("Product Already Wish List Added");
+          } else {
+            // Handle unexpected statuses
+            return createToast("An unexpected error occurred", "error");
+          }
+        }).catch((error) => {
+          // Handle any network or other errors
+          console.error("Error adding product to cart:", error);
+          createToast("Product Already Wish Listed", );
+          return;
+        });
+  
+      }else{
+        createToast("Please Login Your Account");
+      }
+  
+    }
+  
    
   return (
     <>
@@ -31,13 +75,11 @@ const ProductBest = (props) => {
                       <a href="#"> <MdOutlineRemoveRedEye /> </a>
                      
                     </li>
-                    <li className="list-inline-item">
-                      <a href="#" > <CiHeart /> </a>
-                     
-                    </li>
-                    <li className="list-inline-item" >
-                      <a href="#" > <CiShuffle /> </a>
-                     
+                    <li 
+                       className="list-inline-item second-wish"
+                        onClick={() => addToWishList(props?.item?._id)}
+                        >
+                       <a href="#" > <CiHeart /> </a>
                     </li>
                 </ul>
              </div>

@@ -52,13 +52,10 @@
    width: 100%;
    overflow: hidden !important;
 }
-
-
-
 .productThumb .product-image .overlay {
   position: absolute;
-  left: 65px;
-  top: 80px;
+  left: 11px !important;
+  top: 59px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,13 +69,17 @@
 }
 .productThumb .product-image .overlay ul {
   background-color: #fff;
-  width: 103px;
+  width: 68px;
   height: 36px;
   border-radius: 4px;
   color: var(--nest-primary) !important;
 }
 .productThumb .product-image .overlay ul li{
   border-right: 1px solid var(--nest-primary);
+  margin-right: 0px;
+}
+.productThumb .product-image .overlay ul li.second-wish{
+  border-right: 0px;
   margin-right: 0px;
 }
 .productThumb .product-image .overlay ul li .pad-tooltip:hover{
@@ -93,6 +94,9 @@
   font-size: 17px;
   color: var(--nest-primary) !important;
   font-weight: 500;
+}
+.productThumb .product-image .overlay ul li a svg{
+  font-weight: 600;
 }
 .productThumb .product-image .overlay ul li a:hover{
   color: #fdc040 !important;

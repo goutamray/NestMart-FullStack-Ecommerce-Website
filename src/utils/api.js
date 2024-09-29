@@ -181,7 +181,51 @@ export const editcartData = async( url, updatedData ) => {
  }; 
  
 
+/**
+ * Create wishlist data
+ * @param {string} url - The endpoint URL (e.g., "/")
+ * @param {FormData} formData - The form data to submit
+ * @returns {Promise<Object>} - The response data from the server
+ */
+export const createWishListData = async(url, formData) => {
+   try {
+      const response = await axios.post(`http://localhost:5050/api/v1/wishlist${url}`, formData); 
+       return response.data;
+   } catch (error) {
+      console.error('Error submitting form data:', error.message);
+      throw error; 
+   }
+};
+
+/**
+ *  fetch Wishlist data from api
+ * @param {*} url 
+ * @returns 
+ */
+export const fetchWishlistDataFromApi = async(url) => {
+   try {
+      const response = await axios.get("http://localhost:5050/api/v1/wishlist"+url);
+       return response.data;
+   } catch (error) {
+      console.error('Error submitting form data:', error.message);
+      throw error; 
+   }  
+}; 
 
 
+/**
+ * delete cart data from api 
+ * @param {*} id 
+ * @returns 
+ */
+export const deleteWishlistData = async( id ) => {
+   try {
+      const res = await axios.delete(`http://localhost:5050/api/v1/wishlist${id}`); 
+      return res.data; 
+   } catch (error) {
+      console.error('Error submitting form data:', error.message);
+      throw error; 
+   }
+}; 
 
 
