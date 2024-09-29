@@ -20,6 +20,7 @@ import OrderTruck from './pages/orderTruck/OrderTruck'
 import ThankYou from './pages/thankYou/ThankYou'
 import WishList from './pages/wishlist/WishList'
 import NotFound from './pages/NotFound/NotFound'
+import Search from './pages/search/search'
 
 
 import { createContext, useEffect, useState } from 'react'
@@ -38,6 +39,7 @@ function App() {
   const [addingCart, setAddingCart] = useState(false); 
   
   const [cartData, setCartData ] = useState(); 
+  const [searchData, setSearchData] = useState([]); 
 
   const [user, setUser] = useState(() => {
     return JSON.parse(localStorage.getItem("user")) || {
@@ -134,6 +136,8 @@ function App() {
     cartData,
     setCartData,
     getCartData,
+    searchData,
+    setSearchData 
 
     
   }
@@ -176,6 +180,7 @@ function App() {
                 <Route  path='/order-truck' exact={true} element={ <OrderTruck /> }/>
                 <Route  path='/thank-you' exact={true} element={ <ThankYou /> }/>
                 <Route  path='/wishlist' exact={true} element={ <WishList /> }/>
+                <Route  path='/search' exact={true} element={ <Search /> }/>
                 <Route  path='*' exact={true} element={ <NotFound /> }/>
             </Routes>
 

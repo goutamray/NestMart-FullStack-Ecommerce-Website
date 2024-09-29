@@ -279,5 +279,19 @@ export const createOrderData = async(url, formData) => {
 };
 
 
-
+/**
+ * All order data
+ * @param {string} url - The endpoint URL (e.g., "/")
+ * @param {FormData} formData - The form data to submit
+ * @returns {Promise<Object>} - The response data from the server
+ */
+export const fetchSearchProductData = async(url) => {
+   try {
+      const response = await axios.get(`http://localhost:5050/api/v1/search${url}`); 
+       return response.data;
+   } catch (error) {
+      console.error('Error submitting form data:', error.message);
+      throw error; 
+   }
+};
 

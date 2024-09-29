@@ -1,12 +1,10 @@
 
-import SelectDrop from "../selectDropdown/SelectDrop";
 import Navbar from "../Header/navbar/Navbar"
 
 import {  useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // react icons 
-import { IoIosSearch } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
 import { CiLocationOn } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
@@ -27,11 +25,13 @@ import { MyContext } from "../../App";
 import { MdOutlineSecurity } from "react-icons/md";
 import createToast from "../../utils/toastify";
 import { fetchWishlistDataFromApi } from "../../utils/api";
+import SearchBox from "../searchBox/SearchBox";
 
 const Header = () => {
    const [dropDownOpen, setDropDownOpen ] = useState(false); 
    const [myListData, setMyListData] = useState([]); 
-
+   const [openSearch, setOpenSearch] = useState(false); 
+   
    const navigate = useNavigate();
      
    // handle close
@@ -39,6 +39,11 @@ const Header = () => {
     setDropDownOpen(() => !dropDownOpen)
 
    }
+
+   const hanleOpenSearch = () => {
+    setOpenSearch(() => !openSearch)
+   }
+ 
 
    const context = useContext(MyContext); 
 
@@ -165,16 +170,7 @@ const Header = () => {
 
             {/* header search start  */}
               <div className="col-sm-6 middle-bar part2">
-                 <div className="header-search d-flex align-items-center"> 
-                      <SelectDrop data ={context?.categoryData}/>
-                     <div className="search">
-                       <input 
-                          type="text" 
-                          placeholder="Search for items..."
-                         /> 
-                         <IoIosSearch className="search-icon"/>
-                     </div>
-                 </div>
+                 <SearchBox hanleOpenSearch={hanleOpenSearch}  />
               </div>
 
           
