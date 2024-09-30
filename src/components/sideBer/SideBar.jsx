@@ -21,7 +21,6 @@ import "./SideBar.css";
 const SideBar = (props) => {
    const [value, setValue] = useState([20, 90000]);
    const [radioData, setRadioData] = useState();
-
    const [categoryId, setCategoryId] = useState(""); 
 
   const context = useContext(MyContext)
@@ -85,7 +84,7 @@ const SideBar = (props) => {
                         context?.categoryData?.length !== 0 &&
                         context?.categoryData?.map((item, index) => {
                            return <li key={index} > 
-                           <FormControlLabel value={item?._id}  control={<Radio />} label={item?.name} />
+                           <FormControlLabel value={item?._id}  control={<Radio />} label={item?.name}  onClick={props?.openSideBarData} />
                         </li>
                         })
                      } 

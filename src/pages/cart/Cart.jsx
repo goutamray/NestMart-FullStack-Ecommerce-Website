@@ -1,18 +1,19 @@
 
 import QuantityBox from "../../components/counter/quantityBox";
 
-import { FaLongArrowAltLeft } from "react-icons/fa";
+import { FaHome, FaLongArrowAltLeft } from "react-icons/fa";
 import { PiSignOutBold } from "react-icons/pi";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useContext, useEffect, useState } from "react";
+import emptyCart from "../../assets/banner/emptyCart.png"
 
-import "./Cart.css"; 
 import { deleteCartData, editcartData, fetchCartDataFromApi } from "../../utils/api";
 import { MyContext } from "../../App";
 import createToast from "../../utils/toastify";
 
+import "./Cart.css"; 
 const Cart = () => {
   const [productQuantity, setProductQuantity] = useState(); 
   const [changeQuantity, setChangeQuantity] = useState(0); 
@@ -21,7 +22,6 @@ const Cart = () => {
   const [cartFields, setCartFields] = useState({}); 
 
   const context = useContext(MyContext);
-  const navigate = useNavigate(); 
 
   useEffect(() => {
     fetchCartDataFromApi("/").then((res) => {
@@ -109,7 +109,7 @@ const Cart = () => {
                       <p> There are <span> ( { context.cartData?.length } ) </span> products in your cart </p>
                     </div>
                     <div className="right">
-                      <p  > <span > <RiDeleteBin6Fill /> </span> Clear Cart  </p>
+                      {/* <p  > <span > <RiDeleteBin6Fill /> </span> Clear Cart  </p> */}
                     </div>                              
                   </div>
                 </div>   
@@ -169,16 +169,23 @@ const Cart = () => {
                              </td>
                            </tr>
                      
-                          }) :  <p className="cart-not-found"> No Cart Product Added </p>
+                          }) : <div className="empty-cart">
+                          <img src={emptyCart} alt="emptyCart" />
+                         <h2> Your Cart is currently empty </h2>
+                            <Link to="/"> 
+                               <span> 
+                                 <FaHome /> 
+                               </span>  
+                                Continue Shipping  
+                            </Link> 
+                     
+                     </div>
+                        
                         }  
                          
                       </tbody>
                   </table>
                 </div>
-              </div>
-
-              <div className="continue-btn mb-3">
-                <Link to="/"> <span> <FaLongArrowAltLeft /></span> Continue Shopping </Link>
               </div>
           </div>
 

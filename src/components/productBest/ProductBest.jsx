@@ -90,7 +90,7 @@ const ProductBest = (props) => {
            <h4 className="category">  {props?.item?.brand} </h4>
            <div className="title">
              <Link to={`/product/${props?.item?._id}`}>
-                  {props?.item?.name.length > 35 ? props?.item?.name?.substring(0, 30) + ". . ."  : props?.item?.name } 
+                  {props?.item?.name.length > 30 ? props?.item?.name?.substring(0, 25) + ". . ."  : props?.item?.name } 
               </Link>
            </div>
            <div className="review">

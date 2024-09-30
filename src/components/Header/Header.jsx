@@ -31,7 +31,8 @@ const Header = () => {
    const [dropDownOpen, setDropDownOpen ] = useState(false); 
    const [myListData, setMyListData] = useState([]); 
    const [openSearch, setOpenSearch] = useState(false); 
-   
+
+
    const navigate = useNavigate();
      
    // handle close
@@ -73,7 +74,8 @@ const Header = () => {
             userId: ""
           });
       }
-  }, []);
+  }, [context]);
+  
 
 
   // wishlist count 
@@ -157,7 +159,7 @@ const Header = () => {
             <div className="row header-custom-data">
 
              <div className="phone-menu">
-                    <IoMenu />  
+                    <IoMenu onClick={context.handleMobileMenu}/>  
               </div>
 
               <div className="col-sm-2 main-logo-part">

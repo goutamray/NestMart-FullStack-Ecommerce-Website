@@ -232,7 +232,7 @@ const Home = () => {
       </div>
 
            {/* top products */}
-           <div className="topProducts my-3">
+           {/* <div className="topProducts my-3">
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-3">
@@ -249,7 +249,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-      </div>
+           </div> */}
 
     </>
 

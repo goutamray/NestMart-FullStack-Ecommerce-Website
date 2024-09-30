@@ -182,6 +182,22 @@ span.ml-auto.second-price {
 .cat-part button svg{
   font-size: 25px;
 }
+.sidebar-left .card-box .catList {
+  margin-top: 14px !important;
+  margin-bottom: 0px;
+}
+.sidebar-left .card-box h2 {
+  font-size: 20px;
+}
+.sidebar-left .card-box h2::before {
+  top: 53px;
+}
+.sidebar-left .card-box h2::after {
+  top: 53px;
+}
+.sidebar-left .card-box {
+  margin-bottom: 10px !important;
+}
 
 }
   

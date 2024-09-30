@@ -49,6 +49,14 @@ function App() {
     };
   });
 
+  const [openMobileMenu, setOpenMobileMenu] = useState(false); 
+
+   
+  const handleMobileMenu = () => {
+    setOpenMobileMenu(() => !openMobileMenu)
+  }
+
+
    // get all category
    useEffect(() => {
      fetchDataFromApi("/").then((res) => {
@@ -137,9 +145,10 @@ function App() {
     setCartData,
     getCartData,
     searchData,
-    setSearchData 
-
-    
+    setSearchData,
+    openMobileMenu,
+    setOpenMobileMenu,
+    handleMobileMenu,
   }
  
   

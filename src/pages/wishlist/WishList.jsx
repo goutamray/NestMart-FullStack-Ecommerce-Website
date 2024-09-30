@@ -127,7 +127,7 @@ const WishList = () => {
           : 
           <div className="empty-cart">
              <img src={emptyCart} alt="emptyCart" />
-            <h2> Your Cart is currently empty </h2>
+            <h2> Your WishList is currently empty </h2>
                <Link to="/"> 
                   <span> 
                     <FaHome /> 

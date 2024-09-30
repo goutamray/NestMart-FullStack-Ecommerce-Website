@@ -298,5 +298,20 @@ a.compare-text.hide-phone {
 .second-bar{
   display: none;
 }
+.header-middle .cart-wish-account .header-cart-wishlist .dropdown-menu-abc {
+  top: 88%;
+}
+button.my-login-btn {
+  padding: 7px 9px !important;
+  font-size: 14px !important;
+}
+.header-middle .cart-wish-account {
+  width: 45%;
+  display: flex;
+  gap: 9px;
+  padding: 0px!important;
+}
+
+
 
 }

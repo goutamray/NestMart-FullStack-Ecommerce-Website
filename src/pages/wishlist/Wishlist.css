@@ -24,6 +24,9 @@
   border-radius: 4px;
   font-size: 18px;
   font-weight: 500;
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 .empty-cart a span svg{
   font-size: 22px;
@@ -35,6 +38,13 @@
 
 /****** Responsive csss *******/
 @media (min-width : 320px) and (max-width: 576px){
-
+  h1.head-cart {
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .empty-cart h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
 }
 

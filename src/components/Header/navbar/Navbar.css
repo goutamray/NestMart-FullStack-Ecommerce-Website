@@ -137,9 +137,26 @@
 
 /***** Responsive csss ******/
 @media (min-width : 320px) and (max-width: 576px){
- .my-custom-header{
+.navbar-menu {
+    width: 100%;
+}
+.my-custom-header{
   display: none;
  }
+.my-custom-header.open-menu{
+  display: block !important;
+}
+ul.list.list-inline.menu-item {
+  display: flex;
+  flex-direction: column !important;
+}
+.navbar-menu .menu-item .list-item-single {
+  position: relative;
+  display: inline-block;
+  width: 100% !important;
+  padding: 6px 0px !important;
+}
+
 }
 
 

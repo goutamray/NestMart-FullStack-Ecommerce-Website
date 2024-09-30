@@ -31,7 +31,7 @@ const Footer = () => {
                     <div className="info-data">
                          <h2> Stay home & get your daily <br/>  grocery deals </h2>
                          <p> Start Your Daily Shopping with <a href="#"> Nest Mart </a>  </p>
-                         <form className="subscribe-form">
+                         <form className="subscribe-form footer-form">
                            <IoIosSend className="send" />
                            <input type="email" placeholder="Your emaill address" />
                            <button type="submit"> Subscribe </button>

@@ -21,11 +21,13 @@ const Navbar = () => {
   }
 
 
+
+
   return (
     <>
-      <div className="nav navbar-header my-custom-header shadow">
+      <div className={`nav navbar-header my-custom-header shadow ${context.openMobileMenu == true ? "open-menu" : ""} ` }>
         <div className="container-fluid">
-          <div className="row my-custom-navbar my-3">
+          <div className="row my-custom-navbar my-3 ">
             <div className="col-sm-3 part1">
                <div className="browse-button ">
                 
@@ -40,7 +42,7 @@ const Navbar = () => {
                   {
                     context?.categoryData?.length !== 0 && 
                     context?.categoryData?.map((item, index) => {
-                      return <li className="list-inline-item list-item-single" key={index}>
+                      return <li className="list-inline-item list-item-single" key={index} >
                       <Link 
                         to={`/category/${item?._id}`}
                         onClick={handleClickOpen}
@@ -58,19 +60,17 @@ const Navbar = () => {
                </div>
             </div>
             <div className="col-sm-7 part2">
+            
               <div className="navbar-menu">
                  <ul className="list list-inline menu-item">
-
                   {
-                    context?.categoryData?.length !== 0 && 
+                     context?.categoryData?.length !== 0 && 
                     context?.categoryData?.map((item, index) => {
-                      return <li className="list-inline-item list-item-single" key={index}>
-                      <Link to={`/category/${item?._id}`}> {item?.name} </Link>
-                   </li>
+                      return <li className="list-inline-item list-item-single" key={index} onClick={context.handleMobileMenu}>
+                         <Link to={`/category/${item?._id}`}> {item?.name} </ Link>
+                      </li>
                     })
                   }
-
-                
                  </ul>
               </div>
 

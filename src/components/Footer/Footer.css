@@ -346,7 +346,9 @@ justify-content: center;
 .bottom-right p {
 text-align: center;
 }
-
+.subscribe-form.footer-form {
+  margin-left: 10px !important;
+}
 }
 
 
