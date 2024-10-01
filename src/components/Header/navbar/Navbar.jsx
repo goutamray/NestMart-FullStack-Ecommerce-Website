@@ -66,7 +66,7 @@ const Navbar = () => {
                   {
                      context?.categoryData?.length !== 0 && 
                     context?.categoryData?.map((item, index) => {
-                      return <li className="list-inline-item list-item-single" key={index} onClick={context.handleMobileMenu}>
+                      return <li className="list-inline-item list-item-single" key={index} onClick={context?.handleMobileMenu}>
                          <Link to={`/category/${item?._id}`}> {item?.name} </ Link>
                       </li>
                     })

@@ -157,11 +157,15 @@
 
 /***** Responsive css *****/
 @media (min-width : 320px) and (max-width: 576px){
-  .productThumb .info-part {
-    margin-top: 190px !important;
+.productThumb .info-part {
+  margin-top: 190px !important;
 }
 .popular-products .product-slider-main .slick-slide {
   padding: 0px 15px !important;
+}
+.productThumb .product-image .overlay {
+  left: 81px !important;
+  top: 78px !important;
 }
 
 }

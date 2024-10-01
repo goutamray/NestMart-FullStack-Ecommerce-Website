@@ -1,24 +1,26 @@
 
 import { useEffect, useState } from "react";
 import "./ThankYou.css";
-import { fetchCartDataFromApi } from "../../utils/api";
+import { fetchCartDataFromApi, getOrderData } from "../../utils/api";
 
 const ThankYou = () => {
  
   const [cartData, setCartData] = useState([]);  
+
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     fetchCartDataFromApi(`?userId=${user?.userId}`).then((res) => {
       setCartData(res.cartList); 
     });
+
    }, []); 
 
   // scroll top
   useEffect(() => {
     window.scrollTo(0, 0); 
   }, []);
-
+  
 
   return (
     <>

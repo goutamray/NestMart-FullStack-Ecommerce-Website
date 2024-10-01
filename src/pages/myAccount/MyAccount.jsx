@@ -142,6 +142,18 @@ const handleUserUpdate = (e) => {
       .then((res) => {
         setIsLoading(false);
         createToast("User updated successfully!", "success");
+
+          // Update the user information in localStorage
+            const updatedUser = {
+              ...user,
+              name: res.user?.name,
+              email: res.user?.email,
+              phone: res.user?.phone,
+              photo: res.user?.photo || input.previewPhoto, // Use the updated photo URL or the preview photo
+            };
+        
+          // Store the updated user data in localStorage
+          localStorage.setItem("user", JSON.stringify(updatedUser));
       })
   } else {
     setIsLoading(false);

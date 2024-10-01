@@ -538,7 +538,29 @@ text-decoration: line-through;
 .breadcrumb {
   display: block !important;
 }
-
+.add-to-cart-btn button {
+  padding: 10px 8px;
+  font-size: 14px;
+}
+.card-info .review-date {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.productDetailsTab {
+  border-radius: 20px;
+  margin-right: 0px !important;
+  margin-top: 50px;
+}
+.review-details {
+  padding-left: 20px;
+  margin-top: 30px !important;
+}
+.review-form .submit-btn {
+  font-size: 15px;
+  padding: 8px 18px;
+  margin-top: 0px;
+}
 
 
 }

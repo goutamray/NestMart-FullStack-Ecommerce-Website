@@ -188,11 +188,12 @@
 
 
 @media (min-width : 320px) and (max-width: 576px){
-  .productThumb .info-custom {
+.productThumb .info-custom {
     margin-top: 55% !important;
 }
 .productThumb .product-image .overlay {
-  left: 75px !important;
+  left: 86px !important;
+  top: 100px;
 }
 
 }

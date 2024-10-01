@@ -159,7 +159,7 @@ const Header = () => {
             <div className="row header-custom-data">
 
              <div className="phone-menu">
-                    <IoMenu onClick={context.handleMobileMenu}/>  
+                    <IoMenu onClick={context?.handleMobileMenu}/>  
               </div>
 
               <div className="col-sm-2 main-logo-part">

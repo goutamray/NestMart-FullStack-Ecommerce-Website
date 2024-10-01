@@ -21,8 +21,10 @@ import { createReviewData, getReviewData } from "../../utils/api";
 import QuantityBox from "../../components/counter/quantityBox";
 
 import Product from "../../components/product/Product";
-import axios from "axios";
 import { MyContext } from "../../App";
+import axios from "axios";
+
+import avater from "../../assets/avater/aaaa.jpg"
 
 import "./SingleProduct.css";
 const SingleProduct = () => {
@@ -192,6 +194,7 @@ const SingleProduct = () => {
     input.customerId = user?.userId;
     input.productId = id;
     input.customerName = user?.name;
+    input.customerPhoto = user?.photo; 
 
       // Validate all inputs 
       if (!input.review || !input.customerRating) {
@@ -249,7 +252,7 @@ const SingleProduct = () => {
       cartFields.productId = productData?._id
       cartFields.userId = user?.userId
   
-      context.addToCart(cartFields);
+      context?.addToCart(cartFields);
 
       setTimeout(() => {
         navigate("/cart"); 
@@ -258,7 +261,6 @@ const SingleProduct = () => {
       setTabError(true); 
     }
   }
-
 
   
 
@@ -310,7 +312,7 @@ const SingleProduct = () => {
                            <div className="review">
                               <span>  
                                 <Rating name="read-only" value={parseInt(productData?.rating)}  readOnly size="small"/>
-                              </span> (32 reviews)
+                              </span> ( {reviewsData?.length} )
                             </div>
                             <div className="price-sec">
                               <span className="sale-price"> ${productData?.oldPrice} </span>
@@ -426,7 +428,7 @@ const SingleProduct = () => {
                        <ul className='list list-inline'>
                          <li className='list-inline-item'> <button className={`${activeTab === 0 && "active" }`} onClick={() => setActiveTab(0)}> Description </button> </li>
                          <li className='list-inline-item'> <button className={`${activeTab === 1 && "active" }`} onClick={() => setActiveTab(1)}> Additional info </button> </li>
-                         <li className='list-inline-item'> <button className={`${activeTab === 2 && "active" }`} onClick={() => setActiveTab(2)}> Reviews (3) </button> </li>
+                         <li className='list-inline-item'> <button className={`${activeTab === 2 && "active" }`} onClick={() => setActiveTab(2)}> Reviews (  {reviewsData?.length} ) </button> </li>
                        </ul>
                   
                   {
@@ -538,33 +540,47 @@ const SingleProduct = () => {
                           <div className="col-md-8">
                                <div className="review-customer">
                                   <h4> Customer questions & answers  </h4>
-                                  
-                                  <div className="all-review-list">
-                                  {
-                                    reviewsData?.length !== 0 && 
-                                    reviewsData?.slice(0)?.reverse()?.map((item, index) => {
-                                      return  <div className="card p-3 review-card mb-4" key={index}>
-                                      <div className="image-item">
-                                        <div className="rounded-circle">
-                                            <img src="https://nest-frontend-v6.netlify.app/assets/imgs/blog/author-2.png" alt="" />
-                                         </div>
-                                         <p> {item?.customerName} </p>
-                                      </div>
-                                   <div className="card-info">
-                                      <div className="review-date">
-                                          <p className="now-date"> {item?.createdAt?.split("T")[0]} </p>
-                                          <p className="review-star"> 
-                                           <span> <Rating name="read-only" value={parseInt(item?.customerRating)}  readOnly size="small"/>  </span>
-                                           </p>
-                                       </div>
-                                         <p className="message"> {item?.review}  </p>
-                                     </div>
-                                  </div>
+                                    <div className="all-review-list">
+                                        {
+                                        reviewsData?.length !== 0 &&
+                                        reviewsData?.slice(0)?.reverse()?.map((item, index) => {
+                                              // Check if the current user's photo exists in localStorage
+                                              const localUser = JSON.parse(localStorage.getItem("user"));
+                                              const localUserPhoto = localUser?.photo;
 
-                                    })
-                                  }
-                                 </div>
-                            
+                                              return (
+                                                <div className="card p-3 review-card mb-4" key={index}>
+                                                  <div className="image-item">
+                                                    <div className="rounded-circle">
+                                                      {/* Use photo from localStorage if available, otherwise use the review data or a fallback */}
+                                                      <img
+                                                        src={
+                                                          localUserPhoto && localUser?.userId === item?.customerId
+                                                            ? localUserPhoto // Show localStorage photo if it belongs to the current user
+                                                            : item?.customerPhoto || avater
+                                                        }
+                                                        alt={item?.customerName}
+                                                        className="review-image"
+                                                      />
+                                                    </div>
+                                                    <p>{item?.customerName}</p>
+                                                  </div>
+                                                  <div className="card-info">
+                                                    <div className="review-date">
+                                                      <p className="now-date">{item?.createdAt?.split("T")[0]}</p>
+                                                      <p className="review-star">
+                                                        <span>
+                                                          <Rating name="read-only" value={parseInt(item?.customerRating)} readOnly size="small" />
+                                                        </span>
+                                                      </p>
+                                                    </div>
+                                                    <p className="message">{item?.review}</p>
+                                                  </div>
+                                                </div>
+                                              );
+                                            })}
+                                        </div>
+
 
                                   <div className="review-form">
                                      <h3> Add a review </h3>

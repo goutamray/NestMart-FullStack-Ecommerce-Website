@@ -31,7 +31,7 @@ const Cart = () => {
     // real time data update 
     context.getCartData(); 
 
-   }, [context]); 
+   }, [context, cartData]); 
 
   // quantity 
    const quantity = (val) => {
@@ -120,15 +120,18 @@ const Cart = () => {
               <div className="cart-body">
                 <div className="table-responsive">
                 <table className="table table-bordered ">
-                      <thead>
-                            <tr > 
-                              <th> Product </th>
-                              <th> Unit Price </th>
-                              <th className="mobile-hide"> Quantity </th>
-                              <th> Subtotal </th>
-                              <th> Remove </th>
-                            </tr>           
-                      </thead>
+                  {
+                    cartData?.length !== 0 &&  <thead>
+                    <tr > 
+                        <th> Product </th>
+                        <th> Unit Price </th>
+                        <th className="mobile-hide"> Quantity </th>
+                        <th> Subtotal </th>
+                        <th> Remove </th>
+                     </tr>           
+                  </thead>
+                  }
+                   
                       <tbody> 
                         {
                           cartData?.length !== 0 ? 
