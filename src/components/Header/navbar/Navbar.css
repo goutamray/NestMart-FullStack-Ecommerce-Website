@@ -143,8 +143,12 @@
 .my-custom-header{
   display: none;
  }
-.my-custom-header.open-menu{
+ .my-custom-header.open-menu {
   display: block !important;
+  position: absolute;
+  top: 11% !important;
+  z-index: 9999999999;
+  width: 100%
 }
 ul.list.list-inline.menu-item {
   display: flex;

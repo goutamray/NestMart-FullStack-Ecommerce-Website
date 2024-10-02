@@ -58,7 +58,24 @@
   margin-right: 2% !important;
   margin-top: 20px !important;
 }
+.product-galary-slider .slick-track {
+  transform: translate3d(35px, 0px, 0px) !important;
+}
 
+
+.slick-slide {
+  outline: none !important;
+}
+
+.slick-slide:focus,
+.slick-slide img:focus {
+  outline: none !important;
+}
+
+.slick-slide img {
+  outline: none !important;
+  border: none !important;
+}
 
 /******** product-info *************/
 .product-info{

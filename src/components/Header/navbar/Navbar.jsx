@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className={`nav navbar-header my-custom-header shadow ${context.openMobileMenu == true ? "open-menu" : ""} ` }>
+      <div className={`nav navbar-header my-custom-header shadow ${context?.openMobileMenu == true ? "open-menu" : ""} ` }>
         <div className="container-fluid">
           <div className="row my-custom-navbar my-3 ">
             <div className="col-sm-3 part1">

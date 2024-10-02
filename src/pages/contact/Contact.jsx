@@ -8,8 +8,10 @@ import { useState } from "react";
 
 
 import "./Contact.css"
+import { postMessageData } from "../../utils/api";
+import createToast from "../../utils/toastify";
 const Contact = () => {
-
+  const [loading, setLoading] = useState(false);
   const [input, setInput] = useState({
     name : "",
     email: "",
@@ -25,6 +27,36 @@ const Contact = () => {
     }));
   };
 
+   // Handle form submit 
+   const handleContactFormSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+  
+    // Validate all inputs 
+    if ( !input.name || !input.email || !input.message || !input.subject) {
+      setLoading(false);
+      createToast("All fields are required", "error");
+      return;
+    }
+  
+    // Call contact API
+    postMessageData("/create", input)
+      .then((res) => {
+        createToast("Message Send Successful", "success");
+
+        setInput({
+          name : "",
+          email: "",
+          message: "",
+          subject: "",
+        }) 
+      })
+      .catch((err) => {
+         console.log(err.message);
+         createToast("Message Send Failed", "success");
+      })
+
+  };
 
 
 
@@ -75,7 +107,7 @@ const Contact = () => {
                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus sed dolorem earum dicta sapiente eveniet officia! Expedita aut iste sapiente. </p>
                 </div>
               <div className="form py-5">
-                  <form >
+                  <form onSubmit={handleContactFormSubmit}>
                      <div className="row">
                       <div className="col-md-6">
                        <div className="mb-3">

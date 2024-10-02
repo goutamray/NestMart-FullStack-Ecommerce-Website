@@ -35,13 +35,12 @@ const Checkout = () => {
     }))
    }; 
 
-   // get all cart list data 
+   // get cart data 
    useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    fetchCartDataFromApi(`?userId=${user?.userId}`).then((res) => {
+    fetchCartDataFromApi("/").then((res) => {
       setCartData(res.cartList); 
     });
-   }, []); 
+   }, [cartData]); 
 
 
   // handleCheckOutSubmit
@@ -259,11 +258,11 @@ useEffect(() => {
                         <tr>
                           <td className='text-bold-data'> Subtotal </td>
                           <td className='custom-price text-bold-data'>   
-                           Tk {
+                           Tk    {
                                  cartData?.length !== 0
                                  ? cartData.reduce((total, item) => total + (parseFloat(item?.price) * item.quantity), 0)
                                  : 0
-                              }  
+                              }
                           </td>
                         </tr>
                      </tbody>

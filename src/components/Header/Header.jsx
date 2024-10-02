@@ -115,6 +115,9 @@ const Header = () => {
                     <li> 
                       <Link to="/order-truck"> Order Tracking </Link>
                     </li>
+                    <li> 
+                      <Link to="/contact"> Contact </Link>
+                    </li>
                    </ul>
                  </div>
                </div>
