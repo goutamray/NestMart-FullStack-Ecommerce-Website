@@ -18,7 +18,7 @@ import { CircularProgress } from "@mui/material";
 
 import createToast from "../../utils/toastify";
 import { createReviewData, getReviewData } from "../../utils/api";
-import QuantityBox from "../../components/counter/quantityBox";
+import QuantityBox from "../../components/counter/QuantityBox";
 
 import Product from "../../components/product/Product";
 import { MyContext } from "../../App";
