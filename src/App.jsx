@@ -20,7 +20,7 @@ import OrderTruck from './pages/orderTruck/OrderTruck'
 import ThankYou from './pages/thankYou/ThankYou'
 import WishList from './pages/wishlist/WishList'
 import NotFound from './pages/NotFound/NotFound'
-import Search from './pages/search/search'
+import Search from './pages/search/Search'
 
 
 import { createContext, useEffect, useState } from 'react'
