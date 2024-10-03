@@ -1,7 +1,7 @@
 
-import QuantityBox from "../../components/counter/quantityBox";
+import QuantityBox from "../../components/counter/QuantityBox";
 
-import { FaHome, FaLongArrowAltLeft } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import { PiSignOutBold } from "react-icons/pi";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";

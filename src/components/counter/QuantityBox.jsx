@@ -33,12 +33,11 @@ const QuantityBox = (props) => {
 
   // Notify parent component of quantity change
   useEffect(() => {
-    props.quantity(inputVal);
+    props?.quantity(inputVal);
     if (typeof props?.selectedItem === 'function') {
-      props.selectedItem(props.item, inputVal);
+      props?.selectedItem(props.item, inputVal);
     }
   }, [inputVal]); 
-
 
 
   return (
