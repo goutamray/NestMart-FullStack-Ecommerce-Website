@@ -38,7 +38,6 @@
    margin-top: 40px;
    margin-bottom: 50p;
 }
-
 .sidebar-left .card-box .catList .catItem {
   display: flex;
   align-items: center;
@@ -86,7 +85,7 @@
 }
 
 
-/* filter section css */
+/***** filter section css *****/
 .customer-checkbox h2{
   font-size: 16px;
   font-weight: 700;
@@ -133,7 +132,6 @@
   margin-bottom: 20px;
   border-radius: 10px;
   overflow: hidden;
-
 }
 .cat-part button{
   display: none;

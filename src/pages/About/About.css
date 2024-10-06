@@ -1,0 +1,94 @@
+
+.about-us{
+  padding: 50px 0px;
+}
+.about-photo img{
+  border-radius: 20px;
+}
+.about-content h2{
+   padding-top: 100px;
+   font-size: 30px;
+   color: #253D4E;
+}
+.about-content p{
+   padding: 10px 0px;
+}
+.about-bottom{
+  margin-bottom: 50px;
+}
+.about-galary{
+  display: flex;
+  justify-content: space-between;
+}
+.about-galary .about-img-box{
+  height: 200px;
+  width: 200px;
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+.about-galary .about-img-box img{
+   width: 100%;
+   object-fit: cover;
+   border-radius: 10px !important;
+}
+.about-service{
+  padding: 40px 0px;
+}
+.about-service h2{
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.about-service-area{
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.about-service-area .service-box{
+  width: 31% !important;
+  text-align: center;
+  border-radius: 10px;
+  padding: 20px;
+}
+.about-service-area .service-box img{
+  width: 100px;
+}
+.about-service-area .service-box h2{
+  margin-top: 8px;
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: 600;
+}
+.about-service-area .service-box p{
+  margin-bottom: 10px;
+}
+.about-service-area .service-box a{
+  color: rgb(35, 30, 182);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+
+/************ responsive css **************/
+@media (min-width : 320px) and (max-width: 576px){ 
+.about-galary {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.about-img-box{
+  max-width: 100%;
+}
+.about-service-area .service-box{
+  width: 100% !important;
+
+}
+
+
+
+}
+
+

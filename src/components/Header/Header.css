@@ -9,11 +9,11 @@
    gap: 14px;
 }
 .second-bar .menu-top li a{
-     font-size: 13px;
-     font-weight: 500;
-     font-family: var(--font-secondary);
-     text-transform: capitalize;
-     color: var(--heading-color);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-secondary);
+  text-transform: capitalize;
+  color: var(--heading-color);
 }
 .second-bar .menu-top li a:hover{
   color: var(--primary-color);
@@ -142,27 +142,6 @@
 }
 
 
-
-
-/* .header-middle .header-search .search{
-  width: 75%;
-  position: relative;
-}
-.header-middle .header-search .search .search-icon {
-  position: absolute;
-  right: 5px;
-  top: 11px;
-  font-size: 28px;
-  font-weight: 500;
-  color: rgba(0,0,0, 0.5);
-}
-.header-middle .header-search .search input{
- width: 100%;
- height: 50px;
- border: 0px;
- font-style: 14px;
-} */
-
 /********** Cart-wishlist-account css **************/
 .header-middle .cart-wish-account {
   display: flex;
@@ -229,7 +208,6 @@
   width: 0%;
   display: none;
 }
-
 button.my-login-btn {
   padding: 7px 15px;
   background-color: var(--nest-primary);
@@ -311,7 +289,5 @@ button.my-login-btn {
   gap: 9px;
   padding: 0px!important;
 }
-
-
 
 }

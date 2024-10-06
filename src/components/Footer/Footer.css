@@ -349,10 +349,11 @@ text-align: center;
 .subscribe-form.footer-form {
   margin-left: 10px !important;
 }
+
 }
 
 
-
+/***** tablet responsive ******/
 @media (min-width : 576px) and (max-width: 768px){ 
 .news-letter .item .info-data  h2 {
   font-size: 25px;
